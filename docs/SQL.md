@@ -24,7 +24,6 @@ COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB
 ;
 ```
-
 ## Follow关注表
 
 ```
@@ -39,4 +38,22 @@ CREATE TABLE `Follow`(
 	ENGINE=innoDB
 	;
 ```
+## Article文章表
+```
+use sharebook;
+DROP TABLE IF EXISTS `Article`;
+CREATE TABLE Article(
+`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '文章编号',
+`user_id` INT(20) NOT NULL COMMENT '用户编号',
+`content` VARCHAR(1024) NOT NULL COMMENT '文章内容',
+`status` INTEGER(1)  DEFAULT '0' COMMENT '文章状态 0 文章正常，1 文章已被删除',
+`comment_num` BIGINT(254) COMMENT '评论数',
+`like_num` BIGINT(254) COMMENT '点赞数',
+`create_time` DATE  COMMENT '创建时间',
+`update_time` DATE  COMMENT '更新时间',
+PRIMARY KEY(`id`) USING BTREE
+)
+COMMENT='文章表'
+ENGINE = INNODB;
 
+```
