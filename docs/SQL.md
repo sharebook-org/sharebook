@@ -25,3 +25,18 @@ ENGINE=InnoDB
 ;
 ```
 
+## Follow关注表
+
+```
+USE sharebook;
+CREATE TABLE `Follow`(
+	`id` BIGINT(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
+	`user_id` BIGINT(10) NOT NULL  COMMENT '用户编号',
+	`follow_user_id` BIGINT(10) NOT NULL COMMENT '被关注用户编号',
+	PRIMARY KEY (`id`)
+)
+	COMMENT='关注表'
+	ENGINE=innoDB
+	;
+```
+
