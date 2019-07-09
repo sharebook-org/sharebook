@@ -55,5 +55,23 @@ PRIMARY KEY(`id`) USING BTREE
 )
 COMMENT='文章表'
 ENGINE = INNODB;
+;
+```
+
+## Like点赞表
 
 ```
+USE sharebook;
+CREATE TABLE `like`(
+	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+	`entity_type` INT(10) NOT NULL DEFAULT '0' COMMENT '点赞实体类型 0为文章类型，1为评论类型',
+	`entity_id` INT(10) COMMENT '当前点赞实体的编号',
+	`user_id` BIGINT(20) COMMENT '用户编号',
+	`liked` INT(10) NOT NULL DEFAULT '0' COMMENT '0为未点赞，1为已点赞',
+	PRIMARY KEY (`id`)
+)
+	COMMENT='点赞表'
+	ENGINE=innoDB
+	;
+```
+
