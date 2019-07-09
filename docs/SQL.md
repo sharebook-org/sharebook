@@ -76,3 +76,22 @@ CREATE TABLE `like`(
 	;
 ```
 
+## Comment评论表
+```sql
+use sharebook;
+drop TABLE IF EXISTS `comment`;
+CREATE TABLE 	`comment`(
+	`id` BIGINT(10) NOT NULL auto_increment COMMENT '评论编号',
+	`user_id` BIGINT(11) NOT NULL COMMENT '发表评论的用户编号',
+	`entity_type` INT(11) NOT NULL DEFAULT '0' COMMENT '	评论的实体类型,0为文章类型，1为评论类型',
+ `entity_id` BIGINT(12) NOT NULL COMMENT '当前评论实体类型的编号',
+ `content` VARCHAR(254) NOT NULL COMMENT '评论内容',
+ `create_time` date COMMENT '创建时间',
+ `update_time` date COMMENT '更新时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='评论表'
+ ENGINE = InnoDB
+ CHARACTER SET = utf8mb4
+ COLLATE = utf8mb4_general_ci
+```
