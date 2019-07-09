@@ -3,7 +3,8 @@
 ## User用户表
 
 ```
-CREATE TABLE `User` (
+USE sharebook;
+CREATE TABLE `user` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '用户编号',
 	`username` VARCHAR(20) NOT NULL COMMENT '用户昵称',
 	`password` VARCHAR(20) NOT NULL COMMENT '密码',
@@ -28,7 +29,7 @@ ENGINE=InnoDB
 
 ```
 USE sharebook;
-CREATE TABLE `Follow`(
+CREATE TABLE `follow`(
 	`id` BIGINT(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
 	`user_id` BIGINT(10) NOT NULL  COMMENT '用户编号',
 	`follow_user_id` BIGINT(10) NOT NULL COMMENT '被关注用户编号',
@@ -41,7 +42,7 @@ CREATE TABLE `Follow`(
 ## Article文章表
 ```
 use sharebook;
-DROP TABLE IF EXISTS `Article`;
+DROP TABLE IF EXISTS `article`;
 CREATE TABLE Article(
 `id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '文章编号',
 `user_id` INT(20) NOT NULL COMMENT '用户编号',
