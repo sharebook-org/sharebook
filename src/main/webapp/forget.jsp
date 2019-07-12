@@ -10,7 +10,7 @@
 <div class="do axz">
   <div class="ayb">
     <form class="ahr avz j">
-      <h1 class="l afv">登录</h1>
+      <h1 class="l afv">忘记密码</h1>
       <div class="mu">
         <input class="form-control" placeholder="账号" />
       </div>
@@ -23,25 +23,24 @@
         />
       </div>
 
+      <div class="mu afh">
+        <input
+            type="password"
+            class="form-control"
+            placeholder="重复密码"
+        />
+      </div>
+
       <div class="afv">
-        <button type="button" id="loginBtn" class="cg nq">登录</button>
-        <button type="button" id="registerBtn" class="cg ns">注册</button>
+        <button class="cg ns">注册</button>
       </div>
 
       <footer class="bqx">
-        <a href="./forget.jsp" class="axc">忘记密码</a>
+        <a href="./login.jsp" class="axc">回到登录</a>
       </footer>
     </form>
   </div>
 </div>
 <jsp:include page="./common/script.jsp"></jsp:include>
-<script>
-    $(function () {
-        $('#registerBtn').on('click', function () {
-            window.location.href = './register.jsp';
-        });
-    })
-</script>
 </body>
 </html>
-

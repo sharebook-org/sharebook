@@ -2,27 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>注册</title>
-  <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600"
-      rel="stylesheet"
-      type="text/css"
-  />
-  <link href="assets/css/toolkit.css" rel="stylesheet" />
-  <link href="assets/css/application.css" rel="stylesheet" />
+  <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 
 <body>
+<jsp:include page="./common/nav.jsp"></jsp:include>
 <div class="do axz">
   <div class="ayb">
-    <form role="form" class="ahr avz j">
-      <a href="./index.jsp" class="l afv">
-        <h1>sharebook</h1>
-      </a>
-      <h2>注册</h2>
+    <form class="ahr avz j">
+      <h1 class="l afv">注册</h1>
       <div class="mu">
         <input class="form-control" placeholder="账号" />
       </div>
@@ -53,12 +41,7 @@
     </form>
   </div>
 </div>
-
-<script src="./assets/js/jquery.min.js"></script>
-<script src="./assets/js/popper.min.js"></script>
-<script src="./assets/js/chart.js"></script>
-<script src="./assets/js/toolkit.js"></script>
-<script src="./assets/js/application.js"></script>
+<jsp:include page="./common/script.jsp"></jsp:include>
 </body>
 </html>
 
