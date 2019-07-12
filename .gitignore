@@ -27,3 +27,6 @@ hs_err_pid*
 target/
 *.iml
 out/
+
+# Project
+src/main/resource/*.properties
