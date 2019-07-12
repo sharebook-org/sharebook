@@ -38,6 +38,12 @@ public class Test {
         this.hello = hello;
     }
 }
+//注解可以组合使用
+@Getter
+@Setter
+public class Test {
+    private String hello;
+}
 ```
 
 `@Data` 生成getter，setter，toString()，hashCode()，equals()方法和相应参数的构造器，等同于`@Getter @Setter @RequiredArgsConstructor @ToString @EqualsAndHashCode`的组合注解。
