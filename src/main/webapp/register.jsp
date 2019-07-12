@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>登录</title>
+  <title>注册</title>
   <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600"
       rel="stylesheet"
@@ -22,7 +22,7 @@
       <a href="./index.jsp" class="l afv">
         <h1>sharebook</h1>
       </a>
-
+      <h2>注册</h2>
       <div class="mu">
         <input class="form-control" placeholder="账号" />
       </div>
@@ -35,13 +35,20 @@
         />
       </div>
 
+      <div class="mu afh">
+        <input
+            type="password"
+            class="form-control"
+            placeholder="重复密码"
+        />
+      </div>
+
       <div class="afv">
-        <button id="loginBtn" class="cg nq">登录</button>
-        <button id="registerBtn" class="cg ns">注册</button>
+        <button class="cg ns">注册</button>
       </div>
 
       <footer class="bqx">
-        <a href="#" class="axc">忘记密码</a>
+        <a href="./login.jsp" class="axc">回到登录</a>
       </footer>
     </form>
   </div>

@@ -397,5 +397,3 @@
 <script src="./assets/js/application.js"></script>
 </body>
 </html>
-
-
