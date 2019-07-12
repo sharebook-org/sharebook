@@ -1,5 +1,7 @@
 # sharebook
 
+[![Build Status](https://travis-ci.com/sharebook-org/sharebook.svg?branch=master)](https://travis-ci.com/sharebook-org/sharebook)
+
 ## 如何上手
 
 ### 获取项目源码
