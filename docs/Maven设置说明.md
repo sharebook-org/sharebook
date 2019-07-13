@@ -38,3 +38,8 @@
 - 进入idea的设置界面，找到maven设置，填入maven的路径即可。
 
 ![](./imgs/idea_maven_setting.png)
+
+## 参考链接
+
+[用 Maven 做项目构建](https://www.ibm.com/developerworks/cn/java/j-lo-maven/index.html)
+
