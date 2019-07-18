@@ -73,3 +73,7 @@ INSERT INTO `article`(`user_id`, `content`)
 VALUES ('1', 'test');
 INSERT INTO `user`(`username`, `password`, `salt`)
 VALUES ('czq', '1234', 'salt');
+INSERT INTO `user`(`username`, `password`, `salt`)
+VALUES ('wyx', '1234', 'salt');
+INSERT INTO `comment`(`user_id`, `entity_type`, `entity_id`, `content`)
+VALUES ('1', '0', '1', 'test content');
