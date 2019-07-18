@@ -54,8 +54,8 @@ public class UserDao implements CurdRepository<User, Long> {
     }
 
     @Override
-    public User save(User user) {
-        return null;
+    public int save(User user) {
+        return 0;
     }
 
     @Override

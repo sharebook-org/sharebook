@@ -25,7 +25,7 @@ public interface CurdRepository<T, ID> {
      * 保存或更新实体
      * @param t 实体
      */
-    T save(T t);
+    int save(T t);
 
     /**
      * 删除实体
