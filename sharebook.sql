@@ -68,3 +68,8 @@ CREATE TABLE `comment` (
 )
 COMMENT='评论表'
 ENGINE=InnoDB;
+
+INSERT INTO `article`(`user_id`, `content`)
+VALUES ('1', 'test');
+INSERT INTO `user`(`username`, `password`, `salt`)
+VALUES ('czq', '1234', 'salt');
