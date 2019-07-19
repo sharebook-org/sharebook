@@ -4,3 +4,4 @@
 <script src="./assets/js/chart.js"></script>
 <script src="./assets/js/toolkit.js"></script>
 <script src="./assets/js/application.js"></script>
+<script src="./assets/js/custom.js"></script>

@@ -7,50 +7,7 @@
 
 <body class="bob">
 
-<!-- 主导航栏 -->
-<nav class="ck pt adq py tk app-navbar">
-  <a class="e" href="./index.jsp">
-    sharebook
-  </a>
-
-  <div class="collapse f" id="navbarResponsive">
-    <!-- 左侧导航栏 -->
-    <ul class="navbar-nav ahq">
-      <li class="pi active">
-        <a class="pg" href="./index.jsp"
-        >首页<span class="adt">(current)</span></a
-        >
-      </li>
-      <li class="pi">
-        <a class="pg" href="./attention.jsp">关注</a>
-      </li>
-    </ul>
-
-    <!-- 搜索框 -->
-    <form class="nn acx d-none vt">
-      <input
-          class="form-control"
-          type="text"
-          data-action="grow"
-          placeholder="搜索"
-      />
-    </form>
-
-    <ul id="#js-popoverContent" class="nav navbar-nav acx aek d-none vt">
-      <!-- 登录的头像 -->
-      <li class="pi afb">
-        <button class="cg bpo bpp boi" data-toggle="popover">
-          <img class="us" src="./assets/img/avatar-dhg.png" />
-        </button>
-      </li>
-    </ul>
-
-    <ul class="nav navbar-nav d-none" id="js-popoverContent">
-      <li class="pi"><a class="pg" href="./profile.jsp">注册</a></li>
-      <li class="pi"><a class="pg" href="./login.jsp">登录</a></li>
-    </ul>
-  </div>
-</nav>
+<jsp:include page="./common/navbar.jsp"></jsp:include>
 
 <div class="by aha ahl">
   <div class="dp">
@@ -60,7 +17,8 @@
         <!-- 排行榜 -->
         <div class="qa">
           <h6 class="afh">
-            热搜 <small>· <a href="#">换一批</a></small>
+            热搜
+            <small>· <a href="#">换一批</a></small>
           </h6>
           <ul class="dc axg">
             <li><a href="#">#Bootstrap</a></li>
