@@ -20,4 +20,4 @@ before_script:
   - sudo mysql_upgrade -u root -p1234
   - sudo service mysql restart
 script:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.repo.remote=http://repo1.maven.org/maven2 -B -V
+  - mvn package install -DskipTests=true -Dmaven.javadoc.skip=true -Dmaven.repo.remote=http://repo1.maven.org/maven2 -B -V
