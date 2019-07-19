@@ -1,6 +1,4 @@
-package org.sharebook.dao;
-
-import java.util.List;
+package org.sharebook.repository;
 
 /**
  * 增删改查通用接口
@@ -12,24 +10,21 @@ public interface CurdRepository<T, ID> {
     /**
      * 根据主键查找实体
      * @param id 主键
+     * @return 查找的实体
      */
     T findById(ID id);
 
     /**
-     * 根据主键查找实体列表
-     * @param id 主键
-     */
-    List<T> findAllById(ID id);
-
-    /**
      * 保存或更新实体
      * @param t 实体
+     * @return 影响的行数
      */
     int save(T t);
 
     /**
      * 删除实体
      * @param id 主键
+     *
      */
     void delete(ID id);
 }
