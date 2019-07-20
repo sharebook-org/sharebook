@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,23 +17,15 @@
       <div class="pz vp vy afo">
         <!-- 排行榜 -->
         <div class="qa">
+          <input id="hots" hidden />
           <h6 class="afh">
             热搜
             <small>· <a href="#">换一批</a></small>
           </h6>
           <ul class="dc axg">
-            <li><a href="#">#Bootstrap</a></li>
-            <li><a href="#">Mdo for pres</a></li>
-            <li><a href="#">#fatsux</a></li>
-            <li><a href="#">#buyme</a></li>
-            <li><a href="#">#designishard</a></li>
-            <li><a href="#">#helpawesomepeople</a></li>
-            <li><a href="#">#doawesomestuff</a></li>
-            <li><a href="#">Tom Brady</a></li>
-            <li><a href="#">Magna Carta</a></li>
-            <li><a href="#">Mark Otto</a></li>
-            <li><a href="#">Dave Gamache</a></li>
-            <li><a href="#">Jacob Thornton</a></li>
+            <c:forEach items="${hots}" var="hot">
+              <li><a href="${hot.url}" target="_blank">${hot.title}</a></li>
+            </c:forEach>
           </ul>
         </div>
       </div>
@@ -174,7 +167,6 @@
           </ul>
         </div>
       </div>
-
       <!-- 版权 -->
       <jsp:include page="./common/copyright.jsp"></jsp:include>
     </div>

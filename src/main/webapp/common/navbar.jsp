@@ -1,15 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- 主导航栏 -->
 <nav class="ck pt adq py tk app-navbar">
-  <a class="e" href="./index.jsp">
+  <a class="e" href="./index">
     sharebook
   </a>
 
   <div class="collapse f" id="navbarResponsive">
     <!-- 左侧导航栏 -->
-    <ul class="navbar-nav ahq">
+    <ul id="nav" class="navbar-nav ahq">
       <li id="index" class="pi">
-        <a class="pg" href="./index.jsp">首页</a>
+        <a class="pg" href="/index">首页</a>
       </li>
       <li id="attention" class="pi">
         <a class="pg" href="./attention.jsp">关注</a>

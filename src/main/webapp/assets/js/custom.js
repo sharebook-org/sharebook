@@ -19,4 +19,4 @@ function notBlank(value) {
     return true;
   }
   return false;
-}
+};

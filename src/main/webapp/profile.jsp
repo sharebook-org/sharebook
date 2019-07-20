@@ -234,7 +234,7 @@
 
 <nav class="ck pt adq py tk app-navbar">
 
-  <a class="e" href="./index.jsp">
+  <a class="e" href="home.jsp">
     <img src="./assets/img/brand-white.png" alt="brand">
   </a>
 
@@ -274,7 +274,7 @@
 
     <ul id="#js-popoverContent" class="nav navbar-nav acx aek d-none vt">
       <li class="pi">
-        <a class="g pg" href="./index.jsp">
+        <a class="g pg" href="home.jsp">
           <span class="h azy"></span>
         </a>
       </li>
@@ -287,7 +287,7 @@
 
     <ul class="nav navbar-nav d-none" id="js-popoverContent">
       <li class="pi"><a class="pg" href="#" data-action="growl">Growl</a></li>
-      <li class="pi"><a class="pg" href="./index.jsp">Logout</a></li>
+      <li class="pi"><a class="pg" href="home.jsp">Logout</a></li>
     </ul>
   </div>
 </nav>
