@@ -7,5 +7,11 @@ import java.util.List;
 
 public interface HotService {
 
+    /**
+     * 获取热门文章
+     *
+     * @return
+     * @throws IOException
+     */
     List<Hot> getHots() throws IOException;
 }

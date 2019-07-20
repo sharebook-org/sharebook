@@ -1,7 +1,7 @@
 $(function () {
   //切换导航栏
   $('.navbar-nav li a').each(function () {
-    console.log($($(this))[0])
+    console.log($($(this))[0]);
     if ($($(this))[0].href == String(window.location))
       $(this).parent().addClass('active');
   });
@@ -11,12 +11,11 @@ $(function () {
 function checkAccount() {
   var account = $('#account').val();
   return notBlank(account);
-};
-
+}
 //检测字符串是否为空
 function notBlank(value) {
   if (value != null && value != '' && value != undefined) {
     return true;
   }
   return false;
-};
+}

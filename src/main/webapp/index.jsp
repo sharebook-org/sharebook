@@ -20,13 +20,16 @@
           <input id="hots" hidden />
           <h6 class="afh">
             热搜
-            <small>· <a href="#">换一批</a></small>
+            <small>· <a href="#">查看其他热榜</a></small>
           </h6>
           <ul class="dc axg">
-            <c:if test="${hots != null || hots.size() > 0}">
+            <c:if test="${hots != null || hots.size() > 0}" var="hasHots">
               <c:forEach items="${hots}" var="hot">
                 <li><a href="${hot.url}" target="_blank">${hot.title}</a></li>
               </c:forEach>
+            </c:if>
+            <c:if test="${not hasHots}">
+              <li>暂时没有数据啦！</li>
             </c:if>
           </ul>
         </div>

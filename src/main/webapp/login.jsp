@@ -61,8 +61,7 @@
   function checkUserPassword() {
     var password = $('#password').val();
     return notBlank(password);
-  };
-
+  }
   //根据结果是否展示错误信息
   function showErrorMessage(result, message) {
     if (!result) {
@@ -73,7 +72,7 @@
       $('#error-message').hide();
       $('#login-button').removeAttr('disabled');
     }
-  };
+  }
 
 </script>
 </body>

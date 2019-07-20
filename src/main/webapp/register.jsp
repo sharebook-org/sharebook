@@ -70,8 +70,7 @@
       return true;
     }
     return false;
-  };
-
+  }
   //根据结果是否展示错误信息
   function showErrorMessage(result, message) {
     if (!result) {
@@ -82,7 +81,7 @@
       $('#error-message').hide();
       $('#register-button').removeAttr('disabled');
     }
-  };
+  }
 </script>
 </body>
 </html>

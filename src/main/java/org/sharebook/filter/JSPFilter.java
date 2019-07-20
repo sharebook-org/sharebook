@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * JSP过滤器
  * 用于过滤类似"index.jsp"的请求，将其变为"/index"的请求。
  * 原因：页面是由servlet控制。
  */

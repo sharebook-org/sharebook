@@ -5,9 +5,11 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
+/**
+ * 编码过滤器
+ */
 @WebFilter(urlPatterns = "/*")
 public class EncodingFilter implements Filter {
-
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

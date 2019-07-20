@@ -1,7 +1,6 @@
 package org.sharebook.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -12,13 +11,13 @@ import org.sharebook.model.Hot;
 import org.sharebook.service.HotService;
 
 import java.io.IOException;
-import java.net.URI;
 import java.util.List;
-import java.util.Objects;
+
 
 public class HotServiceImpl implements HotService {
 
-    private final String url = "https://www.printf520.com:8080/GetTypeInfo?id=58";
+    //微博热搜接口地址
+    private final static String WEIBO_URL = "https://www.printf520.com:8080/GetTypeInfo?id=58";
 
     @Override
     public List<Hot> getHots() throws IOException {
@@ -26,7 +25,7 @@ public class HotServiceImpl implements HotService {
         CloseableHttpResponse httpResponse = null;
         List<Hot> list = null;
         try {
-            HttpGet httpGet = new HttpGet(url);
+            HttpGet httpGet = new HttpGet(WEIBO_URL);
             httpResponse = httpClient.execute(httpGet);
             HttpEntity entity = httpResponse.getEntity();
             if (entity != null) {

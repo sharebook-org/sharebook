@@ -1,5 +1,6 @@
 package org.sharebook.servlet;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.sharebook.model.Hot;
 import org.sharebook.service.HotService;
 import org.sharebook.service.impl.HotServiceImpl;
@@ -20,7 +21,7 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Hot> hots = hotService.getHots();
-        if (hots != null && hots.size() > 0) {
+        if (CollectionUtils.isNotEmpty(hots)) {
             request.setAttribute("hots", hots);
         }
         request.getRequestDispatcher("/index.jsp").forward(request, response);
