@@ -20,7 +20,9 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Hot> hots = hotService.getHots();
-        request.setAttribute("hots", hots);
+        if (hots != null && hots.size() > 0) {
+            request.setAttribute("hots", hots);
+        }
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

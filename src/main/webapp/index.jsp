@@ -23,9 +23,11 @@
             <small>· <a href="#">换一批</a></small>
           </h6>
           <ul class="dc axg">
-            <c:forEach items="${hots}" var="hot">
-              <li><a href="${hot.url}" target="_blank">${hot.title}</a></li>
-            </c:forEach>
+            <c:if test="${hots != null || hots.size() > 0}">
+              <c:forEach items="${hots}" var="hot">
+                <li><a href="${hot.url}" target="_blank">${hot.title}</a></li>
+              </c:forEach>
+            </c:if>
           </ul>
         </div>
       </div>
