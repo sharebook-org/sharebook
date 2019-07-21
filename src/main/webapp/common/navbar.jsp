@@ -9,11 +9,14 @@
   <div class="collapse f" id="navbarResponsive">
     <!-- 左侧导航栏 -->
     <ul id="nav" class="navbar-nav ahq">
-      <li id="index" class="pi">
+      <li class="pi">
         <a class="pg" href="./index">首页</a>
       </li>
-      <li id="attention" class="pi">
+      <li class="pi">
         <a class="pg" href="./attention">关注</a>
+      </li>
+      <li class="pi">
+        <a class="pg" href="./hots">热榜</a>
       </li>
     </ul>
 

@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>我的关注</title>
   <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 

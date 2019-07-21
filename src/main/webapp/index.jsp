@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>首页</title>
   <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 
@@ -17,7 +18,6 @@
       <div class="pz vp vy afo">
         <!-- 排行榜 -->
         <div class="qa">
-          <input id="hots" hidden />
           <h6 class="afh">
             热搜
             <small>· <a href="#">查看其他热榜</a></small>

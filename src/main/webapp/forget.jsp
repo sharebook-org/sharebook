@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>忘记密码</title>
   <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 

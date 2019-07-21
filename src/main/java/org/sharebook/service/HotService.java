@@ -8,10 +8,18 @@ import java.util.List;
 public interface HotService {
 
     /**
-     * 获取热门文章
+     * 获取微博热门
      *
      * @return
      * @throws IOException
      */
-    List<Hot> getHots() throws IOException;
+    List<Hot> getWeiboHots() throws IOException;
+
+    /**
+     * 获取知乎热门
+     *
+     * @return
+     * @throws IOException
+     */
+    List<Hot> getZhihuHots() throws IOException;
 }

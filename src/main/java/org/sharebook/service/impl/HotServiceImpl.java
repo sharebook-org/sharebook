@@ -12,20 +12,20 @@ import org.sharebook.service.HotService;
 
 import java.io.IOException;
 import java.util.List;
-
+import java.util.ResourceBundle;
 
 public class HotServiceImpl implements HotService {
 
-    //微博热搜接口地址
-    private final static String WEIBO_URL = "https://www.printf520.com:8080/GetTypeInfo?id=58";
+    private final ResourceBundle bundle = ResourceBundle.getBundle("hots-api");
 
     @Override
-    public List<Hot> getHots() throws IOException {
+    public List<Hot> getWeiboHots() throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse httpResponse = null;
         List<Hot> list = null;
         try {
-            HttpGet httpGet = new HttpGet(WEIBO_URL);
+            String weiboUrl = bundle.getString("weibo");
+            HttpGet httpGet = new HttpGet(weiboUrl);
             httpResponse = httpClient.execute(httpGet);
             HttpEntity entity = httpResponse.getEntity();
             if (entity != null) {
@@ -43,5 +43,10 @@ public class HotServiceImpl implements HotService {
             }
         }
         return list;
+    }
+
+    @Override
+    public List<Hot> getZhihuHots() throws IOException {
+        return null;
     }
 }

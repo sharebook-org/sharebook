@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>个人简介</title>
   <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 
