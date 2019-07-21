@@ -18,17 +18,14 @@
       <div class="pz vp vy afo">
         <!-- 排行榜 -->
         <div class="qa">
-          <h6 class="afh">
-            热搜
-            <small>· <a href="#">查看其他热榜</a></small>
-          </h6>
+          <h6 class="afh">微博热搜</h6>
           <ul class="dc axg">
-            <c:if test="${hots != null || hots.size() > 0}" var="hasHots">
-              <c:forEach items="${hots}" var="hot">
-                <li><a href="${hot.url}" target="_blank">${hot.title}</a></li>
+            <c:if test="${weiboHots != null || weiboHots.size() > 0}" var="hasWeiboHots">
+              <c:forEach items="${weiboHots}" var="weibo">
+                <li><a href="${weibo.url}" target="_blank">${weibo.title}</a></li>
               </c:forEach>
             </c:if>
-            <c:if test="${not hasHots}">
+            <c:if test="${not hasWeiboHots}">
               <li>暂时没有数据啦！</li>
             </c:if>
           </ul>
@@ -36,22 +33,19 @@
       </div>
     </div>
 
-    <!-- 热榜数据 -->
+    <%-- 知乎 --%>
     <div class="fj">
       <div class="pz vp vy afo">
         <!-- 排行榜 -->
         <div class="qa">
-          <h6 class="afh">
-            热搜
-            <small>· <a href="#">查看其他热榜</a></small>
-          </h6>
+          <h6 class="afh">知乎热搜</h6>
           <ul class="dc axg">
-            <c:if test="${hots != null || hots.size() > 0}" var="hasHots">
-              <c:forEach items="${hots}" var="hot">
-                <li><a href="${hot.url}" target="_blank">${hot.title}</a></li>
+            <c:if test="${zhihuHots != null || zhihuHots.size() > 0}" var="hasZhihuHots">
+              <c:forEach items="${zhihuHots}" var="zhihu">
+                <li><a href="${zhihu.url}" target="_blank">${zhihu.title}</a></li>
               </c:forEach>
             </c:if>
-            <c:if test="${not hasHots}">
+            <c:if test="${not hasZhihuHots}">
               <li>暂时没有数据啦！</li>
             </c:if>
           </ul>
@@ -59,22 +53,19 @@
       </div>
     </div>
 
-    <!-- 热榜数据 -->
+    <%-- 虎扑 --%>
     <div class="fj">
       <div class="pz vp vy afo">
         <!-- 排行榜 -->
         <div class="qa">
-          <h6 class="afh">
-            热搜
-            <small>· <a href="#">查看其他热榜</a></small>
-          </h6>
+          <h6 class="afh">虎扑热搜</h6>
           <ul class="dc axg">
-            <c:if test="${hots != null || hots.size() > 0}" var="hasHots">
-              <c:forEach items="${hots}" var="hot">
-                <li><a href="${hot.url}" target="_blank">${hot.title}</a></li>
+            <c:if test="${hupuHots != null || hupuHots.size() > 0}" var="hasHupuHots">
+              <c:forEach items="${hupuHots}" var="hupu">
+                <li><a href="${hupu.url}" target="_blank">${hupu.title}</a></li>
               </c:forEach>
             </c:if>
-            <c:if test="${not hasHots}">
+            <c:if test="${not hasHupuHots}">
               <li>暂时没有数据啦！</li>
             </c:if>
           </ul>
@@ -82,22 +73,19 @@
       </div>
     </div>
 
-    <!-- 热榜数据 -->
+    <%-- 天涯 --%>
     <div class="fj">
       <div class="pz vp vy afo">
         <!-- 排行榜 -->
         <div class="qa">
-          <h6 class="afh">
-            热搜
-            <small>· <a href="#">查看其他热榜</a></small>
-          </h6>
+          <h6 class="afh">天涯热搜</h6>
           <ul class="dc axg">
-            <c:if test="${hots != null || hots.size() > 0}" var="hasHots">
-              <c:forEach items="${hots}" var="hot">
-                <li><a href="${hot.url}" target="_blank">${hot.title}</a></li>
+            <c:if test="${tianyaHots != null || tianyaHots.size() > 0}" var="hasTianyaHots">
+              <c:forEach items="${tianyaHots}" var="tianya">
+                <li><a href="${tianya.url}" target="_blank">${tianya.title}</a></li>
               </c:forEach>
             </c:if>
-            <c:if test="${not hasHots}">
+            <c:if test="${not hasTianyaHots}">
               <li>暂时没有数据啦！</li>
             </c:if>
           </ul>

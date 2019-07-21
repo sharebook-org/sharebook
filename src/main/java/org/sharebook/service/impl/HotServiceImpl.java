@@ -18,14 +18,58 @@ public class HotServiceImpl implements HotService {
 
     private final ResourceBundle bundle = ResourceBundle.getBundle("hots-api");
 
+    private final CloseableHttpClient httpClient = HttpClients.createDefault();
+
     @Override
-    public List<Hot> getWeiboHots() throws IOException {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
+    public List<Hot> getWeiboHots() {
+        List<Hot> list = null;
+        try {
+            list = getData("weibo");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Hot> getZhihuHots() {
+        List<Hot> list = null;
+        try {
+            list = getData("zhihu");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Hot> getHupuHots() {
+        List<Hot> list = null;
+        try {
+            list = getData("hupu");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Hot> getTianyaHots() {
+        List<Hot> list = null;
+        try {
+            list = getData("tianya");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private List<Hot> getData(String apiName) throws IOException {
         CloseableHttpResponse httpResponse = null;
         List<Hot> list = null;
         try {
-            String weiboUrl = bundle.getString("weibo");
-            HttpGet httpGet = new HttpGet(weiboUrl);
+            String url = bundle.getString(apiName);
+            HttpGet httpGet = new HttpGet(url);
             httpResponse = httpClient.execute(httpGet);
             HttpEntity entity = httpResponse.getEntity();
             if (entity != null) {
@@ -36,17 +80,11 @@ public class HotServiceImpl implements HotService {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            //throw new RuntimeException("热搜接口失效", e);
         } finally {
             if (httpResponse != null) {
                 httpResponse.close();
             }
         }
         return list;
-    }
-
-    @Override
-    public List<Hot> getZhihuHots() throws IOException {
-        return null;
     }
 }
