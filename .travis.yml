@@ -4,12 +4,11 @@ jdk:
   - openjdk8
 services:
   - mysql
-dist: Bionic
+dist: Trusty
 addons:
   apt:
     packages:
       - mysql-server
-
 sudo: required
 before_script:
   - mysql -e 'create database sharebook;'

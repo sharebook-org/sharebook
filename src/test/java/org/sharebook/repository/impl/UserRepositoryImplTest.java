@@ -18,7 +18,7 @@ public class UserRepositoryImplTest {
 
     private User user = new User(Long.valueOf(1), "czq", "pwd",
             "abcd", "xx", 1, new Date(), "中国",
-            0, 0, "", new Date(), new Date());
+            0, 0, "https://baidu.com", new Date(), new Date());
 
     @Test
     public void findById() {
