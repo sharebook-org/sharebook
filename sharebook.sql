@@ -15,7 +15,9 @@ CREATE TABLE `user` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='用户表'
-ENGINE=InnoDB;
+    DEFAULT CHARSET = utf8
+    AUTO_INCREMENT = 1
+    ENGINE=InnoDB;
 
 CREATE TABLE `follow` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -26,7 +28,9 @@ CREATE TABLE `follow` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='关注表'
-ENGINE=InnoDB;
+    DEFAULT CHARSET = utf8
+    AUTO_INCREMENT = 1
+    ENGINE=InnoDB;
 
 CREATE TABLE `article` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '文章编号',
@@ -41,7 +45,9 @@ CREATE TABLE `article` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='文章表'
-ENGINE=InnoDB;
+    DEFAULT CHARSET = utf8
+    AUTO_INCREMENT = 1
+    ENGINE=InnoDB;
 
 CREATE TABLE `like` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -54,7 +60,9 @@ CREATE TABLE `like` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='点赞表'
-ENGINE=InnoDB;
+    DEFAULT CHARSET = utf8
+    AUTO_INCREMENT = 1
+    ENGINE=InnoDB;
 
 CREATE TABLE `comment` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '评论编号',
@@ -67,7 +75,9 @@ CREATE TABLE `comment` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='评论表'
-ENGINE=InnoDB;
+    DEFAULT CHARSET = utf8
+    AUTO_INCREMENT = 1
+    ENGINE=InnoDB;
 
 INSERT INTO `article`(`user_id`, `content`)
 VALUES ('1', 'test');
