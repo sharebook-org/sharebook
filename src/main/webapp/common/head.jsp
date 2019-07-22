@@ -7,5 +7,6 @@
     rel="stylesheet"
     type="text/css"
 />
-<link href="assets/css/toolkit.css" rel="stylesheet" />
-<link href="assets/css/application.css" rel="stylesheet" />
+<link href="./assets/css/toolkit.css" rel="stylesheet"/>
+<link href="./assets/css/application.css" rel="stylesheet"/>
+<link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/vnd.microsoft.icon"/>

@@ -2,61 +2,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>我的关注</title>
   <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 
 <body class="bob">
 <div class="bon" id="app-growl"></div>
 
-<!-- 主导航栏 -->
-<nav class="ck pt adq py tk app-navbar">
-  <a class="e" href="index.jsp">
-    sharebook
-  </a>
-
-  <div class="collapse f" id="navbarResponsive">
-    <!-- 左侧导航栏 -->
-    <ul class="navbar-nav ahq">
-      <li class="pi">
-        <a class="pg" href="./index.jsp">首页</a>
-      </li>
-      <li class="pi active">
-        <a class="pg" href="./attention.jsp">关注<span class="adt">(current)</span></a>
-      </li>
-    </ul>
-
-    <!-- 搜索框 -->
-    <form class="nn acx d-none vt">
-      <input class="form-control" type="text" data-action="grow" placeholder="搜索">
-    </form>
-
-    <ul id="#js-popoverContent" class="nav navbar-nav acx aek d-none vt">
-      <!-- 登录的头像 -->
-      <li class="pi afb">
-        <button class="cg bpo bpp boi" data-toggle="popover">
-          <img class="us" src="assets/img/avatar-dhg.png">
-        </button>
-      </li>
-    </ul>
-
-    <ul class="nav navbar-nav d-none" id="js-popoverContent">
-      <li class="pi"><a class="pg" href="./profile.jsp">个人信息</a></li>
-      <li class="pi"><a class="pg" href="login/index.jsp">退出登录</a></li>
-    </ul>
-  </div>
-</nav>
+<jsp:include page="./common/navbar.jsp"></jsp:include>
 
 <!-- 左侧个人信息 -->
 <div class="by aha ahl">
   <div class="dp">
+
     <div class="fj">
+
       <div class="pz bpi afo">
         <div class="qf" style="background-image: url(assets/img/iceland.jpg);"></div>
         <div class="qa avz">
           <a href="./profile.jsp">
-            <img
-                class="bpj"
-                src="assets/img/avatar-dhg.png">
+            <img class="bpj" src="assets/img/avatar-dhg.png">
           </a>
 
           <h6 class="qb">
@@ -102,10 +67,10 @@
         <!-- 发表框 -->
         <li class="rv b agz">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Message">
+            <textarea type="text" class="form-control" placeholder="Message"></textarea>
             <!-- 上传图片按钮和发表按钮 -->
             <div class="bpt">
-              <button type="button" class="cg ns yf">
+              <button type="button" class="cg ns yf" data-toggle="modal" data-target="#exampleModal">
                 <span class="h azo"></span>
               </button>
               <button type="button" class="cg ns yf">
@@ -247,7 +212,7 @@
       </div>
 
       <!-- 版权 -->
-      <jsp:include page="common/copyright.jsp"></jsp:include>
+      <jsp:include page="./common/copyright.jsp"></jsp:include>
     </div>
   </div>
 </div>
