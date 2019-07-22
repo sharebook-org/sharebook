@@ -19,7 +19,8 @@ public class HotsServlet extends HttpServlet {
     private final HotService hotService = new HotServiceImpl();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         List<Hot> weiboHots = hotService.getWeiboHots();
         List<Hot> zhihuHots = hotService.getZhihuHots();
         List<Hot> hupuHots = hotService.getHupuHots();

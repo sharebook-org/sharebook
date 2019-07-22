@@ -6,7 +6,7 @@
   <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 
-<body>
+<body class="bob">
 <jsp:include page="./common/nav.jsp"></jsp:include>
 <div class="do axz">
   <div class="ayb">
@@ -33,16 +33,25 @@
             placeholder="重复密码"
         />
       </div>
+
+      <div class="mu afh">
+        性别：
+        女：<input name="sex" type="radio" value="0"/>&nbsp;
+        男：<input name="sex" type="radio" value="1"/>&nbsp;
+        其他：<input name="sex" type="radio" value="2" checked="checked"/>
+      </div>
+
+
       <div id="error-message" class="mu afh" style="display: none">
         <span style="color: #c9302c"></span>
       </div>
 
       <div class="afv">
-        <button id="register-button" class="cg ns" type="button">注册</button>
+        <button id="register-button" class="cg nq" type="button">注册</button>
       </div>
 
       <footer class="bqx">
-        <a href="./login.jsp" class="axc">回到登录</a>
+        <a href="/login" class="axc">回到登录</a>
       </footer>
     </form>
   </div>

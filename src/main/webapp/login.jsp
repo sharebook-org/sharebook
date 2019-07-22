@@ -35,7 +35,7 @@
       </div>
 
       <footer class="bqx">
-        <a href="./forget.jsp" class="axc">忘记密码</a>
+        <a href="/forget" class="axc">忘记密码</a>
       </footer>
     </form>
   </div>
@@ -44,7 +44,7 @@
 <script>
   $(function () {
     $('#register-button').on('click', function () {
-      window.location.href = './register.jsp';
+      window.location.href = '/register';
     });
 
     $('#account').blur(function () {

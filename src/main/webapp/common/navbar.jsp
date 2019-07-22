@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- 主导航栏 -->
 <nav class="ck pt adq py tk app-navbar">
-  <a class="e" href="./index">
+  <a class="e" href="/index">
     sharebook
   </a>
 
@@ -10,13 +10,13 @@
     <!-- 左侧导航栏 -->
     <ul id="nav" class="navbar-nav ahq">
       <li class="pi">
-        <a class="pg" href="./index">首页</a>
+        <a class="pg" href="/index">首页</a>
       </li>
       <li class="pi">
-        <a class="pg" href="./attention">关注</a>
+        <a class="pg" href="/attention">关注</a>
       </li>
       <li class="pi">
-        <a class="pg" href="./hots">热榜</a>
+        <a class="pg" href="/hots">摸鱼热榜</a>
       </li>
     </ul>
 
@@ -41,16 +41,16 @@
         </li>
       </ul>
       <ul class="nav navbar-nav d-none" id="js-popoverContent">
-        <li class="pi"><a class="pg" href="./profile.jsp">个人信息</a></li>
-        <li class="pi"><a class="pg" href="./index.jsp">退出登录</a></li>
+        <li class="pi"><a class="pg" href="/profile">个人信息</a></li>
+        <li class="pi"><a class="pg" href="/index">退出登录</a></li>
       </ul>
     </c:if>
     <%-- 未登录 --%>
     <c:if test="${not hasLogin}">
       <!-- 未登录的样式 -->
       <ul class="nav navbar-nav">
-        <li class="pi"><a class="pg" href="./register.jsp">注册</a></li>
-        <li class="pi"><a class="pg" href="./login.jsp">登录</a></li>
+        <li class="pi"><a class="pg" href="/register">注册</a></li>
+        <li class="pi"><a class="pg" href="/login">登录</a></li>
       </ul>
     </c:if>
   </div>

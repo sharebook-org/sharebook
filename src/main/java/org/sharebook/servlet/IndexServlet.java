@@ -19,7 +19,8 @@ public class IndexServlet extends HttpServlet {
     private HotService hotService = new HotServiceImpl();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         List<Hot> hots = hotService.getWeiboHots();
         if (CollectionUtils.isNotEmpty(hots)) {
             request.setAttribute("hots", hots);

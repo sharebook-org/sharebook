@@ -7,13 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/attention")
-public class AttentionServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/forget")
+public class ForgetServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.getRequestDispatcher("/attention.jsp").forward(request,response);
+        request.getRequestDispatcher("/forget.jsp").forward(request, response);
     }
 }
