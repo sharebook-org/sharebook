@@ -90,4 +90,16 @@ public class UserRepositoryImpl implements UserRepository {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public User findByUsername(String username) {
+        String sql = "SELECT * FROM `user` WHERE `username` = ?";
+        User user = null;
+        try {
+            user = queryRunner.query(sql, new BeanHandler<>(User.class), username);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }

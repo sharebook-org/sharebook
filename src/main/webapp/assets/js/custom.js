@@ -19,3 +19,14 @@ function notBlank(value) {
   }
   return false;
 }
+
+//退出账号
+function logout() {
+  $.ajax({
+    url: '/login',
+    method: 'DELETE',
+    success: function () {
+      window.location.href = '/index';
+    }
+  })
+}

@@ -57,6 +57,33 @@
       console.log(result);
       showErrorMessage(result, '密码不能为空!');
     });
+
+    //登录
+    $('#login-button').on('click', function () {
+      var username = $('#account').val();
+      var password = $('#password').val();
+      console.log('login')
+      $.ajax({
+        url: '/login',
+        method: 'POST',
+        dataType: 'json',
+        data: {
+          username: username,
+          password: password,
+        },
+        success: function (result) {
+          console.log('login result' + result)
+          if (result.code == 200) {
+            window.location.href = '/index';
+          } else {
+            alert('用户名或密码错误！');
+          }
+        },
+        error: function (result) {
+          console.log(result);
+        }
+      })
+    })
   });
 
   function checkUserPassword() {

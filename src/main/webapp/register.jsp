@@ -70,6 +70,35 @@
       var result = checkPassword();
       showErrorMessage(result, '两次输入的密码不同！');
     });
+
+    $('#register-button').on('click', function () {
+      var username = $('#account').val();
+      var password = $('#password').val();
+      var sex = $('input[name=\'sex\']:checked').val();
+      $.ajax({
+        url: '/register',
+        method: 'POST',
+        dataType: 'json',
+        data: {
+          username: username,
+          password: password,
+          sex: sex,
+        },
+        success: function (result) {
+          console.log(result);
+          console.log(result.code);
+          if (result.code == 200) {
+            alert('注册成功');
+            window.location.href = '/login';
+          } else {
+            alert('用户名已被占用');
+          }
+        },
+        error: function (e) {
+          console.log('error' + e);
+        }
+      })
+    })
   });
 
   function checkPassword() {

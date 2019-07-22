@@ -30,7 +30,7 @@
       />
     </form>
     <%-- 已登录 --%>
-    <c:if test="${sessionScope.get(\"user\") != null}" var="hasLogin">
+    <c:if test="${sessionScope.get(\"login\") != null}" var="hasLogin">
       <!-- 登录后的样式 -->
       <ul id="#js-popoverContent" class="nav navbar-nav acx aek d-none vt">
         <!-- 登录的头像 -->
@@ -42,7 +42,7 @@
       </ul>
       <ul class="nav navbar-nav d-none" id="js-popoverContent">
         <li class="pi"><a class="pg" href="/profile">个人信息</a></li>
-        <li class="pi"><a class="pg" href="/index">退出登录</a></li>
+        <li class="pi"><a id="logout" class="pg" href="javascript:void(0)" onclick="logout()">退出登录</a></li>
       </ul>
     </c:if>
     <%-- 未登录 --%>

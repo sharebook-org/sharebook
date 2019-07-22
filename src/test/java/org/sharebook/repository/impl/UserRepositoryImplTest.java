@@ -16,7 +16,7 @@ public class UserRepositoryImplTest {
 
     private final UserRepository userRepository = new UserRepositoryImpl();
 
-    private User user = new User(Long.valueOf(1), "czq", "pwd",
+    private User user = new User(Long.valueOf(1), "test", "pwd",
             "abcd", "xx", 1, new Date(), "中国",
             0, 0, "https://baidu.com", new Date(), new Date());
 
@@ -34,6 +34,12 @@ public class UserRepositoryImplTest {
         Assert.assertEquals(1, result);
     }
 
+    @Test
+    public void findByUsername() {
+        User user = userRepository.findByUsername("czq");
+        System.out.println(user);
+        Assert.assertNotNull(user);
+    }
 
     @Test
     public void update() {
@@ -51,5 +57,6 @@ public class UserRepositoryImplTest {
         System.out.println(result);
         Assert.assertEquals(1, result);
     }
+
 
 }
