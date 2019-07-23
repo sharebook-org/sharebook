@@ -1,7 +1,7 @@
 CREATE TABLE `user` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '用户编号',
 	`username` VARCHAR(20) NOT NULL COMMENT '用户昵称',
-	`password` VARCHAR(20) NOT NULL COMMENT '密码',
+	`password` VARCHAR(50) NOT NULL COMMENT '密码',
 	`salt` VARCHAR(10) NOT NULL COMMENT '四位随机字符串，用于用户密码加密',
 	`introduction` VARCHAR(200) NULL DEFAULT NULL COMMENT '介绍',
 	`sex` INT(1) NULL DEFAULT '2' COMMENT '女：0，男：1，其他：2',
