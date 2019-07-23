@@ -33,8 +33,11 @@ public class LoginServlet extends HttpServlet {
         user.setUsername(username);
         user.setPassword(password);
         boolean result = userService.login(user);
+        User user1=userService.findUserByName(username);
         if (result) {
+            request.getSession().setAttribute("loginId",user1.getId());
             request.getSession().setAttribute("login", username);
+
             ResponseUtils.write(response, ResponseUtils.success());
         } else {
             ResponseUtils.write(response, ResponseUtils.error());

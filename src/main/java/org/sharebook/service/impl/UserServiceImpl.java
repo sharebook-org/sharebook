@@ -15,6 +15,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean modify(User user) {
+        return false;
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        User user=userRepository.findById(id);
+        if (user!=null){
+            return user;
+        }
+        return null;
+    }
+
+    @Override
+    public User findUserByName(String name) {
+        User user=userRepository.findByUsername(name);
+        if (user!=null){
+            return user;
+        }
+        return null;
+    }
+
+    @Override
     public boolean login(User user) {
         String username = user.getUsername();
         String password = user.getPassword();
@@ -45,11 +68,6 @@ public class UserServiceImpl implements UserService {
                 return true;
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean modify(User user) {
         return false;
     }
 

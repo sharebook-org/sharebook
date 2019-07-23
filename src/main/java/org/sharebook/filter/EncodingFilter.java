@@ -20,7 +20,8 @@ public class EncodingFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         request.setCharacterEncoding(StandardCharsets.UTF_8.name());
         response.setCharacterEncoding(StandardCharsets.UTF_8.name());
-        chain.doFilter(request,response);
+        response.setContentType("text/html;charset=UTF-8");
+        chain.doFilter(request, response);
     }
 
     @Override

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,12 +51,16 @@
 
       <div class="pz vp vy afo">
         <div class="qa">
-          <h6 class="afh">个人简介<small>· <a href="./profile.jsp">编辑</a></small></h6>
+          <h6 class="afh">基本资料<small>· <a href="./profile.jsp">编辑</a></small></h6>
           <ul class="dc axg">
-            <li><span class="axc h bgz aff"></span>居住地 <a href="#">Oh, Canada</a>
-            <li><span class="axc h bip aff"></span>毕业于 <a href="#">Obama</a>
-            <li><span class="axc h bjl aff"></span>QQ <a href="#">Github</a>
-            <li><span class="axc h bit aff"></span>简介 <a href="#">San Francisco, CA</a>
+            <li><span class="axc h bit aff"></span>个人简介 :${user.introduction}
+            <li><span class="axc h bgz aff"></span>性别 :
+            <c:if test="${user.sex==0}">女</c:if>
+            <c:if test="${user.sex==1}">男</c:if>
+            <c:if test="${user.sex==2}">其他</c:if>
+            <li><span class="axc h bgz aff"></span>生日 :${user.birth}
+            <li><span class="axc h bip aff"></span>地址 :${user.location}
+            <li><span class="axc h bjl aff"></span>创建时间 :${user.createTime}
           </ul>
         </div>
       </div>
