@@ -67,13 +67,13 @@
         <!-- 发表框 -->
         <li class="rv b agz">
           <div class="input-group">
-            <textarea type="text" class="form-control" placeholder="Message"></textarea>
+            <textarea type="text" class="form-control" placeholder="Message" id="article"></textarea>
             <!-- 上传图片按钮和发表按钮 -->
             <div class="bpt">
               <button type="button" class="cg ns yf" data-toggle="modal" data-target="#exampleModal">
                 <span class="h azo"></span>
               </button>
-              <button type="button" class="cg ns yf">
+              <button type="button" class="cg ns yf" id="publish-button">
                 <span class="h bir"></span>
               </button>
             </div>
@@ -95,7 +95,8 @@
             </div>
             <!-- 微博内容 -->
             <p>
-              Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+              <%=request.getSession().getAttribute("content")%>
+<%--              Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.--%>
             </p>
             <!-- 图片 -->
             <div class="boy" data-grid="images">
@@ -217,6 +218,26 @@
   </div>
 </div>
 <jsp:include page="./common/script.jsp"></jsp:include>
+<script>
+  $(function () {
+    $('#publish-button').on('click',function () {
+      var article=$('#article').val();
+      $.ajax({
+        url:'/article',
+        method:'POST',
+        data: {
+          userId:2,
+          article:article,
+        },
+        success:function () {
+          console.log("success");
+          alert('发表文章成功！');
+          $('#article').val('');
+        }
+      })
+    })
+  })
+</script>
 </body>
 </html>
 
