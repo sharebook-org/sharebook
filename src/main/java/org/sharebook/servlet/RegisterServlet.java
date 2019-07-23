@@ -21,6 +21,7 @@ public class RegisterServlet extends HttpServlet {
     private final UserService userService;
 
     public RegisterServlet() {
+
         this.userService = new UserServiceImpl();
     }
 
