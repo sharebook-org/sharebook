@@ -19,7 +19,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<User> getAllUsers(int page, int size) {
-        List<User> users=userRepository.findAllUsers(page,size);
+        List<User> users = userRepository.findAll(page, size);
         if (users!=null){
             return users;
         }

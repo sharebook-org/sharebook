@@ -10,7 +10,7 @@ public class UserTest {
     @Test
     public void findAllUsers(){
         UserRepositoryImpl userRepository=new UserRepositoryImpl();
-        List<User> users= userRepository.findAllUsers(1,2);
+        List<User> users = userRepository.findAll(1, 2);
         System.out.println(users);
     }
 

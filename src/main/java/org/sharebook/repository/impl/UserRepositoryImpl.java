@@ -10,7 +10,6 @@ import org.sharebook.repository.UserRepository;
 import org.sharebook.utils.JDBCUtils;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -108,13 +107,17 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> findAllUsers(int page, int size) {
-        int offset=(page-1)*size;
-        String sql="SELECT * FROM `user` LIMIT ?,?";
-        List<User> users=new ArrayList<>();
+    public List<User> findAll(int page, int size) {
+        int offset = (page - 1) * size;
+        String sql = "SELECT * FROM `user` LIMIT ?,?";
+        List<User> users = null;
         try {
-            users=queryRunner.query(sql,
-                    new BeanListHandler<>(User.class),new Object[]{offset,size});
+            users = queryRunner.query(
+                    sql,
+                    new BeanListHandler<>(User.class),
+                    offset,
+                    size
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -123,10 +126,10 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public long getUsersCount() {
-        String sql="SELECT COUNT(*) FROM `user`";
-        long count=0;
+        String sql = "SELECT COUNT(*) FROM `user`";
+        long count = 0;
         try {
-            count=queryRunner.query(sql,new ScalarHandler<Long>());
+            count = queryRunner.query(sql, new ScalarHandler<Long>());
         } catch (SQLException e) {
             e.printStackTrace();
         }

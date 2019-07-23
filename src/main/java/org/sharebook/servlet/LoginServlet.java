@@ -26,17 +26,18 @@ public class LoginServlet extends HttpServlet {
 
     //登录
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         boolean result = userService.login(user);
-        User user1=userService.findUserByName(username);
+        User loginUser = userService.findUserByName(username);
         if (result) {
-            request.getSession().setAttribute("loginId",user1.getId());
-            request.getSession().setAttribute("login", username);
+            request.getSession().setAttribute("loginId", loginUser.getId());
+            request.getSession().setAttribute("login", loginUser.getUsername());
 
             ResponseUtils.write(response, ResponseUtils.success());
         } else {

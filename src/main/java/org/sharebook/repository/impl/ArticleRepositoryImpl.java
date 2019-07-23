@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleRepositoryImpl implements ArticleRepository {
+
     private final QueryRunner queryRunner;
 
     public ArticleRepositoryImpl() {
@@ -24,11 +25,11 @@ public class ArticleRepositoryImpl implements ArticleRepository {
     }
 
     @Override
-    public List<Article> findAllArticle() {
-        List<Article> articles=new ArrayList<>();
-        String sql="select * from Article";
+    public List<Article> findAll() {
+        List<Article> articles = new ArrayList<>();
+        String sql = "select * from `article`";
         try {
-            articles=queryRunner.query(sql,new BeanListHandler<>(Article.class));
+            articles = queryRunner.query(sql, new BeanListHandler<>(Article.class));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -37,7 +38,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
     @Override
     public int save(Article article) {
-        String sql="INSERT INTO `article`" +
+        String sql = "INSERT INTO `article`" +
                 "(`id`,`user_id`,`content`,`images`,`status`,`comment_num`,`like_num`,`create_time`,`update_time`)" +
                 "VALUES(?,?,?,?,?,?,?,?,?)";
 
@@ -53,7 +54,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
                     article.getLikeNum(),
                     article.getCreateTime(),
                     article.getUpdateTime()
-                    );
+            );
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);

@@ -14,21 +14,22 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/article")
 public class ArticleServlet extends HttpServlet {
-    private final ArticleService articleService=new ArticleServiceImpl();
+
+    private final ArticleService articleService = new ArticleServiceImpl();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Long userId= Long.valueOf(request.getParameter("userId"));
-        String content=request.getParameter("article");
-        Article article=new Article();
+        Long userId = Long.valueOf(request.getParameter("userId"));
+        String content = request.getParameter("article");
+        Article article = new Article();
         article.setUserId(userId);
         article.setContent(content);
-        boolean result= articleService.publish(article);
-        if (result){
-            request.getSession().setAttribute("content",content);
+        boolean result = articleService.publish(article);
+        if (result) {
+            request.getSession().setAttribute("content", content);
             //request.getRequestDispatcher("/attention").forward(request,response);
             ResponseUtils.write(response, ResponseUtils.success());
-        }
-        else {
+        } else {
             ResponseUtils.write(response, ResponseUtils.error());
         }
 

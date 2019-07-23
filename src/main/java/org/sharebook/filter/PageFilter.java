@@ -11,6 +11,10 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = "/users")
 public class PageFilter implements Filter {
+
+    private final static int DEFAULT_PAGE = 1;
+    private final static int DEFAULT_SIZE = 2;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -22,17 +26,20 @@ public class PageFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String method = request.getMethod();
-        int defaultPage = 1;
-        int defaultSize = 2;
+        int page = DEFAULT_PAGE;
+        int size = DEFAULT_SIZE;
         if (method.equals("GET")) {
-            String page = request.getParameter("page");
-            String size = request.getParameter("size");
-            if (StringUtils.isBlank(page) || StringUtils.isBlank(size)) {
-                String url = String.format("/users?page=%d&&size=%d", defaultPage, defaultSize);
-                request.getRequestDispatcher(url).forward(request, response);
-            } else {
-                chain.doFilter(request, response);
+            String currentPage = request.getParameter("page");
+            String currentSize = request.getParameter("size");
+            if (!StringUtils.isBlank(currentPage)) {
+                page = Integer.parseInt(currentPage);
             }
+            if (!StringUtils.isBlank(currentSize)) {
+                size = Integer.parseInt(currentSize);
+            }
+            request.getRequestDispatcher(
+                    String.format("/users?page=%d&&size=%d", page, size)
+            ).forward(request, response);
         }else {
             chain.doFilter(request, response);
         }

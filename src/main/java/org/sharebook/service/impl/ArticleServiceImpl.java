@@ -22,7 +22,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public boolean browse(Article article) {
         if (article!=null){
-            articleRepository.findAllArticle();
+            articleRepository.findAll();
             return true;
         }
         return false;

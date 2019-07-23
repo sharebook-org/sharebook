@@ -16,19 +16,19 @@ import java.util.List;
 @WebServlet(urlPatterns = "/users")
 public class UsersServlet extends HttpServlet {
 
-    private AdminService adminService=new AdminServiceImpl();
+    private AdminService adminService = new AdminServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int page=Integer.parseInt(request.getParameter("page"));
-        int size=Integer.parseInt(request.getParameter("size"));
-        List<User> users=adminService.getAllUsers(page,size);
+        int page = Integer.parseInt(request.getParameter("page"));
+        int size = Integer.parseInt(request.getParameter("size"));
+        List<User> users = adminService.getAllUsers(page, size);
         ResponseUtils.write(response, ResponseUtils.success(users));
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req,resp);
+        doPost(req, resp);
     }
 }
