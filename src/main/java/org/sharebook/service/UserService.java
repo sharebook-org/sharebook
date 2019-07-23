@@ -33,4 +33,18 @@ public interface UserService {
      * @return
      */
     boolean isExistUser(String username);
+
+    /**
+     * 根据ID查看个人信息
+     * @param id
+     * @return
+     */
+    User findUserById(Long id);
+
+    /**
+     * 根据名字查看个人信息
+     * @param name
+     * @return
+     */
+    User findUserByName(String name);
 }
