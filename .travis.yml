@@ -1,4 +1,18 @@
 language: java
 jdk:
-  - oraclejdk8
   - openjdk8
+services:
+  - mysql
+dist: Trusty
+addons:
+  apt:
+    packages:
+      - mysql-server
+sudo: required
+before_script:
+  - mysql -e 'create database sharebook;'
+  - mysql -e 'use sharebook;'
+  - mysql -u root --default-character-set=utf8 sharebook < sharebook.sql
+  - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('1234') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+  - sudo mysql_upgrade -u root -p1234
+  - sudo service mysql restart

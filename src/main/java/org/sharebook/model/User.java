@@ -1,10 +1,14 @@
 package org.sharebook.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     private Long id;
@@ -20,4 +24,19 @@ public class User {
     private String avatar;
     private Date createTime;
     private Date updateTime;
+
+    //constructor for register
+    public User(String username, String password, String salt,
+                Integer sex, Integer status, Integer role,
+                String avatar, Date createTime, Date updateTime) {
+        this.username = username;
+        this.password = password;
+        this.salt = salt;
+        this.sex = sex;
+        this.status = status;
+        this.role = role;
+        this.avatar = avatar;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
 }

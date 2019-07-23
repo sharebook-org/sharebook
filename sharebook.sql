@@ -1,8 +1,3 @@
-# SQL
-
-## User用户表
-
-```sql
 CREATE TABLE `user` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '用户编号',
 	`username` VARCHAR(20) NOT NULL COMMENT '用户昵称',
@@ -20,12 +15,10 @@ CREATE TABLE `user` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='用户表'
-ENGINE=InnoDB
-;
-```
-## Follow关注表
+    DEFAULT CHARSET = utf8
+    AUTO_INCREMENT = 1
+    ENGINE=InnoDB;
 
-```sql
 CREATE TABLE `follow` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
 	`user_id` BIGINT(20) NOT NULL COMMENT '用户编号',
@@ -35,11 +28,10 @@ CREATE TABLE `follow` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='关注表'
-ENGINE=InnoDB
-```
-## Article文章表
+    DEFAULT CHARSET = utf8
+    AUTO_INCREMENT = 1
+    ENGINE=InnoDB;
 
-```sql
 CREATE TABLE `article` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '文章编号',
 	`user_id` BIGINT(20) NOT NULL COMMENT '用户编号',
@@ -53,12 +45,10 @@ CREATE TABLE `article` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='文章表'
-ENGINE=InnoDB
-;
-```
-## Like点赞表
+    DEFAULT CHARSET = utf8
+    AUTO_INCREMENT = 1
+    ENGINE=InnoDB;
 
-```sql
 CREATE TABLE `like` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
 	`entity_type` INT(1) NOT NULL COMMENT '点赞实体类型 0为文章类型，1为评论类型',
@@ -70,12 +60,10 @@ CREATE TABLE `like` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='点赞表'
-ENGINE=InnoDB
-;
-```
-## Comment评论表
+    DEFAULT CHARSET = utf8
+    AUTO_INCREMENT = 1
+    ENGINE=InnoDB;
 
-```sql
 CREATE TABLE `comment` (
 	`id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '评论编号',
 	`user_id` BIGINT(20) NOT NULL COMMENT '发表评论的用户编号',
@@ -87,7 +75,15 @@ CREATE TABLE `comment` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='评论表'
-ENGINE=InnoDB
-;
-```
+    DEFAULT CHARSET = utf8
+    AUTO_INCREMENT = 1
+    ENGINE=InnoDB;
 
+INSERT INTO `article`(`user_id`, `content`)
+VALUES ('1', 'test');
+INSERT INTO `user`(`username`, `password`, `salt`)
+VALUES ('czq', '1234', 'salt');
+INSERT INTO `user`(`username`, `password`, `salt`)
+VALUES ('wyx', '1234', 'salt');
+INSERT INTO `comment`(`user_id`, `entity_type`, `entity_id`, `content`)
+VALUES ('1', '0', '1', 'test content');
