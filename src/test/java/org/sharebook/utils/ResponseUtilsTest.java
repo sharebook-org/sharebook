@@ -13,7 +13,7 @@ public class ResponseUtilsTest {
         System.out.println(ResponseUtils.success());
         List<Hot> hots = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            hots.add(new Hot("title", "url"));
+            hots.add(new Hot("title", "哈哈"));
         }
         System.out.println(ResponseUtils.success("message", hots));
         System.out.println(ResponseUtils.success(hots));

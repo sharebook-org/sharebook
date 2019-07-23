@@ -1,12 +1,15 @@
 package org.sharebook.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONAware;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * JSON相关工具类
@@ -82,6 +85,7 @@ public class ResponseUtils {
      */
     public static void write(HttpServletResponse response, String message) {
         try {
+            response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(message);
         } catch (IOException e) {
             e.printStackTrace();
