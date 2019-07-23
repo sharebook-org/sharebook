@@ -30,3 +30,5 @@ out/
 
 # Project
 src/main/resource/*.properties
+.classpath
+.factorypath
