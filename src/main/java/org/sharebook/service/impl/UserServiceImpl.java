@@ -16,6 +16,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean modify(User user) {
+        int result=userRepository.update(user);
+        if (result!=0){
+            return true;
+        }
         return false;
     }
 
@@ -42,7 +46,6 @@ public class UserServiceImpl implements UserService {
         String username = user.getUsername();
         String password = user.getPassword();
         User u = userRepository.findByUsername(username);
-        System.out.println(u);
         if (user != null) {
             String salt = u.getSalt();
             String encryptPassword = MD5Utils.md5(password, salt);

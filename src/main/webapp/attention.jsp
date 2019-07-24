@@ -26,10 +26,10 @@
           </a>
 
           <h6 class="qb">
-            <a class="boa" href="./profile.jsp">Dave Gamache</a>
+            <a class="boa" href="./profile.jsp">${user.username}</a>
           </h6>
 
-          <p class="afo">I wish i was a little bit taller, wish i was a baller, wish i had a girl… also.</p>
+          <p class="afo">${user.introduction}</p>
 
           <ul class="bpk">
             <li class="bpl">
@@ -53,7 +53,6 @@
         <div class="qa">
           <h6 class="afh">基本资料<small>· <a href="./profile.jsp">编辑</a></small></h6>
           <ul class="dc axg">
-            <li><span class="axc h bit aff"></span>个人简介 :${user.introduction}
             <li><span class="axc h bgz aff"></span>性别 :
             <c:if test="${user.sex==0}">女</c:if>
             <c:if test="${user.sex==1}">男</c:if>
@@ -75,10 +74,10 @@
             <textarea type="text" class="form-control" placeholder="Message" id="article"></textarea>
             <!-- 上传图片按钮和发表按钮 -->
             <div class="bpt">
-              <button type="button" class="cg ns yf" data-toggle="modal" data-target="#exampleModal">
+              <button type="button" class="cg ns yf" data-toggle="modal" data-target="#exampleModal" title="插入图片">
                 <span class="h azo"></span>
               </button>
-              <button type="button" class="cg ns yf" id="publish-button">
+              <button type="button" class="cg ns yf" id="publish-button" title="发表">
                 <span class="h bir"></span>
               </button>
             </div>
@@ -94,7 +93,7 @@
           <div class="rw">
             <div class="bpb">
               <!-- 发表时间 -->
-              <small class="acx axc">4 min</small>
+              <small class="acx axc"><%=request.getSession().getAttribute("createTime")%><%--4 min--%></small>
               <!-- 昵称 -->
               <h6>Dave Gamache</h6>
             </div>
@@ -107,7 +106,7 @@
             <div class="boy" data-grid="images">
               <div style="display: none">
                 <img data-action="zoom" data-width="1050" data-height="700" src="assets/img/unsplash_1.jpg">
-              </div>
+            </div>
 
               <div style="display: none">
                 <img data-action="zoom" data-width="640" data-height="640" src="assets/img/instagram_1.jpg">
@@ -130,7 +129,8 @@
                     src="assets/img/avatar-fat.jpg">
                 <div class="rw">
                   <strong>Jacon Thornton: </strong>
-                  Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.
+
+<%--                  Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.--%>
                 </div>
               </li>
               <!-- 评论 -->
@@ -227,19 +227,28 @@
   $(function () {
     $('#publish-button').on('click',function () {
       var article=$('#article').val();
-      $.ajax({
-        url:'/article',
-        method:'POST',
-        data: {
-          userId:2,
-          article:article,
-        },
-        success:function () {
-          console.log("success");
-          alert('发表文章成功！');
-          $('#article').val('');
-        }
-      })
+      var res = notBlank(article);
+      if (!res) {
+        alert('文章内容不能为空!');
+      } else {
+        $.ajax({
+          url:'/article',
+          method:'POST',
+          data: {
+            userId:${loginId},
+            article:article,
+          },
+          success:function (result) {
+            if (result.code==200) {
+              alert('发表文章成功！');
+              $('#article').val('');
+            }
+            else {
+              alert('发表文章失败！');
+            }
+          }
+        })
+      }
     })
   })
 </script>
