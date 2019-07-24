@@ -38,13 +38,6 @@ public class UsersServlet extends HttpServlet {
         ResponseUtils.write(response, ResponseUtils.success(userVOS));
     }
 
-    /**
-     *
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id=Long.parseLong(request.getParameter("id"));

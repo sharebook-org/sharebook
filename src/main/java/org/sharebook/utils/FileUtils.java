@@ -1,6 +1,6 @@
 package org.sharebook.utils;
 
-public class FileUtil {
+public class FileUtils {
     public static String getFileName(String header){
         /**
          * String[] tempArr1 =

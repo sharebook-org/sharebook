@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebFilter(urlPatterns = "*.jsp")
 public class JSPFilter implements Filter {
 
-    private final String suffix = ".jsp";
+    private final static String SUFFIX = ".jsp";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -22,11 +22,12 @@ public class JSPFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
         String path = request.getRequestURI();
-        if (path.endsWith(suffix)) {
+        if (path.endsWith(SUFFIX)) {
             int index = path.indexOf(".");
             String servletPath = path.substring(0, index);
             request.getRequestDispatcher(servletPath).forward(req, resp);

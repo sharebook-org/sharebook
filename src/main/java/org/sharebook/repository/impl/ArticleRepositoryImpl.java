@@ -39,7 +39,8 @@ public class ArticleRepositoryImpl implements ArticleRepository {
     @Override
     public int save(Article article) {
         String sql = "INSERT INTO `article`" +
-                "(`id`,`user_id`,`content`,`images`,`status`,`comment_num`,`like_num`,`create_time`,`update_time`)" +
+                "(`id`,`user_id`,`content`,`images`,`status`," +
+                "`comment_num`,`like_num`,`create_time`,`update_time`)" +
                 "VALUES(?,?,?,?,?,?,?,?,?)";
 
         try {

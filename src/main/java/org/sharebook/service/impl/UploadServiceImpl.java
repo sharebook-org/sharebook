@@ -1,7 +1,7 @@
 package org.sharebook.service.impl;
 
 import org.sharebook.service.UploadService;
-import org.sharebook.utils.FileUtil;
+import org.sharebook.utils.FileUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -29,7 +29,7 @@ public class UploadServiceImpl implements UploadService {
         String path=request.getServletContext().getRealPath("upload");
         String header=part.getHeader("Content-Disposition");
         //获取上传文件的名字
-        String fileName= FileUtil.getFileName(header);
+        String fileName = FileUtils.getFileName(header);
         try {
             part.write(path+ File.separator+fileName);
         } catch (IOException e) {

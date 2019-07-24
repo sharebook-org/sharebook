@@ -11,7 +11,7 @@
 <div class="do axz">
   <div class="ayb">
     <form class="ahr avz j">
-      <h1 class="l afv">忘记密码</h1>
+      <h1 class="l afv">找回密码</h1>
       <div class="mu">
         <input class="form-control" placeholder="账号" />
       </div>
@@ -29,6 +29,14 @@
             type="password"
             class="form-control"
             placeholder="重复密码"
+        />
+      </div>
+
+      <div class="mu afh">
+        <input
+            type="password"
+            class="form-control"
+            placeholder="新密码"
         />
       </div>
 

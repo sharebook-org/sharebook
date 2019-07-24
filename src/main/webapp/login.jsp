@@ -35,7 +35,7 @@
       </div>
 
       <footer class="bqx">
-        <a href="/forget" class="axc">忘记密码</a>
+        <a href="/forget" class="axc">找回密码</a>
       </footer>
     </form>
   </div>
@@ -62,7 +62,7 @@
     $('#login-button').on('click', function () {
       var username = $('#account').val();
       var password = $('#password').val();
-      console.log('login')
+      console.log('login');
       $.ajax({
         url: '/login',
         method: 'POST',
@@ -72,7 +72,7 @@
           password: password,
         },
         success: function (result) {
-          console.log('login result' + result)
+          console.log('login result' + result);
           if (result.code == 200) {
             window.location.href = '/index';
           } else {

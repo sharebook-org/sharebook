@@ -10,24 +10,23 @@ import java.io.IOException;
 
 @WebFilter("/attention")
 public class AttentionFilter implements Filter {
-    public void destroy() {
-    }
-
-    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        HttpServletRequest request=(HttpServletRequest) req;
-        HttpServletResponse response=(HttpServletResponse) resp;
-        String loginSuccess=(String) request.getSession().getAttribute("login");
-        if (StringUtils.isBlank(loginSuccess)){
-            request.getRequestDispatcher("login.jsp").forward(request,response);
-        }
-        else {
-            chain.doFilter(req, resp);
-        }
-
-    }
-
     public void init(FilterConfig config) throws ServletException {
+    }
 
+    public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
+            throws ServletException, IOException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) resp;
+        String loginSuccess = (String) request.getSession().getAttribute("login");
+        if (!StringUtils.isBlank(loginSuccess)) {
+            chain.doFilter(req, resp);
+        } else {
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+
+    }
+
+    public void destroy() {
     }
 
 }

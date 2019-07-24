@@ -54,12 +54,13 @@
           <h6 class="afh">基本资料<small>· <a href="./profile.jsp">编辑</a></small></h6>
           <ul class="dc axg">
             <li><span class="axc h bgz aff"></span>性别 :
-            <c:if test="${user.sex==0}">女</c:if>
-            <c:if test="${user.sex==1}">男</c:if>
-            <c:if test="${user.sex==2}">其他</c:if>
-            <li><span class="axc h bgz aff"></span>生日 :${user.birth}
-            <li><span class="axc h bip aff"></span>地址 :${user.location}
-            <li><span class="axc h bjl aff"></span>创建时间 :${user.createTime}
+              <c:if test="${user.sex==0}">女</c:if>
+              <c:if test="${user.sex==1}">男</c:if>
+              <c:if test="${user.sex==2}">其他</c:if>
+            </li>
+            <li><span class="axc h bgz aff"></span>生日 :${user.birth}</li>
+            <li><span class="axc h bip aff"></span>地址 :${user.location}</li>
+            <li><span class="axc h bjl aff"></span>创建时间 :${user.createTime}</li>
           </ul>
         </div>
       </div>
