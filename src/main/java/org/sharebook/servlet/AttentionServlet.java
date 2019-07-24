@@ -13,27 +13,27 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/attention")
 public class AttentionServlet extends HttpServlet {
-    public final UserServiceImpl userService = new UserServiceImpl();
+
+    public final UserServiceImpl userService=new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long id = (Long) request.getSession().getAttribute("loginId");
-        User user = userService.findUserById(id);
-        if (user != null) {
-            request.getSession().setAttribute("user", user);
-            ResponseUtils.write(response, ResponseUtils.success());
-        } else {
-            ResponseUtils.write(response, ResponseUtils.error());
+        Long id=(Long)request.getSession().getAttribute("loginId");
+        User user=userService.findUserById(id);
+        if (user!=null){
+            request.getSession().setAttribute("user",user);
+            ResponseUtils.write(response,ResponseUtils.success());
+        }else {
+            ResponseUtils.write(response,ResponseUtils.error());
         }
-
-        request.getRequestDispatcher("/attention.jsp").forward(request, response);
+        request.getRequestDispatcher("/attention.jsp").forward(request,response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long id = (Long) request.getSession().getAttribute("loginId");
-        User user = userService.findUserById(id);
+        Long id=(Long)request.getSession().getAttribute("loginId");
+        User user=userService.findUserById(id);
 
     }
 
