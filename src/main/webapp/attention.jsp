@@ -94,7 +94,7 @@
           <div class="rw">
             <div class="bpb">
               <!-- 发表时间 -->
-              <small class="acx axc">4 min</small>
+              <small class="acx axc"><%=request.getSession().getAttribute("createTime")%><%--4 min--%></small>
               <!-- 昵称 -->
               <h6>Dave Gamache</h6>
             </div>
@@ -227,19 +227,28 @@
   $(function () {
     $('#publish-button').on('click',function () {
       var article=$('#article').val();
-      $.ajax({
-        url:'/article',
-        method:'POST',
-        data: {
-          userId:2,
-          article:article,
-        },
-        success:function () {
-          console.log("success");
-          alert('发表文章成功！');
-          $('#article').val('');
-        }
-      })
+      var res = notBlank(article);
+      if (!res) {
+        alert('文章内容不能为空!');
+      } else {
+        $.ajax({
+          url:'/article',
+          method:'POST',
+          data: {
+            userId:2,
+            article:article,
+          },
+          success:function (result) {
+            if (result.code==200) {
+              alert('发表文章成功！');
+              $('#article').val('');
+            }
+            else {
+              alert('发表文章失败！');
+            }
+          }
+        })
+      }
     })
   })
 </script>
