@@ -26,10 +26,10 @@
           </a>
 
           <h6 class="qb">
-            <a class="boa" href="./profile.jsp">Dave Gamache</a>
+            <a class="boa" href="./profile.jsp">${user.username}</a>
           </h6>
 
-          <p class="afo">I wish i was a little bit taller, wish i was a baller, wish i had a girl… also.</p>
+          <p class="afo">${user.introduction}</p>
 
           <ul class="bpk">
             <li class="bpl">
@@ -53,7 +53,6 @@
         <div class="qa">
           <h6 class="afh">基本资料<small>· <a href="./profile.jsp">编辑</a></small></h6>
           <ul class="dc axg">
-            <li><span class="axc h bit aff"></span>个人简介 :${user.introduction}
             <li><span class="axc h bgz aff"></span>性别 :
             <c:if test="${user.sex==0}">女</c:if>
             <c:if test="${user.sex==1}">男</c:if>

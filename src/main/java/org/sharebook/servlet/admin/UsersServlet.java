@@ -27,6 +27,13 @@ public class UsersServlet extends HttpServlet {
         ResponseUtils.write(response, ResponseUtils.success(users));
     }
 
+    /**
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);

@@ -30,11 +30,8 @@ public class AttentionServlet extends HttpServlet {
         request.getRequestDispatcher("/attention.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Long id = (Long) request.getSession().getAttribute("loginId");
-        User user = userService.findUserById(id);
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/index").forward(request,response);
     }
 
 }

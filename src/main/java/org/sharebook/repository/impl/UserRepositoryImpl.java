@@ -1,5 +1,7 @@
 package org.sharebook.repository.impl;
 
+import org.apache.commons.dbutils.BasicRowProcessor;
+import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -25,7 +27,11 @@ public class UserRepositoryImpl implements UserRepository {
     public User findById(Long id) {
         String sql = "SELECT * FROM `user` WHERE `id` = ?";
         try {
-            return queryRunner.query(sql, new BeanHandler<>(User.class), id);
+            return queryRunner.query(
+                    sql,
+                    new BeanHandler<>(User.class, new BasicRowProcessor(new GenerousBeanProcessor())),
+                    id
+            );
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -99,7 +105,7 @@ public class UserRepositoryImpl implements UserRepository {
         String sql = "SELECT * FROM `user` WHERE `username` = ?";
         User user = null;
         try {
-            user = queryRunner.query(sql, new BeanHandler<>(User.class), username);
+            user = queryRunner.query(sql, new BeanHandler<>(User.class,new BasicRowProcessor(new GenerousBeanProcessor())), username);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -114,7 +120,7 @@ public class UserRepositoryImpl implements UserRepository {
         try {
             users = queryRunner.query(
                     sql,
-                    new BeanListHandler<>(User.class),
+                    new BeanListHandler<>(User.class,new BasicRowProcessor(new GenerousBeanProcessor())),
                     offset,
                     size
             );
