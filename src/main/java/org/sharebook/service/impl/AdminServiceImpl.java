@@ -25,4 +25,26 @@ public class AdminServiceImpl implements AdminService {
         }
         return null;
     }
+
+    @Override
+    public int updateRole(long id, int role) {
+        User user=userRepository.findById(id);
+        user.setRole(role);
+        int result=userRepository.update(user);
+        return result;
+    }
+
+    @Override
+    public int updateStatus(long id, int status) {
+        User user=userRepository.findById(id);
+        user.setStatus(status);
+        int result=userRepository.update(user);
+        return result;
+    }
+
+    @Override
+    public int deleteUser(long id) {
+        int result=userRepository.delete(id);
+        return result;
+    }
 }
