@@ -33,12 +33,19 @@
             placeholder="重复密码"
         />
       </div>
-
+      <div class="mu afh">
+        <input
+                id="eamil"
+                type="email"
+                class="form-control"
+                placeholder="邮箱"
+        />
+      </div>
       <div class="mu afh">
         性别：
-        女：<input name="sex" type="radio" value="0"/>&nbsp;
-        男：<input name="sex" type="radio" value="1"/>&nbsp;
-        其他：<input name="sex" type="radio" value="2" checked="checked"/>
+       <input name="sex" type="radio" value="0"/>&nbsp; 女
+       <input name="sex" type="radio" value="1"/>&nbsp;男
+       <input name="sex" type="radio" value="2" checked="checked"/> 其他
       </div>
 
 

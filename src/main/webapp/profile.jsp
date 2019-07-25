@@ -25,10 +25,10 @@
   <nav class="bov">
     <ul class="nav ph xm">
       <li class="pi">
-        <a class="pg active" href="#">主页</a>
+        <a class="pg active" href="/profile">主页</a>
       </li>
       <li class="pi">
-        <a class="pg" href="#">微博</a>
+        <a class="pg" href="/my">微博</a>
       </li>
       <li class="pi">
         <a class="pg" href="#">相册</a>
@@ -37,42 +37,74 @@
   </nav>
 </div>
 
-<div class="by afl" data-grid="images">
+<div class="do axz">
+  <div class="ayb">
+    <form class="ahr avz j">
 
-  <p>用户名：<input type="text" name="username" value="${user.username}" id="name"></p>
+      <div class="mu afh">
+        <span style="position: relative;left: -170px;top: 28px;">用户名</span><input
+              type="text"
+              name="username"
+              value="${user.username}"
+              class="form-control"
+              id="name"
+      />
+      </div>
 
-  <p> 性别：
-    <c:if test="${user.sex==0}">
-      <input type="text" name="sex" id="sex" value="女"/>
-    </c:if>
-    <c:if test="${user.sex==1}">
-      <input type="text" name="sex" id="sex" value="男"/>
-    </c:if>
-    <c:if test="${user.sex==2}">
-      <input type="text" name="sex" id="sex" value="其他"/>
-    </c:if>
-  </p>
+      <div class="mu afh">
+        <span style="position: relative;left: -170px;top: 28px;">性别</span>
+          <c:if test="${user.sex==0}">
+            <input type="text" name="sex" id="sex" value="女" class="form-control" />
+          </c:if>
+          <c:if test="${user.sex==1}">
+            <input type="text" name="sex" id="sex" value="男" class="form-control"/>
+          </c:if>
+          <c:if test="${user.sex==2}">
+            <input type="text" name="sex" id="sex" value="其他" class="form-control"/>
+          </c:if>
+      </div>
 
-  <p> 生日：<input type="text" name="birth" value="${user.birth}" id="birth"></p>
-  <%-- <select>
-       <option>月</option>
-       <option>1</option>
-   </select>
-   <select>
-       <option>日</option>
-       <option>12</option>
-   </select>--%>
+      <div class="mu afh">
+        <span style="position: relative;left: -170px;top: 28px;">生日</span>
+        <input
+              type="text"
+              name="birth"
+              value="${user.birth}"
+              class="form-control"
+              id="birth"
+      />
+      </div>
 
-  <p>地址：<input type="text" name="location" value="${user.location}" id="location"></p>
+      <div class="mu afh">
+        <span style="position: relative;left: -170px;top: 28px;">地址</span>
+        <input
+              type="text"
+              name="location"
+              value="${user.location}"
+              class="form-control"
+              id="location"
+      />
+      </div>
+      <div id="error-message" class="mu afh" style="display: none">
+        <span style="color: #c9302c"></span>
+      </div>
 
-  <p>
-    <button type="button" id="modify-button">修改</button>
-  </p>
+      <div class="afv">
+          <button type="button" id="modify-button" class="cg nq">修改</button>
+      </div>
 
+    </form>
+  </div>
 </div>
 <jsp:include page="./common/script.jsp"></jsp:include>
 <script>
   $(function () {
+
+    $('#name').blur(function () {
+      var name = $('#name').val();
+      var result=notBlank(name);
+      showErrorMessage(result,'用户名不能为空');
+    });
 
     $('#modify-button').on('click', function () {
       var name = $('#name').val();
@@ -112,6 +144,17 @@
       })
     })
   });
+  //根据结果是否展示错误信息
+  function showErrorMessage(result, message) {
+    if (!result) {
+      $('#error-message span').text(message);
+      $('#error-message').show();
+      $('#modify-button').attr('disabled', 'disabled');
+    } else {
+      $('#error-message').hide();
+      $('#modify-button').removeAttr('disabled');
+    }
+  }
 </script>
 </body>
 </html>
