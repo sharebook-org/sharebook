@@ -36,6 +36,7 @@ public class RegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String email=request.getParameter("email");
         int sex = Integer.parseInt(request.getParameter("sex"));
         User user = new User();
         user.setUsername(username);

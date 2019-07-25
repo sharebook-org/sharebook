@@ -26,10 +26,9 @@ public class ProfileServlet extends HttpServlet {
         int sex=Integer.parseInt(request.getParameter("sex"));
         String birth=request.getParameter("birth");
         String location=request.getParameter("location");
-        User user=(User)request.getSession().getAttribute("user");
+        User user=(User)request.getSession().getAttribute("user");//获取已登录的用户
         user.setUsername(name);
         user.setSex(sex);
-
 //        user.setBirth(date);
         user.setLocation(location);
        boolean result=userService.modify(user);
