@@ -51,7 +51,9 @@
 
       <div class="pz vp vy afo">
         <div class="qa">
-          <h6 class="afh">基本资料<small>· <a href="./profile.jsp">编辑</a></small></h6>
+          <h6 class="afh">基本资料
+            <small>· <a href="./profile.jsp">编辑</a></small>
+          </h6>
           <ul class="dc axg">
             <li><span class="axc h bgz aff"></span>性别 :
               <c:if test="${user.sex==0}">女</c:if>
@@ -101,13 +103,13 @@
             <!-- 微博内容 -->
             <p>
               <%=request.getSession().getAttribute("content")%>
-<%--              Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.--%>
+              <%--              Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.--%>
             </p>
             <!-- 图片 -->
             <div class="boy" data-grid="images">
               <div style="display: none">
                 <img data-action="zoom" data-width="1050" data-height="700" src="assets/img/unsplash_1.jpg">
-            </div>
+              </div>
 
               <div style="display: none">
                 <img data-action="zoom" data-width="640" data-height="640" src="assets/img/instagram_1.jpg">
@@ -131,7 +133,7 @@
                 <div class="rw">
                   <strong>Jacon Thornton: </strong>
 
-<%--                  Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.--%>
+                  <%--                  Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.--%>
                 </div>
               </li>
               <!-- 评论 -->
@@ -141,7 +143,8 @@
                     src="assets/img/avatar-mdo.png">
                 <div class="rw">
                   <strong>Mark Otto: </strong>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo,
+                  tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
                 </div>
               </li>
             </ul>
@@ -154,7 +157,9 @@
     <div class="fj">
       <div class="pz afo d-none vy">
         <div class="qa">
-          <h6 class="afh">Likes <small>· <a href="#">View All</a></small></h6>
+          <h6 class="afh">Likes
+            <small>· <a href="#">View All</a></small>
+          </h6>
           <ul class="bow box">
             <li class="rv afa">
               <img
@@ -164,7 +169,8 @@
                 <strong>Jacob Thornton</strong> @fat
                 <div class="bpa">
                   <button class="cg nz ok">
-                    <span class="h ayi"></span> Follow</button>
+                    <span class="h ayi"></span> Follow
+                  </button>
                 </div>
               </div>
             </li>
@@ -178,7 +184,8 @@
                 <strong>Mark Otto</strong> @mdo
                 <div class="bpa">
                   <button class="cg nz ok">
-                    <span class="h ayi"></span> Follow</button>
+                    <span class="h ayi"></span> Follow
+                  </button>
                 </div>
               </div>
             </li>
@@ -226,27 +233,26 @@
 <jsp:include page="./common/script.jsp"></jsp:include>
 <script>
   $(function () {
-    var  date = '${user.createTime}';
-    $('#createTime').text(date.substring(0,date.length-2));
-    $('#publish-button').on('click',function () {
-      var article=$('#article').val();
+    var date = '${user.createTime}';
+    $('#createTime').text(date.substring(0, date.length - 2));
+    $('#publish-button').on('click', function () {
+      var article = $('#article').val();
       var res = notBlank(article);
       if (!res) {
         alert('文章内容不能为空!');
       } else {
         $.ajax({
-          url:'/article',
-          method:'POST',
+          url: '/article',
+          method: 'POST',
           data: {
             userId:${loginId},
-            article:article,
+            article: article,
           },
-          success:function (result) {
-            if (result.code==200) {
+          success: function (result) {
+            if (result.code == 200) {
               alert('发表文章成功！');
               $('#article').val('');
-            }
-            else {
+            } else {
               alert('发表文章失败！');
             }
           }

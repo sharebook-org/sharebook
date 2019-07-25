@@ -12,6 +12,8 @@ function checkAccount() {
   var account = $('#account').val();
   return notBlank(account);
 }
+
+
 //检测字符串是否为空
 function notBlank(value) {
   if (value != null && value != '' && value != undefined) {

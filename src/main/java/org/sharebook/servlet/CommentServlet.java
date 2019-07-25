@@ -14,30 +14,32 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/comment")
 public class CommentServlet extends HttpServlet {
-    private final CommentService commentService=new CommentServiceImpl();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Long userId= Long.valueOf(request.getParameter("userId"));
-        String content=request.getParameter("content");
-        int entityType= Integer.parseInt(request.getParameter("entityType"));
-        Long entityId= Long.valueOf(request.getParameter("entityId"));
+    private final CommentService commentService = new CommentServiceImpl();
 
-        Comment comment=new Comment();
-        comment.setUserId(userId);
-        comment.setContent(content);
-        comment.setEntityType(entityType);
-        comment.setEntityId(entityId);
-        boolean result=commentService.comments(comment);
-        if (result){
+    //发表评论
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Long userId = Long.valueOf(request.getParameter("userId"));
+        String content = request.getParameter("content");
+        Integer entityType = Integer.parseInt(request.getParameter("entityType"));
+        Long entityId = Long.valueOf(request.getParameter("entityId"));
+
+        Comment comment = new Comment(
+                userId, content, entityType, entityId
+        );
+
+        boolean result = commentService.comments(comment);
+        if (result) {
             ResponseUtils.write(response, ResponseUtils.success());
-        }
-        else {
+        } else {
             ResponseUtils.write(response, ResponseUtils.error());
         }
-
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
     }
 }

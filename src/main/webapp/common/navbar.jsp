@@ -13,9 +13,12 @@
         <a class="pg" href="/index">首页</a>
       </li>
       <c:if test="${login!=null}">
-      <li class="pi">
-        <a class="pg" href="/attention">关注</a>
-      </li>
+        <li class="pi">
+          <a class="pg" href="/attention">关注</a>
+        </li>
+        <li class="pi">
+          <a class="pg" href="/publish">发表</a>
+        </li>
       </c:if>
       <li class="pi">
         <a class="pg" href="/hots">摸鱼热榜</a>
@@ -44,6 +47,7 @@
       </ul>
       <ul class="nav navbar-nav d-none" id="js-popoverContent">
         <li class="pi"><a class="pg" href="/profile">个人信息</a></li>
+        <li class="pi"><a class="pg" href="/modify">修改密码</a></li>
         <li class="pi"><a id="logout" class="pg" href="javascript:void(0)" onclick="logout()">退出登录</a></li>
       </ul>
     </c:if>

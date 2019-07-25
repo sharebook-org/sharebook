@@ -4,6 +4,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.sharebook.model.Hot;
 import org.sharebook.service.HotService;
 import org.sharebook.service.impl.HotServiceImpl;
+import org.sharebook.utils.ResponseUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,5 +39,14 @@ public class HotsServlet extends HttpServlet {
             request.setAttribute("tianyaHots", tianyaHots);
         }
         request.getRequestDispatcher("/hots.jsp").forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Hot> weiboHots = hotService.getWeiboHots();
+        if (CollectionUtils.isNotEmpty(weiboHots)) {
+            ResponseUtils.write(response, ResponseUtils.success(weiboHots));
+        }
     }
 }

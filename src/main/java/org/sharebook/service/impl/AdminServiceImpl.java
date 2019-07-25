@@ -20,7 +20,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<User> getAllUsers(int page, int size) {
         List<User> users = userRepository.findAll(page, size);
-        if (users!=null){
+        if (users != null) {
             return users;
         }
         return null;
@@ -28,23 +28,23 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int updateRole(long id, int role) {
-        User user=userRepository.findById(id);
+        User user = userRepository.findById(id);
         user.setRole(role);
-        int result=userRepository.update(user);
+        int result = userRepository.update(user);
         return result;
     }
 
     @Override
     public int updateStatus(long id, int status) {
-        User user=userRepository.findById(id);
+        User user = userRepository.findById(id);
         user.setStatus(status);
-        int result=userRepository.update(user);
+        int result = userRepository.update(user);
         return result;
     }
 
     @Override
     public int deleteUser(long id) {
-        int result=userRepository.delete(id);
+        int result = userRepository.delete(id);
         return result;
     }
 }

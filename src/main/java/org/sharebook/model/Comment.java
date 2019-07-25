@@ -12,9 +12,17 @@ import java.util.Date;
 public class Comment {
     private Long id;
     private Long userId;
+    private String content;
     private int entityType;
     private Long entityId;
-    private String content;
     private Date createTime;
     private Date updateTime;
+
+    public Comment(Long userId, String content,
+                   int entityType, Long entityId) {
+        this.userId = userId;
+        this.entityType = entityType;
+        this.entityId = entityId;
+        this.content = content;
+    }
 }

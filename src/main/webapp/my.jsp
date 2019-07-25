@@ -8,7 +8,6 @@
 </head>
 
 <body class="bob">
-<div class="bon" id="app-growl"></div>
 
 <jsp:include page="./common/navbar.jsp"></jsp:include>
 

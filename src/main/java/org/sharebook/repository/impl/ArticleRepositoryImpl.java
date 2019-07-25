@@ -1,5 +1,7 @@
 package org.sharebook.repository.impl;
 
+import org.apache.commons.dbutils.BasicRowProcessor;
+import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.sharebook.model.Article;
@@ -7,7 +9,6 @@ import org.sharebook.repository.ArticleRepository;
 import org.sharebook.utils.JDBCUtils;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleRepositoryImpl implements ArticleRepository {
@@ -20,16 +21,22 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
 
     @Override
-    public Article findById(Long aLong) {
+    public Article findById(Long id) {
         return null;
     }
 
     @Override
     public List<Article> findAll() {
-        List<Article> articles = new ArrayList<>();
+        List<Article> articles = null;
         String sql = "select * from `article`";
         try {
-            articles = queryRunner.query(sql, new BeanListHandler<>(Article.class));
+            articles = queryRunner.query(
+                    sql,
+                    new BeanListHandler<>(
+                            Article.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    )
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,13 +45,14 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
     @Override
     public int save(Article article) {
+        int count = 0;
         String sql = "INSERT INTO `article`" +
                 "(`id`,`user_id`,`content`,`images`,`status`," +
                 "`comment_num`,`like_num`,`create_time`,`update_time`)" +
                 "VALUES(?,?,?,?,?,?,?,?,?)";
 
         try {
-            return queryRunner.execute(
+            count = queryRunner.execute(
                     sql,
                     article.getId(),
                     article.getUserId(),
@@ -58,8 +66,8 @@ public class ArticleRepositoryImpl implements ArticleRepository {
             );
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
+        return count;
     }
 
     @Override
@@ -68,7 +76,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
     }
 
     @Override
-    public int delete(Long aLong) {
+    public int delete(Long id) {
         return 0;
     }
 

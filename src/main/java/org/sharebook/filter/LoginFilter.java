@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter("/attention")
-public class AttentionFilter implements Filter {
+/**
+ * 未登录时访问以下页面会被拦截
+ */
+@WebFilter(urlPatterns = {"/attention", "/publish", "/my"})
+public class LoginFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
 

@@ -42,55 +42,56 @@
     <form class="ahr avz j">
 
       <div class="mu afh">
-        <span style="position: relative;left: -170px;top: 28px;">用户名</span><input
-              type="text"
-              name="username"
-              value="${user.username}"
-              class="form-control"
-              id="name"
+        <span style="position: relative;left: -170px;top: 28px;">用户名</span>
+        <input
+            type="text"
+            name="username"
+            value="${user.username}"
+            class="form-control"
+            id="name"
       />
       </div>
 
       <div class="mu afh">
         <span style="position: relative;left: -170px;top: 28px;">性别</span>
-          <c:if test="${user.sex==0}">
-            <input type="text" name="sex" id="sex" value="女" class="form-control" />
-          </c:if>
-          <c:if test="${user.sex==1}">
-            <input type="text" name="sex" id="sex" value="男" class="form-control"/>
-          </c:if>
-          <c:if test="${user.sex==2}">
-            <input type="text" name="sex" id="sex" value="其他" class="form-control"/>
-          </c:if>
+        <c:if test="${user.sex eq '0'}">
+          <input type="text" name="sex" id="sex" value="女" class="form-control"/>
+        </c:if>
+        <c:if test="${user.sex eq '1'}">
+          <input type="text" name="sex" id="sex" value="男" class="form-control"/>
+        </c:if>
+        <c:if test="${user.sex eq '2'}">
+          <input type="text" name="sex" id="sex" value="其他" class="form-control"/>
+        </c:if>
       </div>
 
       <div class="mu afh">
         <span style="position: relative;left: -170px;top: 28px;">生日</span>
         <input
-              type="text"
-              name="birth"
-              value="${user.birth}"
-              class="form-control"
-              id="birth"
-      />
+            type="text"
+            name="birth"
+            value="${user.birth}"
+            class="form-control"
+            id="birth"
+        />
       </div>
 
       <div class="mu afh">
         <span style="position: relative;left: -170px;top: 28px;">地址</span>
         <input
-              type="text"
-              name="location"
-              value="${user.location}"
-              class="form-control"
-              id="location"
-      />
+            type="text"
+            name="location"
+            value="${user.location}"
+            class="form-control"
+            id="location"
+        />
       </div>
       <div id="error-message" class="mu afh" style="display: none">
         <span style="color: #c9302c"></span>
       </div>
 
       <div class="afv">
-          <button type="button" id="modify-button" class="cg nq">修改</button>
+        <button type="button" id="modify-button" class="cg nq">修改</button>
       </div>
 
     </form>
@@ -102,8 +103,8 @@
 
     $('#name').blur(function () {
       var name = $('#name').val();
-      var result=notBlank(name);
-      showErrorMessage(result,'用户名不能为空');
+      var result = notBlank(name);
+      showErrorMessage(result, '用户名不能为空');
     });
 
     $('#modify-button').on('click', function () {
@@ -144,6 +145,7 @@
       })
     })
   });
+
   //根据结果是否展示错误信息
   function showErrorMessage(result, message) {
     if (!result) {

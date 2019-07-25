@@ -20,18 +20,9 @@
         <div class="qa">
           <h6 class="afh">
             热搜
-            <small>· <a href="#">查看其他热榜</a></small>
+            <small>· <a href="/hots">查看其他热榜</a></small>
           </h6>
-          <ul class="dc axg">
-            <c:if test="${hots != null || hots.size() > 0}" var="hasHots">
-              <c:forEach items="${hots}" var="hot">
-                <li><a href="${hot.url}" target="_blank">${hot.title}</a></li>
-              </c:forEach>
-            </c:if>
-            <c:if test="${not hasHots}">
-              <li>暂时没有数据啦！</li>
-            </c:if>
-          </ul>
+          <ul class="dc axg" id="hot-list"></ul>
         </div>
       </div>
     </div>
@@ -178,6 +169,33 @@
   </div>
 </div>
 <jsp:include page="./common/script.jsp"></jsp:include>
+<script>
+  $(function () {
+    //获取热榜数据
+    $.ajax({
+      url: '/hots',
+      method: 'POST',
+      dataType: 'json',
+      success: function (result) {
+        var str = '';
+        if (result.code == 200) {
+          var data = result.data;
+          $.each(data, function (i, n) {
+            str += '<li><a href=\"' + n.url + '\" target=\"_blank\">' + n.title + '</a></li>';
+          });
+        } else {
+          str += '<li>暂时没有数据！</li>';
+        }
+        $('#hot-list').append(str);
+      },
+      error: function (result) {
+        console.log(result);
+        var str = '<li>暂时没有数据！</li>';
+        $('#hot-list').append(str);
+      }
+    })
+  })
+</script>
 </body>
 </html>
 
