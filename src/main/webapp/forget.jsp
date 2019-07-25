@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>忘记密码</title>
+  <title>修改密码</title>
   <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 
@@ -11,9 +11,9 @@
 <div class="do axz">
   <div class="ayb">
     <form class="ahr avz j">
-      <h1 class="l afv">找回密码</h1>
+      <h1 class="l afv">修改密码</h1>
       <div class="mu">
-        <input class="form-control" placeholder="账号" />
+        <input class="form-control" placeholder="账号" id="userName"/>
       </div>
 
       <div class="mu afh">
@@ -21,6 +21,7 @@
             type="password"
             class="form-control"
             placeholder="密码"
+            id="password"
         />
       </div>
 
@@ -29,6 +30,7 @@
             type="password"
             class="form-control"
             placeholder="重复密码"
+            id="rePassword"
         />
       </div>
 
@@ -37,11 +39,16 @@
             type="password"
             class="form-control"
             placeholder="新密码"
+            id="newPassword"
         />
       </div>
 
+      <div id="error-message" class="mu afh" style="display: none">
+        <span style="color: #c9302c"></span>
+      </div>
+
       <div class="afv">
-        <button class="cg ns">注册</button>
+        <button type="button" class="cg ns" id="updatePwd-button">注册</button>
       </div>
 
       <footer class="bqx">
@@ -51,5 +58,79 @@
   </div>
 </div>
 <jsp:include page="./common/script.jsp"></jsp:include>
+<script>
+  $(function () {
+    $('#userName').blur(function () {
+      var userName=$('#userName').val();
+      var res1=notBlank(userName);
+      showErrorMessage(res1,'账户不能为空！');
+    });
+
+    $('#password').blur(function () {
+      var password=$('#password').val();
+      var res2=notBlank(password);
+      showErrorMessage(res2,'密码不能为空！');
+    });
+
+    $('#rePassword').blur(function () {
+      var res3=checkPassword();
+      showErrorMessage(res3,'重复密码输入有误！');
+    });
+
+    $('#newPassword').blur(function () {
+      var newPassword=$('#newPassword').val();
+      var res4=notBlank(newPassword);
+      showErrorMessage(res4,'请输入新密码！');
+    })
+
+    $('#updatePwd-button').on('click',function () {
+      var userName=$('#userName').val();
+      var password=$('#password').val();
+      var rePassword=$('#rePassword').val();
+      var newPassword=$('#newPassword').val();
+        $.ajax({
+          url:'/forget',
+          method:'POST',
+          dataType: 'json',
+          data: {
+            password:password,
+            userName:userName,
+            newPassword:newPassword,
+          },
+          success:function (result) {
+            if (result.code==200){
+              alert('修改密码成功,1秒后跳到登录页面！');
+              setTimeout(function () {
+                window.location.href='/login';
+              },1000);
+            }
+            else {
+              alert('修改密码失败');
+            }
+          }
+        })
+    })
+  });
+
+  function checkPassword() {
+    var password = $('#password').val();
+    var repeatPassword = $('#rePassword').val();
+    if (password == repeatPassword) {
+      return true;
+    }
+    return false;
+  }
+  //根据结果是否展示错误信息
+  function showErrorMessage(result, message) {
+    if (!result) {
+      $('#error-message span').text(message);
+      $('#error-message').show();
+      $('#updatePwd-button').attr('disabled', 'disabled');
+    } else {
+      $('#error-message').hide();
+      $('#updatePwd-button').removeAttr('disabled');
+    }
+  }
+</script>
 </body>
 </html>

@@ -141,4 +141,16 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return count;
     }
+
+    @Override
+    public int modifyPassword(User user) {
+        String sql="update user set password=?, salt=? where username=?";
+        int result=0;
+        try {
+            result= queryRunner.execute(sql,user.getPassword(),user.getSalt(),user.getUsername());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
