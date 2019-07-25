@@ -1,5 +1,6 @@
 package org.sharebook.service.impl;
 
+import org.sharebook.constant.UserStatus;
 import org.sharebook.model.User;
 import org.sharebook.repository.UserRepository;
 import org.sharebook.repository.impl.UserRepositoryImpl;
@@ -47,11 +48,14 @@ public class UserServiceImpl implements UserService {
         String password = user.getPassword();
         User u = userRepository.findByUsername(username);
         if (user != null) {
-            String salt = u.getSalt();
-            String encryptPassword = MD5Utils.md5(password, salt);
-            if (encryptPassword.equals(u.getPassword())) {
-                return true;
+            if (u.getStatus() == UserStatus.NORMAL) {
+                String salt = u.getSalt();
+                String encryptPassword = MD5Utils.md5(password, salt);
+                if (encryptPassword.equals(u.getPassword())) {
+                    return true;
+                }
             }
+
         }
         return false;
     }
