@@ -19,9 +19,6 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long loginId = (Long) request.getSession().getAttribute("loginId");
-        User user = userService.findUserById(loginId);
-        request.setAttribute("user", user);
         request.getRequestDispatcher("/profile.jsp").forward(request, response);
     }
 
@@ -33,8 +30,7 @@ public class ProfileServlet extends HttpServlet {
         String birth = request.getParameter("birth");
         String location = request.getParameter("location");
         //获取已登录的用户
-        Long loginId = (Long) request.getSession().getAttribute("loginId");
-        User user = userService.findUserById(loginId);
+        User user = (User) request.getSession().getAttribute("user");
         user.setUsername(name);
         user.setSex(sex);
 //        user.setBirth(date);

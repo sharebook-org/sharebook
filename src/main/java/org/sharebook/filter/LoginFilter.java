@@ -1,6 +1,6 @@
 package org.sharebook.filter;
 
-import org.apache.commons.lang3.StringUtils;
+import org.sharebook.model.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -20,13 +20,12 @@ public class LoginFilter implements Filter {
             throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        String loginSuccess = (String) request.getSession().getAttribute("login");
-        if (!StringUtils.isBlank(loginSuccess)) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
             chain.doFilter(req, resp);
         } else {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-
     }
 
     public void destroy() {

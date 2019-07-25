@@ -13,7 +13,6 @@ function checkAccount() {
   return notBlank(account);
 }
 
-
 //检测字符串是否为空
 function notBlank(value) {
   if (value != null && value != '' && value != undefined) {
@@ -32,3 +31,4 @@ function logout() {
     }
   })
 }
+

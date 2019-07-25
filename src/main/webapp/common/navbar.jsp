@@ -12,7 +12,7 @@
       <li class="pi">
         <a class="pg" href="/index">首页</a>
       </li>
-      <c:if test="${login!=null}">
+      <c:if test="${user!=null}">
         <li class="pi">
           <a class="pg" href="/attention">关注</a>
         </li>
@@ -35,7 +35,7 @@
       />
     </form>
     <%-- 已登录 --%>
-    <c:if test="${login != null}" var="hasLogin">
+    <c:if test="${user != null}" var="hasLogin">
       <!-- 登录后的样式 -->
       <ul id="#js-popoverContent" class="nav navbar-nav acx aek d-none vt">
         <!-- 登录的头像 -->

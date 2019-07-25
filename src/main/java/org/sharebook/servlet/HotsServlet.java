@@ -17,7 +17,11 @@ import java.util.List;
 @WebServlet(urlPatterns = "/hots")
 public class HotsServlet extends HttpServlet {
 
-    private final HotService hotService = new HotServiceImpl();
+    private final HotService hotService;
+
+    public HotsServlet() {
+        this.hotService = new HotServiceImpl();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

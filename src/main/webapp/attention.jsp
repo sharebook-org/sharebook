@@ -21,12 +21,12 @@
       <div class="pz bpi afo">
         <div class="qf" style="background-image: url(assets/img/iceland.jpg);"></div>
         <div class="qa avz">
-          <a href="./profile.jsp">
+          <a href="/profile">
             <img class="bpj" src="assets/img/avatar-dhg.png">
           </a>
 
           <h6 class="qb">
-            <a class="boa" href="./profile.jsp">${user.username}</a>
+            <a class="boa" href="/profile">${user.username}</a>
           </h6>
 
           <p class="afo">${user.introduction}</p>

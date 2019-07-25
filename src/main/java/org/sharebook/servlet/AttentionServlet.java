@@ -19,10 +19,8 @@ public class AttentionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Long id = (Long) request.getSession().getAttribute("loginId");
-        User user = userService.findUserById(id);
+        User user = (User) request.getSession().getAttribute("user");
         if (user != null) {
-            request.getSession().setAttribute("user", user);
             request.getRequestDispatcher("/attention.jsp").forward(request, response);
         } else {
             ResponseUtils.write(response, ResponseUtils.error());

@@ -37,18 +37,17 @@ public class LoginServlet extends HttpServlet {
         user.setUsername(username);
         user.setPassword(password);
         boolean result = userService.login(user);
-        User user1 = userService.findUserByName(username);
-        if (user1.getStatus() == UserStatus.BANNED) {
+        User loginUser = userService.findUserByName(username);
+        if (loginUser.getStatus() == UserStatus.BANNED) {
             ResponseUtils.write(response, ResponseUtils.error("您已经被封号了!"));
             return;
         }
-        if (user1.getStatus() == UserStatus.DELETED) {
+        if (loginUser.getStatus() == UserStatus.DELETED) {
             ResponseUtils.write(response, ResponseUtils.error("您已经被注销了!"));
             return;
         }
         if (result) {
-            request.getSession().setAttribute("loginId", user1.getId());
-            request.getSession().setAttribute("login", username);
+            request.getSession().setAttribute("user", new User(loginUser));
 
             ResponseUtils.write(response, ResponseUtils.success());
         } else {
@@ -60,6 +59,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().removeAttribute("login");
+        request.getSession().removeAttribute("user");
     }
 }
