@@ -75,7 +75,10 @@
           console.log('login result' + result);
           if (result.code == 200) {
             window.location.href = '/index';
-          } else {
+          }else if (result.code==404){
+            alert(result.message);
+          }
+          else {
             alert('用户名或密码错误！');
           }
         },
