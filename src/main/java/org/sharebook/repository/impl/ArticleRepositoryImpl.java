@@ -3,6 +3,7 @@ package org.sharebook.repository.impl;
 import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.sharebook.model.Article;
 import org.sharebook.repository.ArticleRepository;
@@ -22,7 +23,14 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
     @Override
     public Article findById(Long id) {
-        return null;
+        String sql="select * from `article` where `id`=?";
+        Article article=null;
+        try {
+            article=queryRunner.query(sql,new BeanHandler<>(Article.class),id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return article;
     }
 
     @Override
