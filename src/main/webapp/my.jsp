@@ -60,7 +60,7 @@
                                         class="bos vb yb aff"
                                         src="assets/img/avatar-fat.jpg">
                                 <div class="rw">
-                                    <strong>Jacon Thornton: </strong>
+                                    <strong>${user.username}</strong>
 
                                     <%--                  Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.--%>
                                 </div>
@@ -71,10 +71,11 @@
                                         class="bos vb yb aff"
                                         src="assets/img/avatar-mdo.png">
                                 <div class="rw">
-                                    <strong>Mark Otto: </strong>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                    <strong>${user.username} </strong>
+                                    这里是评论啊。。。Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
                                 </div>
                             </li>
+                            
                         </ul>
                     </div>
                 </li>
