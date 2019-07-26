@@ -47,4 +47,6 @@ public interface UserService {
      * @return
      */
     User findUserByName(String name);
+
+    long getCount();
 }
