@@ -157,4 +157,16 @@ public class FollowRepositoryImpl implements FollowRepository {
         }
         return follows;
     }
+
+    @Override
+    public int delete(Long userId, Long followUserId) {
+        String sql="DELETE  FROM `follow` WHERE `user_id`=? AND `follow_user_id`=?";
+        int count=0;
+        try {
+            count=queryRunner.execute(sql,userId,followUserId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

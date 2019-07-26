@@ -55,4 +55,17 @@ public class FollowServlet extends HttpServlet {
         ResponseUtils.write(response, ResponseUtils.success(map));
 
     }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Long userId= Long.valueOf(req.getParameter("userId"));
+        Long followUserId= Long.valueOf(req.getParameter("followUserId"));
+        boolean res=followService.deleteFollow(userId,followUserId);
+        if (res){
+            ResponseUtils.write(resp, ResponseUtils.success());
+        }
+        else {
+            ResponseUtils.write(resp, ResponseUtils.error());
+        }
+    }
 }

@@ -57,5 +57,16 @@ public class FollowServiceImpl implements FollowService {
         return result;
     }
 
+    @Override
+    public boolean deleteFollow(Long userId,Long followUserId) {
+            Follow follow1=followRepository.find(userId,followUserId);
+            //如果查到则取消关注
+            if (follow1!=null){
+                followRepository.delete(userId,followUserId);
+                return true;
+            }
+            return false;
+    }
+
 
 }
