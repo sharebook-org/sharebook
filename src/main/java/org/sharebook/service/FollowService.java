@@ -29,4 +29,7 @@ public interface FollowService {
      * @return
      */
     Long showUserNum(Long followUserId);
+
+    //取关
+    boolean deleteFollow(Long userId,Long followUserId);
 }

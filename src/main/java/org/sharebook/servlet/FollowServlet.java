@@ -27,10 +27,11 @@ public class FollowServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long userId= Long.valueOf(request.getParameter("userId"));
         Long followUserId= Long.valueOf(request.getParameter("followUserId"));
-        Follow follow=new Follow();
+        /*Follow follow=new Follow();
         follow.setUserId(userId);
         follow.setFollowUserId(followUserId);
-        boolean res=followService.follow(follow);
+        boolean res=followService.follow(follow);*/
+        boolean res=followService.deleteFollow(userId,followUserId);
         if (res){
             ResponseUtils.write(response, ResponseUtils.success());
         }

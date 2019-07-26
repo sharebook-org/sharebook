@@ -46,4 +46,6 @@ public interface FollowRepository extends CurdRepository<Follow,Long>{
      * @return
      */
     List<Follow> findAll();
+
+    int delete(Long userId,Long followUserId);
 }
