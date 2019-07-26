@@ -16,12 +16,32 @@
         <input class="form-control" placeholder="账号" />
       </div>
 
-      <div class="mu">
-        <input class="form-control" placeholder="验证码"/>
+      <div class="mu afh">
+        <input
+            type="password"
+            class="form-control"
+            placeholder="密码"
+        />
+      </div>
+
+      <div class="mu afh">
+        <input
+            type="password"
+            class="form-control"
+            placeholder="重复密码"
+        />
+      </div>
+
+      <div class="mu afh">
+        <input
+            type="password"
+            class="form-control"
+            placeholder="新密码"
+        />
       </div>
 
       <div class="afv">
-        <button class="cg ns">确定</button>
+        <button class="cg ns">注册</button>
       </div>
 
       <footer class="bqx">

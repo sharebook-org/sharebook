@@ -43,11 +43,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public long getCount() {
-        return userRepository.getUsersCount();
-    }
-
-    @Override
     public boolean login(User user) {
         String username = user.getUsername();
         String password = user.getPassword();
