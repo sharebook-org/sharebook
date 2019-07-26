@@ -30,12 +30,15 @@ public class LikeServiceImpl implements LikeService {
             Like like1 = new Like();
             like1.setEntityType(entityType);
             like1.setEntityId(entityId);
+            like1.setUserId(userId);
+            like1.setLiked(LikeStatus.LIKED);
             if (entityType == EntityType.ARTICLE) {
                 Article article = articleRepository.findById(entityId);
-                article.setLikeNum(article.getLikeNum() + 1);
-                articleRepository.save(article);
+                long currentLikeNum = article.getLikeNum();
+                article.setLikeNum(currentLikeNum + 1);
+                int res = articleRepository.update(article);
             }
-            like1.setUserId(userId);
+
             int result = likeResposity.save(like1);
             if (result != 0) {
                 return true;
@@ -46,9 +49,9 @@ public class LikeServiceImpl implements LikeService {
                 if (entityType == EntityType.ARTICLE) {
                     Article article = articleRepository.findById(entityId);
                     article.setLikeNum(article.getLikeNum() + 1);
-                    articleRepository.save(article);
+                    articleRepository.update(article);
                 }
-                int result = likeResposity.save(like);
+                int result = likeResposity.update(like);
                 if (result != 0) {
                     return true;
                 }
