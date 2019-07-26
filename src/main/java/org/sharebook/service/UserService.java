@@ -49,4 +49,6 @@ public interface UserService {
     User findUserByName(String name);
 
     long getCount();
+
+    boolean modifyPassword(User user);
 }
