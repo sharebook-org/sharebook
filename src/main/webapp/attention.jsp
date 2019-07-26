@@ -245,7 +245,7 @@
           url: '/article',
           method: 'POST',
           data: {
-            userId:${loginId},
+            userId:${user.id},
             article: article,
           },
           success: function (result) {
