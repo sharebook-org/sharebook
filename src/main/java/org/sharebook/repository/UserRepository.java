@@ -14,4 +14,6 @@ public interface UserRepository extends CurdRepository<User, Long> {
     List<User> findAll(int page, int size);
 
     long getUsersCount();
+
+    int modifyPassword(User user);
 }
