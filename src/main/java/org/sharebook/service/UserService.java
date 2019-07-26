@@ -47,4 +47,8 @@ public interface UserService {
      * @return
      */
     User findUserByName(String name);
+
+    long getCount();
+
+    boolean modifyPassword(User user);
 }
