@@ -43,15 +43,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean modifyPassword(User user) {
-        int res=userRepository.modifyPassword(user);
-        if (res>0){
-            return true;
-        }
-        return false;
-    }
-
-    @Override
     public boolean login(User user) {
         String username = user.getUsername();
         String password = user.getPassword();

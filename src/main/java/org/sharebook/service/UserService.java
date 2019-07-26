@@ -47,11 +47,4 @@ public interface UserService {
      * @return
      */
     User findUserByName(String name);
-
-    /**
-     * 修改密码
-     * @param user
-     * @return
-     */
-    boolean modifyPassword(User user);
 }

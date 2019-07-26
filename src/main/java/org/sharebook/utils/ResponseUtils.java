@@ -1,15 +1,13 @@
 package org.sharebook.utils;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONAware;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 /**
  * JSON相关工具类
@@ -60,6 +58,11 @@ public class ResponseUtils {
         return JSON.toJSONString(data);
     }
 
+    public static String success(Object object, Map map) {
+        ResponseData data = new ResponseData(SUCCESS_CODE, SUCCESS_MESSAGE, object, map);
+        return JSON.toJSONString(data);
+    }
+
     /**
      * 输出错误信息
      * @return
@@ -85,6 +88,7 @@ public class ResponseUtils {
      */
     public static void write(HttpServletResponse response, String message) {
         try {
+            response.setHeader("Access-Control-Allow-Origin", "*");
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(message);
         } catch (IOException e) {
@@ -102,11 +106,17 @@ public class ResponseUtils {
         private int code;
         private String message;
         private Object data;
+        private Map ext;
 
         public ResponseData(int code, String message) {
             this.code = code;
             this.message = message;
-            this.data = null;
+        }
+
+        public ResponseData(int code, String message, Object data) {
+            this.code = code;
+            this.message = message;
+            this.data = data;
         }
     }
 }

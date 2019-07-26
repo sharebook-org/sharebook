@@ -129,7 +129,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<User> findAll(int page, int size) {
         int offset = (page - 1) * size;
-        String sql = "SELECT * FROM `user` LIMIT ?,?";
+        String sql = "SELECT * FROM `user` LIMIT ?, ?";
         List<User> users = null;
         try {
             users = queryRunner.query(

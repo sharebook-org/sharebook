@@ -13,6 +13,9 @@ import java.util.Date;
 public class UserVO {
     private Long id;
     private String username;
+    private String email;
+    private String phone;
+    private String introduction;
     private Integer sex;
     private Date birth;
     private String location;
@@ -23,6 +26,8 @@ public class UserVO {
     public UserVO(User user) {
         this.id=user.getId();
         this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.phone = user.getPhone();
         this.sex = user.getSex();
         this.birth=user.getBirth();
         this.location=user.getLocation();
