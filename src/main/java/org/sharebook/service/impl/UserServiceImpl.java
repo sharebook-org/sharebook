@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean modify(User user) {
-        int result=userRepository.update(user);
-        if (result!=0){
+        int result = userRepository.update(user);
+        if (result != 0) {
             return true;
         }
         return false;
@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(Long id) {
-        User user=userRepository.findById(id);
-        if (user!=null){
+        User user = userRepository.findById(id);
+        if (user != null) {
             return user;
         }
         return null;
@@ -35,11 +35,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByName(String name) {
-        User user=userRepository.findByUsername(name);
-        if (user!=null){
+        User user = userRepository.findByUsername(name);
+        if (user != null) {
             return user;
         }
         return null;
+    }
+
+    @Override
+    public long getCount() {
+        return userRepository.getUsersCount();
     }
 
     @Override
@@ -82,6 +87,15 @@ public class UserServiceImpl implements UserService {
     public boolean isExistUser(String username) {
         User user = userRepository.findByUsername(username);
         if (user != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean modifyPassword(User user) {
+        int res = userRepository.modifyPassword(user);
+        if (res > 0) {
             return true;
         }
         return false;
