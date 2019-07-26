@@ -17,7 +17,7 @@ public class UserRepositoryImplTest {
     private final UserRepository userRepository = new UserRepositoryImpl();
 
     private User user = new User(Long.valueOf(1), "test", "pwd",
-            "abcd", "xx", 1, new Date(), "中国",
+            "abcd", "qq@xx.com", "18799999999", "xx", 1, new Date(), "中国",
             0, 0, "https://baidu.com", new Date(), new Date());
 
     @Test

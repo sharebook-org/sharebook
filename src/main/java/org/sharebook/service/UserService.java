@@ -47,4 +47,11 @@ public interface UserService {
      * @return
      */
     User findUserByName(String name);
+
+    /**
+     * 获取用户总数
+     *
+     * @return
+     */
+    long getCount();
 }

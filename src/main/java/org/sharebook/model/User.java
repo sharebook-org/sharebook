@@ -15,6 +15,8 @@ public class User {
     private String username;
     private String password;
     private String salt;
+    private String email;
+    private String phone;
     private String introduction;
     private Integer sex;
     private Date birth;
@@ -26,13 +28,22 @@ public class User {
     private Date updateTime;
 
     //constructor for register
+
+
     public User(String username, String password, String salt,
-                Integer sex, Integer status, Integer role,
-                String avatar, Date createTime, Date updateTime) {
+                String email, String phone, String introduction,
+                Integer sex, Date birth, String location,
+                Integer status, Integer role, String avatar,
+                Date createTime, Date updateTime) {
         this.username = username;
         this.password = password;
         this.salt = salt;
+        this.email = email;
+        this.phone = phone;
+        this.introduction = introduction;
         this.sex = sex;
+        this.birth = birth;
+        this.location = location;
         this.status = status;
         this.role = role;
         this.avatar = avatar;
@@ -43,6 +54,8 @@ public class User {
     public User(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
+        this.email = user.getEmail();
+        this.phone = user.getPhone();
         this.introduction = user.getIntroduction();
         this.sex = user.getSex();
         this.birth = user.getBirth();
