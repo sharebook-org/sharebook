@@ -11,9 +11,17 @@
 <div class="do axz">
   <div class="ayb">
     <form class="ahr avz j">
-      <h1 class="l afv">注册</h1>
+      <h2>注册</h2>
       <div class="mu">
-        <input id="account" class="form-control" placeholder="账号"/>
+        <input id="username" type="text" class="form-control" placeholder="*昵称"/>
+      </div>
+
+      <div class="mu">
+        <input id="phone" type="text" class="form-control" placeholder="*手机号"/>
+      </div>
+
+      <div class="mu">
+        <input id="email" type="email" class="form-control" placeholder="*邮箱"/>
       </div>
 
       <div class="mu afh">
@@ -21,7 +29,7 @@
             id="password"
             type="password"
             class="form-control"
-            placeholder="密码"
+            placeholder="*密码"
         />
       </div>
 
@@ -30,27 +38,22 @@
             id="repeat-password"
             type="password"
             class="form-control"
-            placeholder="重复密码"
+            placeholder="*重复密码"
         />
       </div>
-      <div class="mu afh">
-        <input
-                id="eamil"
-                type="email"
-                class="form-control"
-                placeholder="邮箱"
-        />
+      <div class="mu">
+        <input id="location" type="text" class="form-control" placeholder="地区"/>
       </div>
       <div class="mu afh">
         性别：
-       <input name="sex" type="radio" value="0"/>&nbsp; 女
-       <input name="sex" type="radio" value="1"/>&nbsp;男
-       <input name="sex" type="radio" value="2" checked="checked"/> 其他
+        <input name="sex" type="radio" value="0"/>&nbsp; 女
+        <input name="sex" type="radio" value="1"/>&nbsp;男
+        <input name="sex" type="radio" value="2" checked="checked"/> 其他
       </div>
 
 
-      <div id="error-message" class="mu afh" style="display: none">
-        <span style="color: #c9302c"></span>
+      <div id="error-message" class="mu afh">
+        <span style="color: #c9302c">带*的为必填项</span>
       </div>
 
       <div class="afv">
@@ -66,9 +69,8 @@
 <jsp:include page="./common/script.jsp"></jsp:include>
 <script>
   $(function () {
-    $('#account').blur(function () {
-      console.log('account-input blur');
-      var result = checkAccount();
+    $('#username').blur(function () {
+      var result = checkUsername();
       showErrorMessage(result, '用户名不能为空！');
     });
 
@@ -79,7 +81,7 @@
     });
 
     $('#register-button').on('click', function () {
-      var username = $('#account').val();
+      var username = $('#username').val();
       var password = $('#password').val();
       var sex = $('input[name=\'sex\']:checked').val();
       $.ajax({
@@ -92,8 +94,6 @@
           sex: sex,
         },
         success: function (result) {
-          console.log(result);
-          console.log(result.code);
           if (result.code == 200) {
             alert('注册成功');
             window.location.href = '/login';
@@ -108,6 +108,12 @@
     })
   });
 
+  //检查用户名是否为空
+  function checkUsername() {
+    var username = $('#username').val();
+    return notBlank(username);
+  };
+
   function checkPassword() {
     console.log('check password');
     var password = $('#password').val();
@@ -117,14 +123,13 @@
     }
     return false;
   }
+
   //根据结果是否展示错误信息
   function showErrorMessage(result, message) {
     if (!result) {
       $('#error-message span').text(message);
-      $('#error-message').show();
       $('#register-button').attr('disabled', 'disabled');
     } else {
-      $('#error-message').hide();
       $('#register-button').removeAttr('disabled');
     }
   }

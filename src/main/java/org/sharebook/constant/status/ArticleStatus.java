@@ -1,4 +1,4 @@
-package org.sharebook.constant;
+package org.sharebook.constant.status;
 
 /**
  * 文章状态常量

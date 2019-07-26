@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>忘记密码</title>
+  <title>修改密码</title>
   <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 
@@ -11,9 +11,9 @@
 <div class="do axz">
   <div class="ayb">
     <form class="ahr avz j">
-      <h1 class="l afv">找回密码</h1>
+      <h1 class="l afv">修改密码</h1>
       <div class="mu">
-        <input class="form-control" placeholder="账号" />
+        <input class="form-control" placeholder="账号"/>
       </div>
 
       <div class="mu afh">
@@ -41,11 +41,11 @@
       </div>
 
       <div class="afv">
-        <button class="cg ns">注册</button>
+        <button class="cg ns">修改密码</button>
       </div>
 
       <footer class="bqx">
-        <a href="./login.jsp" class="axc">回到登录</a>
+        <a href="/index" class="axc">回到主页</a>
       </footer>
     </form>
   </div>

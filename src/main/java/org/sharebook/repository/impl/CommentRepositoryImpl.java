@@ -9,21 +9,24 @@ import java.sql.SQLException;
 
 public class CommentRepositoryImpl implements CommentRepository {
     private final QueryRunner queryRunner;
-    public CommentRepositoryImpl(){
-        this.queryRunner= JDBCUtils.getQueryRunner();
+
+    public CommentRepositoryImpl() {
+        this.queryRunner = JDBCUtils.getQueryRunner();
     }
+
     @Override
-    public Comment findById(Long aLong) {
+    public Comment findById(Long id) {
         return null;
     }
 
     @Override
     public int save(Comment comment) {
-        String sql="insert into `comment`"+
-                "(`id`,`user_id`,`entity_type`,`entity_id`,`content`,`create_time`,`update_time`)"+
-                "values(?,?,?,?,?,?,?)";
+        int count = 0;
+        String sql = "insert into `comment`(`id`,`user_id`," +
+                "`entity_type`,`entity_id`,`content`,`create_time`," +
+                "`update_time`) values(?,?,?,?,?,?,?)";
         try {
-            return queryRunner.execute(
+            count = queryRunner.execute(
                     sql,
                     comment.getId(),
                     comment.getUserId(),
@@ -35,8 +38,8 @@ public class CommentRepositoryImpl implements CommentRepository {
             );
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
+        return count;
     }
 
     @Override
@@ -45,7 +48,7 @@ public class CommentRepositoryImpl implements CommentRepository {
     }
 
     @Override
-    public int delete(Long aLong) {
+    public int delete(Long id) {
         return 0;
     }
 }

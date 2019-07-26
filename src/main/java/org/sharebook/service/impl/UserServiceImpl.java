@@ -1,6 +1,6 @@
 package org.sharebook.service.impl;
 
-import org.sharebook.constant.UserStatus;
+import org.sharebook.constant.status.UserStatus;
 import org.sharebook.model.User;
 import org.sharebook.repository.UserRepository;
 import org.sharebook.repository.impl.UserRepositoryImpl;

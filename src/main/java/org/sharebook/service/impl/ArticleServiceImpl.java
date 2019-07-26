@@ -6,13 +6,16 @@ import org.sharebook.repository.impl.ArticleRepositoryImpl;
 import org.sharebook.service.ArticleService;
 
 public class ArticleServiceImpl implements ArticleService {
+
     private final ArticleRepository articleRepository;
-    public ArticleServiceImpl(){
-        this.articleRepository=new ArticleRepositoryImpl();
+
+    public ArticleServiceImpl() {
+        this.articleRepository = new ArticleRepositoryImpl();
     }
+
     @Override
     public boolean publish(Article article) {
-        if (article!=null){
+        if (article != null) {
             articleRepository.save(article);
             return true;
         }
@@ -21,7 +24,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public boolean browse(Article article) {
-        if (article!=null){
+        if (article != null) {
             articleRepository.findAll();
             return true;
         }

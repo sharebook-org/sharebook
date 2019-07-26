@@ -15,16 +15,18 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-@MultipartConfig(maxFileSize = 5765004,fileSizeThreshold = 1000)
+@MultipartConfig(maxFileSize = 5765004, fileSizeThreshold = 1000)
 @WebServlet(urlPatterns = "/upload")
 public class UploadServlet extends HttpServlet {
-    private final UploadService uploadService=new UploadServiceImpl();
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private final UploadService uploadService = new UploadServiceImpl();
 
-        Collection<Part> parts=request.getParts();
-        List<String> list=uploadService.upload(parts,request);
-        String imgPaths=String.join("#",list);
-        ResponseUtils.write(response,ResponseUtils.success(imgPaths));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        Collection<Part> parts = request.getParts();
+        List<String> list = uploadService.upload(parts, request);
+        String imgPaths = String.join("#", list);
+        ResponseUtils.write(response, ResponseUtils.success("上传成功！", imgPaths));
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

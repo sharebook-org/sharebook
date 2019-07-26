@@ -1,6 +1,6 @@
 package org.sharebook.filter;
 
-import org.apache.commons.lang3.StringUtils;
+import org.sharebook.model.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter("/attention")
-public class AttentionFilter implements Filter {
+/**
+ * 未登录时访问以下页面会被拦截
+ */
+@WebFilter(urlPatterns = {"/attention", "/publish", "/my"})
+public class LoginFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
 
@@ -17,13 +20,12 @@ public class AttentionFilter implements Filter {
             throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
-        String loginSuccess = (String) request.getSession().getAttribute("login");
-        if (!StringUtils.isBlank(loginSuccess)) {
+        User user = (User) request.getSession().getAttribute("user");
+        if (user != null) {
             chain.doFilter(req, resp);
         } else {
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-
     }
 
     public void destroy() {

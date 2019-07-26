@@ -39,4 +39,18 @@ public class User {
         this.createTime = createTime;
         this.updateTime = updateTime;
     }
+
+    public User(User user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.introduction = user.getIntroduction();
+        this.sex = user.getSex();
+        this.birth = user.getBirth();
+        this.location = user.getLocation();
+        this.status = user.getStatus();
+        this.role = user.getRole();
+        this.avatar = user.getAvatar();
+        this.createTime = user.getCreateTime();
+        this.updateTime = user.getUpdateTime();
+    }
 }

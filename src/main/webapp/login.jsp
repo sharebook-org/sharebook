@@ -11,7 +11,7 @@
 <div class="do axz">
   <div class="ayb">
     <form class="ahr avz j">
-      <h1 class="l afv">登录</h1>
+      <h2>登录</h2>
       <div class="mu">
         <input id="account" class="form-control" placeholder="账号"/>
       </div>
@@ -36,6 +36,7 @@
 
       <footer class="bqx">
         <a href="/forget" class="axc">找回密码</a>
+        <a href="/modify" class="axc">修改密码</a>
       </footer>
     </form>
   </div>

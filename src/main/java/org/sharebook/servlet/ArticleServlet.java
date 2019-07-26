@@ -19,13 +19,15 @@ public class ArticleServlet extends HttpServlet {
 
     private final ArticleService articleService = new ArticleServiceImpl();
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //发表文章
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         Long userId = Long.valueOf(request.getParameter("userId"));
         String content = request.getParameter("article");
         String imgs = request.getParameter("images");
-        Date date=new Date();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String createTime = sdf.format(date);
 
         Article article = new Article();
@@ -35,7 +37,7 @@ public class ArticleServlet extends HttpServlet {
         article.setImages(imgs);
         boolean result = articleService.publish(article);
         if (result) {
-            request.getSession().setAttribute("createTime",createTime);
+            request.getSession().setAttribute("createTime", createTime);
             request.getSession().setAttribute("content", content);
             //request.getRequestDispatcher("/attention").forward(request,response);
             ResponseUtils.write(response, ResponseUtils.success());

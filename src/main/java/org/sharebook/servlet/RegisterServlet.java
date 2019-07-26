@@ -1,7 +1,7 @@
 package org.sharebook.servlet;
 
 import org.sharebook.constant.Role;
-import org.sharebook.constant.UserStatus;
+import org.sharebook.constant.status.UserStatus;
 import org.sharebook.model.User;
 import org.sharebook.service.UserService;
 import org.sharebook.service.impl.UserServiceImpl;
@@ -21,7 +21,6 @@ public class RegisterServlet extends HttpServlet {
     private final UserService userService;
 
     public RegisterServlet() {
-
         this.userService = new UserServiceImpl();
     }
 
@@ -31,12 +30,13 @@ public class RegisterServlet extends HttpServlet {
         request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
 
+    //注册
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String email=request.getParameter("email");
+        String email = request.getParameter("email");
         int sex = Integer.parseInt(request.getParameter("sex"));
         User user = new User();
         user.setUsername(username);

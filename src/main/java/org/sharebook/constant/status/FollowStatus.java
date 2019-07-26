@@ -1,4 +1,4 @@
-package org.sharebook.constant;
+package org.sharebook.constant.status;
 
 /**
  * 关注常量

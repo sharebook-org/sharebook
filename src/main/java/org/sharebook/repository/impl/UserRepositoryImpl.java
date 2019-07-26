@@ -6,7 +6,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-import org.sharebook.constant.UserStatus;
+import org.sharebook.constant.status.UserStatus;
 import org.sharebook.model.User;
 import org.sharebook.repository.UserRepository;
 import org.sharebook.utils.JDBCUtils;
@@ -26,26 +26,31 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findById(Long id) {
         String sql = "SELECT * FROM `user` WHERE `id` = ?";
+        User user = null;
         try {
-            return queryRunner.query(
+            user = queryRunner.query(
                     sql,
-                    new BeanHandler<>(User.class, new BasicRowProcessor(new GenerousBeanProcessor())),
+                    new BeanHandler<>(
+                            User.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
                     id
             );
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
+        return user;
     }
 
     @Override
     public int save(User user) {
+        int count = 0;
         //TODO 写SQL太复杂
         String sql = "INSERT INTO `user`(`username`,`password`," +
                 "`salt`,`sex`,`status`,`role`,`avatar`," +
                 "`create_time`,`update_time`) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
-            return queryRunner.execute(
+            count = queryRunner.execute(
                     sql,
                     user.getUsername(),
                     user.getPassword(),
@@ -59,17 +64,18 @@ public class UserRepositoryImpl implements UserRepository {
             );
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
+        return count;
     }
 
     @Override
     public int update(User user) {
+        int count = 0;
         String sql = "UPDATE `user` SET `username` = ?, `introduction` = ?," +
                 " `sex` = ?, `birth` = ?, `location` = ?, `status` = ?," +
                 " `role` = ?, `avatar` = ?, `update_time` = ? WHERE `id` = ?";
         try {
-            return queryRunner.update(
+            count = queryRunner.update(
                     sql,
                     user.getUsername(),
                     user.getIntroduction(),
@@ -84,20 +90,21 @@ public class UserRepositoryImpl implements UserRepository {
             );
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
+        return count;
     }
 
     //非真实删除
     @Override
     public int delete(Long id) {
         String sql = "UPDATE `user` SET `status` = ? WHERE `id` = ?";
+        int count = 0;
         try {
-            return queryRunner.update(sql, UserStatus.DELETED, id);
+            count = queryRunner.update(sql, UserStatus.DELETED, id);
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
+        return count;
     }
 
     @Override
@@ -105,7 +112,14 @@ public class UserRepositoryImpl implements UserRepository {
         String sql = "SELECT * FROM `user` WHERE `username` = ?";
         User user = null;
         try {
-            user = queryRunner.query(sql, new BeanHandler<>(User.class,new BasicRowProcessor(new GenerousBeanProcessor())), username);
+            user = queryRunner.query(
+                    sql,
+                    new BeanHandler<>(
+                            User.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
+                    username
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,7 +134,10 @@ public class UserRepositoryImpl implements UserRepository {
         try {
             users = queryRunner.query(
                     sql,
-                    new BeanListHandler<>(User.class,new BasicRowProcessor(new GenerousBeanProcessor())),
+                    new BeanListHandler<>(
+                            User.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
                     offset,
                     size
             );
@@ -135,7 +152,7 @@ public class UserRepositoryImpl implements UserRepository {
         String sql = "SELECT COUNT(*) FROM `user`";
         long count = 0;
         try {
-            count = queryRunner.query(sql, new ScalarHandler<Long>());
+            count = queryRunner.query(sql, new ScalarHandler<>());
         } catch (SQLException e) {
             e.printStackTrace();
         }
