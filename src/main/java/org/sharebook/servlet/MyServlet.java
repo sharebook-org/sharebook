@@ -1,4 +1,4 @@
-package org.sharebook.servlet.admin;
+package org.sharebook.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

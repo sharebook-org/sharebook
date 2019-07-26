@@ -4,10 +4,10 @@ import org.sharebook.model.User;
 
 import java.util.List;
 
-public interface AdminService {
+public interface UserManageService {
 
     /**
-     *
+     *分页查询用户
      * @param page
      * @param size
      * @return
@@ -15,7 +15,7 @@ public interface AdminService {
     List<User> getAllUsers(int page,int size);
 
     /**
-     *
+     *更新用户角色
      * @param id
      * @param role
      * @return
@@ -23,7 +23,7 @@ public interface AdminService {
     int updateRole(long id,int role);
 
     /**
-     *
+     *更新用户状态
      * @param id
      * @param status
      * @return
@@ -31,7 +31,7 @@ public interface AdminService {
     int updateStatus(long id,int status);
 
     /**
-     *
+     *删除用户
      * @param id
      * @return
      */

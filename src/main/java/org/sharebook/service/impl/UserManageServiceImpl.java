@@ -3,17 +3,17 @@ package org.sharebook.service.impl;
 import org.sharebook.model.User;
 import org.sharebook.repository.UserRepository;
 import org.sharebook.repository.impl.UserRepositoryImpl;
-import org.sharebook.service.AdminService;
+import org.sharebook.service.UserManageService;
 
 import java.util.List;
 
-public class AdminServiceImpl implements AdminService {
+public class UserManageServiceImpl implements UserManageService {
     UserRepository userRepository;
 
     // private final UserRepository repository = new UserRepository();
 
     //构造函数实例化
-    public AdminServiceImpl() {
+    public UserManageServiceImpl() {
         this.userRepository = new UserRepositoryImpl();
     }
 
