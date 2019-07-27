@@ -72,18 +72,23 @@
     <div class="fm">
       <ul class="ca bow box afo">
         <!-- 发表框 -->
-        <li class="rv b agz">
-          <div class="input-group">
-            <textarea type="text" class="form-control" placeholder="Message" id="article"></textarea>
-            <!-- 上传图片按钮和发表按钮 -->
-            <div class="bpt">
-              <button type="button" class="cg ns yf" data-toggle="modal" data-target="#exampleModal" title="插入图片">
-                <span class="h azo"></span>
-              </button>
-              <button type="button" class="cg ns yf" id="publish-button" title="发表">
-                <span class="h bir"></span>
-              </button>
-            </div>
+        <li>
+          <%--          <div class="input-group">--%>
+          <%--            <textarea type="text" class="form-control" placeholder="Message" id="article"></textarea>--%>
+          <%--            <!-- 上传图片按钮和发表按钮 -->--%>
+          <%--            <div class="bpt">--%>
+          <%--              <button type="button" class="cg ns yf" data-toggle="modal" data-target="#exampleModal" title="插入图片">--%>
+          <%--                <span class="h azo"></span>--%>
+          <%--              </button>--%>
+          <%--              <button type="button" class="cg ns yf" id="publish-button" title="发表">--%>
+          <%--                <span class="h bir"></span>--%>
+          <%--              </button>--%>
+          <%--            </div>--%>
+          <%--          </div>--%>
+          <div style="display: flex; flex-direction: row;margin-bottom: 10px;">
+            <textarea type="text" rows="2" class="form-control" placeholder="分享新鲜事"></textarea>
+            <button class="cg nz ok" id="publish">带图<br>发表</button>
+            <button class="cg nz ok" id="publish-button">发布</button>
           </div>
         </li>
 
@@ -258,6 +263,9 @@
           }
         })
       }
+    });
+    $('#publish').on('click', function () {
+      window.location.href = '/publish';
     })
   })
 </script>

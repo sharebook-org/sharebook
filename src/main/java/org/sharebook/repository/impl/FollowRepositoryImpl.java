@@ -14,16 +14,19 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class FollowRepositoryImpl implements FollowRepository {
+
     private final QueryRunner queryRunner;
-    public FollowRepositoryImpl(){
-        this.queryRunner= JDBCUtils.getQueryRunner();
+
+    public FollowRepositoryImpl() {
+        this.queryRunner = JDBCUtils.getQueryRunner();
     }
+
     @Override
     public Follow findById(Long id) {
-        String sql="select * from `follow` where `id`=?";
-        Follow follow=null;
+        String sql = "select * from `follow` where `id`=?";
+        Follow follow = null;
         try {
-            follow=queryRunner.query(sql,new BeanHandler<>(Follow.class),id);
+            follow = queryRunner.query(sql, new BeanHandler<>(Follow.class), id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -32,10 +35,11 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public int save(Follow follow) {
-        String sql="insert into `follow`(`id`,`user_id`,`follow_user_id`,`create_time`,`update_time`) values(?,?,?,?,?)";
-        int count=0;
+        String sql = "insert into `follow`(`id`,`user_id`,`follow_user_id`," +
+                "`create_time`,`update_time`) values(?,?,?,?,?)";
+        int count = 0;
         try {
-            count=queryRunner.execute(
+            count = queryRunner.execute(
                     sql,
                     follow.getId(),
                     follow.getUserId(),
@@ -61,13 +65,17 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public List<Follow> findFollowByUserId(Long userId) {
-        String sql="select * from `follow` where `user_id`=?";
-        List<Follow> follows=null;
+        String sql = "select * from `follow` where `user_id`=?";
+        List<Follow> follows = null;
         try {
-            follows=queryRunner.query(
+            follows = queryRunner.query(
                     sql,
-                    new BeanListHandler<>(Follow.class, new BasicRowProcessor(new GenerousBeanProcessor())),
-                    userId);
+                    new BeanListHandler<>(
+                            Follow.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
+                    userId
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,14 +84,17 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public List<Follow> findUserByFollow(Long followUserId) {
-        String sql="select * from `follow` where `follow_user_id`=?";
-        List<Follow> follows=null;
+        String sql = "select * from `follow` where `follow_user_id`=?";
+        List<Follow> follows = null;
         try {
-            follows=queryRunner.query(
+            follows = queryRunner.query(
                     sql,
-                    new BeanListHandler<>(Follow.class, new BasicRowProcessor(new GenerousBeanProcessor())),
+                    new BeanListHandler<>(
+                            Follow.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
                     followUserId
-                    );
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,12 +103,15 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public Follow find(Long userId, Long followUserId) {
-        String sql="SELECT * FROM `follow` WHERE `user_id` = ? AND `follow_user_id` = ?";
-        Follow follow=null;
+        String sql = "SELECT * FROM `follow` WHERE `user_id` = ? AND `follow_user_id` = ?";
+        Follow follow = null;
         try {
-            follow=queryRunner.query(
+            follow = queryRunner.query(
                     sql,
-                    new BeanHandler<>(Follow.class, new BasicRowProcessor(new GenerousBeanProcessor())),
+                    new BeanHandler<>(
+                            Follow.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
                     userId,
                     followUserId
             );
@@ -109,15 +123,14 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public Long findNumByUserId(Long userId) {
-        String sql="select count(*) as count from `follow` where `user_id`=?";
-        Long count=0L;
+        String sql = "select count(*) as count from `follow` where `user_id`=?";
+        Long count = 0L;
         try {
-            count=queryRunner.query(
+            count = queryRunner.query(
                     sql,
                     new ScalarHandler<>(),
                     userId
-                    );
-
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -126,10 +139,10 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public Long findNumByFollowUserId(Long followUserId) {
-        String sql="select count(*) as count from `follow` where `follow_user_id`=?";
-        Long count=0L;
+        String sql = "select count(*) as count from `follow` where `follow_user_id`=?";
+        Long count = 0L;
         try {
-            count=queryRunner.query(
+            count = queryRunner.query(
                     sql,
                     new ScalarHandler<>(),
                     followUserId
@@ -142,8 +155,8 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public List<Follow> findAll() {
-        List<Follow> follows=null;
-        String sql="select * from `follow`";
+        List<Follow> follows = null;
+        String sql = "select * from `follow`";
         try {
             follows = queryRunner.query(
                     sql,
@@ -160,10 +173,10 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public int delete(Long userId, Long followUserId) {
-        String sql="DELETE  FROM `follow` WHERE `user_id`=? AND `follow_user_id`=?";
-        int count=0;
+        String sql = "DELETE  FROM `follow` WHERE `user_id`=? AND `follow_user_id`=?";
+        int count = 0;
         try {
-            count=queryRunner.execute(sql,userId,followUserId);
+            count = queryRunner.execute(sql, userId, followUserId);
         } catch (SQLException e) {
             e.printStackTrace();
         }

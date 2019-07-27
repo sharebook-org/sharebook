@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>我的关注</title>
-    <jsp:include page="./common/head.jsp"></jsp:include>
+  <title>我的关注</title>
+  <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 
 <body class="bob">
@@ -12,80 +12,97 @@
 <jsp:include page="./common/navbar.jsp"></jsp:include>
 
 <div class="by aha ahl">
-    <div class="dp">
-        <!-- 微博 -->
-        <div class="fm" style="margin: 0 auto">
-            <ul class="ca bow box afo">
-                <!-- 微博主体 -->
-                <li class="rv b agz">
-                    <!-- 头像 -->
-                    <img
-                            class="bos vb yb aff"
-                            src="assets/img/avatar-dhg.png">
-                    <div class="rw">
-                        <div class="bpb">
-                            <!-- 发表时间 -->
-                            <small class="acx axc"><%=request.getSession().getAttribute("createTime")%><%--4 min--%></small>
-                            <!-- 昵称 -->
-                            <h6>${user.username}</h6>
-                        </div>
-                        <!-- 微博内容 -->
-                        <p>
-                            <%=request.getSession().getAttribute("content")%>
-                            <%--              Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.--%>
-                        </p>
-                        <!-- 图片 -->
-                        <div class="boy" data-grid="images">
-                            <div style="display: none">
-                                <img data-action="zoom" data-width="1050" data-height="700" src="assets/img/unsplash_1.jpg">
-                            </div>
+  <div class="dp">
+    <!-- 微博 -->
+    <div class="fm" style="margin: 0 auto">
+      <ul class="ca bow box afo">
+        <!-- 微博主体 -->
+        <li class="rv b agz">
+          <!-- 头像 -->
+          <img
+              class="bos vb yb aff"
+              src="assets/img/avatar-dhg.png">
+          <div class="rw">
+            <div class="bpb">
+              <!-- 发表时间 -->
+              <small class="acx axc"><%=request.getSession().getAttribute("createTime")%><%--4 min--%></small>
+              <!-- 昵称 -->
+              <h6>${user.username}</h6>
+            </div>
+            <!-- 微博内容 -->
+            <p>
+              <%=request.getSession().getAttribute("content")%>
+            </p>
+            <!-- 图片 -->
+            <div class="boy">
+              <img style="width: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+            </div>
 
-                            <div style="display: none">
-                                <img data-action="zoom" data-width="640" data-height="640" src="assets/img/instagram_1.jpg">
-                            </div>
+            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
+              <span id="forward">转发</span>
+              <c:if test="${commentNum gt 0}" var="comment">
+                <span id="comment">评论&nbsp;${commentNum}</span>
+              </c:if>
+              <c:if test="${not comment}">
+                <span id="comment">评论</span>
+              </c:if>
+              <c:if test="${likeNum gt 0}" var="like">
+                <span id="like">点赞&nbsp;${likeNum}</span>
+              </c:if>
+              <c:if test="${not like}">
+                <span id="like">点赞</span>
+              </c:if>
+            </div>
+            <div style="display: flex; flex-direction: row;margin-bottom: 10px;">
+              <textarea type="text" rows="2" class="form-control" placeholder="来发表您的评论吧！"></textarea>
+              <button class="cg nz ok" id="publish-comment">评论</button>
+            </div>
 
-                            <div style="display: none">
-                                <img data-action="zoom" data-width="640" data-height="640" src="assets/img/instagram_13.jpg">
-                            </div>
+            <ul class="bow afa">
 
-                            <div style="display: none">
-                                <img data-action="zoom" data-width="1048" data-height="700" src="assets/img/unsplash_2.jpg">
-                            </div>
-                        </div>
+              <!-- 第一条评论 -->
+              <li class="rv">
+                <!-- 头像 -->
+                <img
+                    class="bos vb yb aff"
+                    src="assets/img/avatar-mdo.png">
+                <div class="rw">
+                  <strong>${user.username} </strong>
+                  这里是评论啊。。。Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus
+                  commodo, tortor mauris condimentum nibh, ut fermxxxxxxentum massa jssssssssssssssssssssusto sit amet
+                  risus.
+                  <!-- 评论时间 -->
+                  <small class="acx axc">${createTime}
+                </div>
+              </li>
 
-                        <ul class="bow afa">
-                            <!-- 评论 -->
-                            <li class="rv afh">
-                                <img
-                                        class="bos vb yb aff"
-                                        src="assets/img/avatar-fat.jpg">
-                                <div class="rw">
-                                    <strong>${user.username}</strong>
-
-                                    <%--                  Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.--%>
-                                </div>
-                            </li>
-                            <!-- 评论 -->
-                            <li class="rv">
-                                <img
-                                        class="bos vb yb aff"
-                                        src="assets/img/avatar-mdo.png">
-                                <div class="rw">
-                                    <strong>${user.username} </strong>
-                                    这里是评论啊。。。Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                </div>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </li>
             </ul>
-        </div>
-
+          </div>
+        </li>
+      </ul>
     </div>
+
+  </div>
 </div>
 <jsp:include page="./common/script.jsp"></jsp:include>
-
+<script>
+  $(function () {
+    $('#publish-comment').on('click', function () {
+      alert('comment')
+    });
+    $('#forward').on('click', function () {
+      alert('转发');
+    });
+  })
+</script>
 </body>
 </html>
 
