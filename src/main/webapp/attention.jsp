@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>我的关注</title>
+  <title>我关注的</title>
   <jsp:include page="./common/head.jsp"></jsp:include>
 </head>
 
@@ -73,21 +73,9 @@
       <ul class="ca bow box afo">
         <!-- 发表框 -->
         <li>
-          <%--          <div class="input-group">--%>
-          <%--            <textarea type="text" class="form-control" placeholder="Message" id="article"></textarea>--%>
-          <%--            <!-- 上传图片按钮和发表按钮 -->--%>
-          <%--            <div class="bpt">--%>
-          <%--              <button type="button" class="cg ns yf" data-toggle="modal" data-target="#exampleModal" title="插入图片">--%>
-          <%--                <span class="h azo"></span>--%>
-          <%--              </button>--%>
-          <%--              <button type="button" class="cg ns yf" id="publish-button" title="发表">--%>
-          <%--                <span class="h bir"></span>--%>
-          <%--              </button>--%>
-          <%--            </div>--%>
-          <%--          </div>--%>
           <div style="display: flex; flex-direction: row;margin-bottom: 10px;">
-            <textarea type="text" rows="2" class="form-control" placeholder="分享新鲜事"></textarea>
-            <button class="cg nz ok" id="publish">带图<br>发表</button>
+            <textarea id="article" type="text" rows="2" class="form-control" placeholder="分享新鲜事"></textarea>
+            <button class="cg nz ok" id="publish">带图<br>微博</button>
             <button class="cg nz ok" id="publish-button">发布</button>
           </div>
         </li>
@@ -95,15 +83,24 @@
         <!-- 微博主体 -->
         <li class="rv b agz">
           <!-- 头像 -->
-          <img
-              class="bos vb yb aff"
-              src="assets/img/avatar-dhg.png">
+          <div style="display: flex; flex-direction: column">
+            <img
+                data-action="zoom"
+                class="bos vb yb aff"
+                src="assets/img/avatar-dhg.png">
+            <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
+              <span>关注</span>
+            </button>
+          </div>
           <div class="rw">
             <div class="bpb">
               <!-- 发表时间 -->
               <small class="acx axc"><%=request.getSession().getAttribute("createTime")%><%--4 min--%></small>
               <!-- 昵称 -->
-              <h6>Dave Gamache</h6>
+              <div style="display: flex; ">
+                <h6>Dave Gamache</h6>
+
+              </div>
             </div>
             <!-- 微博内容 -->
             <p>
@@ -111,48 +108,33 @@
               <%--              Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.--%>
             </p>
             <!-- 图片 -->
-            <div class="boy" data-grid="images">
-              <div style="display: none">
-                <img data-action="zoom" data-width="1050" data-height="700" src="assets/img/unsplash_1.jpg">
-              </div>
-
-              <div style="display: none">
-                <img data-action="zoom" data-width="640" data-height="640" src="assets/img/instagram_1.jpg">
-              </div>
-
-              <div style="display: none">
-                <img data-action="zoom" data-width="640" data-height="640" src="assets/img/instagram_13.jpg">
-              </div>
-
-              <div style="display: none">
-                <img data-action="zoom" data-width="1048" data-height="700" src="assets/img/unsplash_2.jpg">
-              </div>
+            <div class="boy">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
             </div>
 
-            <ul class="bow afa">
-              <!-- 评论 -->
-              <li class="rv afh">
-                <img
-                    class="bos vb yb aff"
-                    src="assets/img/avatar-fat.jpg">
-                <div class="rw">
-                  <strong>Jacon Thornton: </strong>
-
-                  <%--                  Donec id elit non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Sed posuere consectetur est at lobortis.--%>
-                </div>
-              </li>
-              <!-- 评论 -->
-              <li class="rv">
-                <img
-                    class="bos vb yb aff"
-                    src="assets/img/avatar-mdo.png">
-                <div class="rw">
-                  <strong>Mark Otto: </strong>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo,
-                  tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                </div>
-              </li>
-            </ul>
+            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
+              <span id="forward">转发</span>
+              <c:if test="${commentNum gt 0}" var="comment">
+                <span id="comment">评论&nbsp;${commentNum}</span>
+              </c:if>
+              <c:if test="${not comment}">
+                <span id="comment">评论</span>
+              </c:if>
+              <c:if test="${likeNum gt 0}" var="like">
+                <span id="like">点赞&nbsp;${likeNum}</span>
+              </c:if>
+              <c:if test="${not like}">
+                <span id="like">点赞</span>
+              </c:if>
+            </div>
           </div>
         </li>
       </ul>

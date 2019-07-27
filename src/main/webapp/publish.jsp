@@ -20,16 +20,10 @@
 
     <div class="fm">
       <ul class="ca bow box afo">
-        <!-- 发表框 -->
-        <li class="rv b agz">
-          <div class="input-group">
-            <textarea type="text" class="form-control" placeholder="Message" id="article"></textarea>
-            <!-- 发表按钮 -->
-            <div class="bpt">
-              <button type="button" class="cg ns yf" id="publish-button" title="发表">
-                <span class="h bir"></span>
-              </button>
-            </div>
+        <li>
+          <div style="display: flex; flex-direction: row;margin-bottom: 10px;">
+            <textarea type="text" rows="4" class="form-control" placeholder="分享新鲜事"></textarea>
+            <button class="cg nz ok" id="publish-button">发布</button>
           </div>
         </li>
         <li class="ca bow box afo">
@@ -80,7 +74,7 @@
           url: '/article',
           method: 'POST',
           data: {
-            userId: ${loginId},
+            userId: ${user.id},
             article: article,
             images: images
           },

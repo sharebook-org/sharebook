@@ -14,7 +14,7 @@
       </li>
       <c:if test="${user!=null}">
         <li class="pi">
-          <a class="pg" href="/attention">关注</a>
+          <a class="pg" href="/attention">我关注的</a>
         </li>
         <li class="pi">
           <a class="pg" href="/publish">发表</a>

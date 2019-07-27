@@ -33,7 +33,15 @@
         <!-- 微博主体 -->
         <li class="rv b agz">
           <!-- 头像 -->
-          <img class="bos vb yb aff" src="assets/img/avatar-dhg.png" />
+          <div style="display: flex; flex-direction: column">
+            <img
+                data-action="zoom"
+                class="bos vb yb aff"
+                src="assets/img/avatar-dhg.png">
+            <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
+              <span>关注</span>
+            </button>
+          </div>
           <div class="rw">
             <div class="bpb">
               <!-- 发表时间 -->
@@ -51,75 +59,33 @@
               dis parturient montes, nascetur ridiculus mus.
             </p>
             <!-- 图片 -->
-            <div class="boy" data-grid="images">
-              <div style="display: none">
-                <img
-                    data-action="zoom"
-                    data-width="1050"
-                    data-height="700"
-                    src="assets/img/unsplash_1.jpg"
-                />
-              </div>
-
-              <div style="display: none">
-                <img
-                    data-action="zoom"
-                    data-width="640"
-                    data-height="640"
-                    src="assets/img/instagram_1.jpg"
-                />
-              </div>
-
-              <div style="display: none">
-                <img
-                    data-action="zoom"
-                    data-width="640"
-                    data-height="640"
-                    src="assets/img/instagram_13.jpg"
-                />
-              </div>
-
-              <div style="display: none">
-                <img
-                    data-action="zoom"
-                    data-width="1048"
-                    data-height="700"
-                    src="assets/img/unsplash_2.jpg"
-                />
-              </div>
+            <div class="boy">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
             </div>
 
-            <ul class="bow afa">
-              <!-- 评论 -->
-              <li class="rv afh">
-                <img
-                    class="bos vb yb aff"
-                    src="assets/img/avatar-fat.jpg"
-                />
-                <div class="rw">
-                  <strong>Jacon Thornton: </strong>
-                  Donec id elit non mi porta gravida at eget metus. Vivamus
-                  sagittis lacus vel augue laoreet rutrum faucibus dolor
-                  auctor. Donec ullamcorper nulla non metus auctor
-                  fringilla. Praesent commodo cursus magna, vel scelerisque
-                  nisl consectetur et. Sed posuere consectetur est at
-                  lobortis.
-                </div>
-              </li>
-              <!-- 评论 -->
-              <li class="rv">
-                <img
-                    class="bos vb yb aff"
-                    src="assets/img/avatar-mdo.png"
-                />
-                <div class="rw">
-                  <strong>Mark Otto: </strong>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Fusce dapibus, tellus ac cursus commodo, tortor mauris
-                  condimentum nibh, ut fermentum massa justo sit amet risus.
-                </div>
-              </li>
-            </ul>
+            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
+              <span id="forward">转发</span>
+              <c:if test="${commentNum gt 0}" var="comment">
+                <span id="comment">评论&nbsp;${commentNum}</span>
+              </c:if>
+              <c:if test="${not comment}">
+                <span id="comment">评论</span>
+              </c:if>
+              <c:if test="${likeNum gt 0}" var="like">
+                <span id="like">点赞&nbsp;${likeNum}</span>
+              </c:if>
+              <c:if test="${not like}">
+                <span id="like">点赞</span>
+              </c:if>
+            </div>
           </div>
         </li>
       </ul>

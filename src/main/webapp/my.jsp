@@ -19,9 +19,14 @@
         <!-- 微博主体 -->
         <li class="rv b agz">
           <!-- 头像 -->
-          <img
-              class="bos vb yb aff"
-              src="assets/img/avatar-dhg.png">
+          <div style="display: flex; flex-direction: column">
+            <img
+                class="bos vb yb aff"
+                src="assets/img/avatar-dhg.png">
+            <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
+              <span class="h ayi">关注</span>
+            </button>
+          </div>
           <div class="rw">
             <div class="bpb">
               <!-- 发表时间 -->
@@ -71,9 +76,15 @@
               <!-- 第一条评论 -->
               <li class="rv">
                 <!-- 头像 -->
-                <img
-                    class="bos vb yb aff"
-                    src="assets/img/avatar-mdo.png">
+                <div style="display: flex; flex-direction: column">
+                  <img
+                      data-action="zoom"
+                      class="bos vb yb aff"
+                      src="assets/img/avatar-mdo.png">
+                  <button class="cg nz ok" style="width: 40px;margin-top: 5px;">
+                    <span>关注</span>
+                  </button>
+                </div>
                 <div class="rw">
                   <strong>${user.username} </strong>
                   这里是评论啊。。。Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus
