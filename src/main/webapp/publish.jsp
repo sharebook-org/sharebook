@@ -22,14 +22,14 @@
       <ul class="ca bow box afo">
         <li>
           <div style="display: flex; flex-direction: row;margin-bottom: 10px;">
-            <textarea type="text" rows="4" class="form-control" placeholder="分享新鲜事"></textarea>
+            <textarea type="text" id="article" rows="4" class="form-control" placeholder="分享新鲜事"></textarea>
             <button class="cg nz ok" id="publish-button">发布</button>
           </div>
         </li>
         <li class="ca bow box afo">
           <form enctype="multipart/form-data">
             <input type="file" id="images" accept="image/*" multiple>
-            <button type="button" id="upload">上传</button>
+            <button type="button" class="cg nz ok" id="upload">上传</button>
           </form>
         </li>
 
@@ -44,10 +44,10 @@
     //发送图片
     $('#upload').click(function () {
       var files = $('#images').prop('files');
-      var formData = new FormData();
       for (var i = 0; i < files.length; i++) {
         formData.append('images', files[i]);
       }
+      console.log(formData)
       $.ajax({
         url: '/upload',
         method: 'POST',
@@ -64,7 +64,6 @@
     });
 
     $('#publish-button').on('click', function () {
-      console.log("images" + images);
       var article = $('#article').val();
       var res = notBlank(article);
       if (!res) {

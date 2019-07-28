@@ -11,41 +11,27 @@
 <div class="do axz">
   <div class="ayb">
     <form class="ahr avz j">
-      <h1 class="l afv">找回密码</h1>
-      <div class="mu">
-        <input class="form-control" placeholder="账号" />
-      </div>
+      <h2 class="l afv">找回密码</h2>
 
       <div class="mu afh">
         <input
-            type="password"
+            type="email"
             class="form-control"
-            placeholder="密码"
+            placeholder="邮箱"
         />
       </div>
 
-      <div class="mu afh">
-        <input
-            type="password"
-            class="form-control"
-            placeholder="重复密码"
-        />
-      </div>
-
-      <div class="mu afh">
-        <input
-            type="password"
-            class="form-control"
-            placeholder="新密码"
-        />
+      <div class="mu afh" style="display: flex; ">
+        <input class="form-control" type="text" placeholder="请输入验证码"/>
+        <button class="cg nz ok" type="button" style="margin-left: 5px">获取</button>
       </div>
 
       <div class="afv">
-        <button class="cg ns">注册</button>
+        <button class="cg nq">确认</button>
       </div>
 
       <footer class="bqx">
-        <a href="./login.jsp" class="axc">回到登录</a>
+        <a href="/login" class="axc">回到登录</a>
       </footer>
     </form>
   </div>

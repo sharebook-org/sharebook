@@ -74,10 +74,10 @@
             <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
               <span id="forward">转发</span>
               <c:if test="${commentNum gt 0}" var="comment">
-                <span id="comment">评论&nbsp;${commentNum}</span>
+                <span id="comment" onclick="handleCommentClick(id)">评论&nbsp;${commentNum}</span>
               </c:if>
               <c:if test="${not comment}">
-                <span id="comment">评论</span>
+                <span id="comment" onclick="handleCommentClick(id)">评论</span>
               </c:if>
               <c:if test="${likeNum gt 0}" var="like">
                 <span id="like">点赞&nbsp;${likeNum}</span>
@@ -159,8 +159,13 @@
         var str = '<li>暂时没有数据！</li>';
         $('#hot-list').append(str);
       }
-    })
+    });
   })
+
+  function handleCommentClick(id) {
+    var href = '/detail?id=' + id;
+    window.open(href, '_blank');
+  };
 </script>
 </body>
 </html>

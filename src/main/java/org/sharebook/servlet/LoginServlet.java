@@ -48,7 +48,6 @@ public class LoginServlet extends HttpServlet {
         }
         if (result) {
             request.getSession().setAttribute("user", new User(loginUser));
-
             ResponseUtils.write(response, ResponseUtils.success());
         } else {
             ResponseUtils.write(response, ResponseUtils.error());
@@ -60,5 +59,6 @@ public class LoginServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getSession().removeAttribute("user");
+        ResponseUtils.write(response, ResponseUtils.success());
     }
 }

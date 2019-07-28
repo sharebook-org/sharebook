@@ -10,7 +10,7 @@
 <jsp:include page="./common/nav.jsp"></jsp:include>
 <div class="do axz">
   <div class="ayb">
-    <form class="ahr avz j">
+    <form class="ahr avz j" style="margin-top: 0px;">
       <h2>注册</h2>
       <div class="mu">
         <input id="username" type="text" class="form-control" placeholder="*昵称"/>
@@ -41,16 +41,30 @@
             placeholder="*重复密码"
         />
       </div>
+
       <div class="mu">
         <input id="location" type="text" class="form-control" placeholder="地区"/>
       </div>
-      <div class="mu afh">
-        性别：
-        <input name="sex" type="radio" value="0"/>&nbsp; 女
-        <input name="sex" type="radio" value="1"/>&nbsp;男
-        <input name="sex" type="radio" value="2" checked="checked"/> 其他
+
+      <div class="mu">
+        <input id="birth" type="date" class="form-control" placeholder="生日"/>
       </div>
 
+      <div class="mu afh" style="display: flex; justify-content: space-between">
+        <span>性别：</span>
+        <div>
+          <label for="female">女</label>
+          <input style="vertical-align: middle" id="female" name="sex" type="radio" value="0"/>
+        </div>
+        <div>
+          <label for="male">男</label>
+          <input style="vertical-align: middle" id="male" name="sex" type="radio" value="1"/>
+        </div>
+        <div>
+          <label for="other">其他</label>
+          <input style="vertical-align: middle" id="other" name="sex" type="radio" value="2" checked="checked"/>
+        </div>
+      </div>
 
       <div id="error-message" class="mu afh">
         <span style="color: #c9302c">带*的为必填项</span>

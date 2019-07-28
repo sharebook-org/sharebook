@@ -53,6 +53,26 @@
       </div>
 
       <div class="mu afh">
+        <span style="position: relative;left: -170px;top: 28px;">手机号</span>
+        <input
+            id="phone"
+            type="text"
+            class="form-control"
+            value="${user.phone}"
+        />
+      </div>
+
+      <div class="mu afh">
+        <span style="position: relative;left: -170px;top: 28px;">邮箱</span>
+        <input
+            id="email"
+            type="email"
+            class="form-control"
+            value="${user.email}"
+        />
+      </div>
+
+      <div class="mu afh">
         <span style="position: relative;left: -170px;top: 28px;">性别</span>
         <c:if test="${user.sex eq '0'}">
           <input type="text" name="sex" id="sex" value="女" class="form-control"/>
@@ -68,16 +88,15 @@
       <div class="mu afh">
         <span style="position: relative;left: -170px;top: 28px;">生日</span>
         <input
-            type="text"
-            name="birth"
-            value="${user.birth}"
-            class="form-control"
             id="birth"
+            type="date"
+            class="form-control"
+            value=""
         />
       </div>
 
       <div class="mu afh">
-        <span style="position: relative;left: -170px;top: 28px;">地址</span>
+        <span style="position: relative;left: -170px;top: 28px;">地区</span>
         <input
             type="text"
             name="location"
@@ -143,7 +162,10 @@
           console.log(result);
         }
       })
-    })
+    });
+
+    var birth = '${user.birth}';
+    $('#birth').val(birth.substring(0, 10));
   });
 
   //根据结果是否展示错误信息

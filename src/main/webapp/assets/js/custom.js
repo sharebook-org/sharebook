@@ -1,7 +1,6 @@
 $(function () {
   //切换导航栏
   $('.navbar-nav li a').each(function () {
-    console.log($($(this))[0]);
     if ($($(this))[0].href == String(window.location))
       $(this).parent().addClass('active');
   });
@@ -26,9 +25,13 @@ function logout() {
   $.ajax({
     url: '/login',
     method: 'DELETE',
-    success: function () {
-      window.location.href = '/index';
+    success: function (result) {
+      if (result.code == 200) {
+        window.location.href = '/index';
+      } else {
+        alert('退出异常！');
+      }
     }
-  })
+  });
 }
 
