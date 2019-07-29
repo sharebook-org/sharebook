@@ -20,19 +20,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean modify(User user) {
         int result = userRepository.update(user);
-        if (result != 0) {
-            return true;
-        }
-        return false;
+        return result != 0;
     }
 
     @Override
     public User findUserById(Long id) {
         User user = userRepository.findById(id);
-        if (user != null) {
-            return user;
-        }
-        return null;
+        return user;
     }
 
     @Override
@@ -44,10 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByName(String name) {
         User user = userRepository.findByUsername(name);
-        if (user != null) {
-            return user;
-        }
-        return null;
+        return user;
     }
 
     @Override
@@ -64,9 +55,7 @@ public class UserServiceImpl implements UserService {
             if (u.getStatus() == UserStatus.NORMAL) {
                 String salt = u.getSalt();
                 String encryptPassword = MD5Utils.md5(password, salt);
-                if (encryptPassword.equals(u.getPassword())) {
-                    return true;
-                }
+                return encryptPassword.equals(u.getPassword());
             }
 
         }
@@ -93,9 +82,7 @@ public class UserServiceImpl implements UserService {
             user.setSalt(salt);
             user.setPassword(encryptPassword);
             int result = userRepository.save(user);
-            if (result > 0) {
-                return true;
-            }
+            return result > 0;
         }
         return false;
     }
@@ -103,10 +90,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isExistUser(String username) {
         User user = userRepository.findByUsername(username);
-        if (user != null) {
-            return true;
-        }
-        return false;
+        return user != null;
     }
 
     public boolean isExistUser(User user) {
@@ -114,18 +98,12 @@ public class UserServiceImpl implements UserService {
         if (u == null) {
             u = userRepository.findByPhone(user.getPhone());
         }
-        if (u != null) {
-            return true;
-        }
-        return false;
+        return u != null;
     }
 
     @Override
     public boolean modifyPassword(User user) {
         int res = userRepository.modifyPassword(user);
-        if (res > 0) {
-            return true;
-        }
-        return false;
+        return res > 0;
     }
 }

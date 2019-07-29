@@ -47,7 +47,7 @@
       for (var i = 0; i < files.length; i++) {
         formData.append('images', files[i]);
       }
-      console.log(formData)
+      console.log(formData);
       $.ajax({
         url: '/upload',
         method: 'POST',
