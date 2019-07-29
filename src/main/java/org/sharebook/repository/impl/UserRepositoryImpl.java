@@ -46,16 +46,21 @@ public class UserRepositoryImpl implements UserRepository {
     public int save(User user) {
         int count = 0;
         //TODO 写SQL太复杂
-        String sql = "INSERT INTO `user`(`username`,`password`," +
-                "`salt`,`sex`,`status`,`role`,`avatar`," +
-                "`create_time`,`update_time`) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `user`(`username`, `email`, `phone`, `password`," +
+                " `salt`, `introduction`, `sex`, `birth`, `location`, `status`, `role`," +
+                " `avatar`, `create_time`, `update_time`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
         try {
             count = queryRunner.execute(
                     sql,
                     user.getUsername(),
+                    user.getEmail(),
+                    user.getPhone(),
                     user.getPassword(),
                     user.getSalt(),
+                    user.getIntroduction(),
                     user.getSex(),
+                    user.getBirth(),
+                    user.getLocation(),
                     user.getStatus(),
                     user.getRole(),
                     user.getAvatar(),

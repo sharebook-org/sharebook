@@ -67,8 +67,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String account, String password) {
-        User user = null;
-        user = userRepository.findByEmail(account);
+        User user = userRepository.findByEmail(account);
         if (user == null) {
             user = userRepository.findByPhone(account);
         }
@@ -77,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(User user) {
-        boolean isExist = isExistUser(user.getUsername());
+        boolean isExist = isExistUser(user);
         if (!isExist) {
             String salt = MD5Utils.getSalt();
             String encryptPassword = MD5Utils.md5(
@@ -97,6 +96,17 @@ public class UserServiceImpl implements UserService {
     public boolean isExistUser(String username) {
         User user = userRepository.findByUsername(username);
         if (user != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isExistUser(User user) {
+        User u = userRepository.findByEmail(user.getEmail());
+        if (u == null) {
+            u = userRepository.findByPhone(user.getPhone());
+        }
+        if (u != null) {
             return true;
         }
         return false;
