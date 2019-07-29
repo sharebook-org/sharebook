@@ -11,6 +11,7 @@ import org.sharebook.repository.impl.CommentRepositoryImpl;
 import org.sharebook.service.CommentService;
 
 import java.util.Date;
+import java.util.List;
 
 public class CommentServiceImpl implements CommentService {
 
@@ -20,6 +21,21 @@ public class CommentServiceImpl implements CommentService {
     public CommentServiceImpl() {
         this.commentRepository = new CommentRepositoryImpl();
         this.articleRepository= new ArticleRepositoryImpl();
+    }
+
+    @Override
+    public List<Comment> getCommentList(int entityType, long entityId) {
+        List<Comment> comments=commentRepository.findAll(entityType,entityId);
+        return comments;
+    }
+
+    @Override
+    public Comment findById(long id) {
+        Comment comment=commentRepository.findById(id);
+        if (comment!=null){
+            return comment;
+        }
+        return null;
     }
 
     @Override

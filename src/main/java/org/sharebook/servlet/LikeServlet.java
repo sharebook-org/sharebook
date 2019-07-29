@@ -20,11 +20,10 @@ public class LikeServlet extends HttpServlet {
     private LikeService likeService=new LikeServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //User user=request.getSession().getAttribute("user")
-        long userId=Long.parseLong(request.getParameter("userId"));
+        User user=(User)request.getSession().getAttribute("user");
+        long userId=user.getId();
         int entityType=Integer.parseInt(request.getParameter("entityType"));
         long entityId= Long.parseLong(request.getParameter("entityId"));
-//        int liked=Integer.parseInt(request.getParameter("liked"));
         boolean result=likeService.isLiked(entityType,entityId,userId);
         if (result){
             ResponseUtils.write(response,ResponseUtils.success());
@@ -39,11 +38,11 @@ public class LikeServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //User user=request.getSession().getAttribute("user")
-        long userId=Long.parseLong(request.getParameter("userId"));
+        User user=(User)request.getSession().getAttribute("user");
+        long userId=user.getId();
+//        long userId=Long.parseLong(request.getParameter("userId"));
         int entityType=Integer.parseInt(request.getParameter("entityType"));
         long entityId= Long.parseLong(request.getParameter("entityId"));
-//        int liked=Integer.parseInt(request.getParameter("liked"));
         boolean result=likeService.likedCancle(entityType,entityId,userId);
         if (result){
             ResponseUtils.write(response,ResponseUtils.success());

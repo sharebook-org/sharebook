@@ -15,6 +15,15 @@ public interface UserService {
     boolean login(User user);
 
     /**
+     * 账号登录
+     *
+     * @param account  邮箱或手机号
+     * @param password 密码
+     * @return
+     */
+    User login(String account, String password);
+
+    /**
      * 注册
      * @param user
      * @return
