@@ -8,7 +8,7 @@ public class ActiveStatus {
     public final static int ACTIVATED = 0;
 
     /**
-     * 未激活
+     * 为激活
      */
     public final static int INACTIVATED = 1;
 }

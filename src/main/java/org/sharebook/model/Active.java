@@ -19,12 +19,4 @@ public class Active {
     private int status;
     private Date createTime;
     private Date updateTime;
-
-    public Active(Long userId, String code, int status) {
-        this.userId = userId;
-        this.code = code;
-        this.status = status;
-        this.createTime = new Date();
-        this.updateTime = new Date();
-    }
 }

@@ -1,28 +1,20 @@
 package org.sharebook.service.impl;
 
-import org.sharebook.constant.status.ActiveStatus;
 import org.sharebook.constant.status.UserStatus;
-import org.sharebook.model.Active;
 import org.sharebook.model.User;
-import org.sharebook.repository.ActiveRepository;
 import org.sharebook.repository.UserRepository;
-import org.sharebook.repository.impl.ActiveRepositoryImpl;
 import org.sharebook.repository.impl.UserRepositoryImpl;
 import org.sharebook.service.UserService;
-import org.sharebook.utils.CodeUtils;
 import org.sharebook.utils.MD5Utils;
-import org.sharebook.utils.MailUtils;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final ActiveRepository activeRepository;
 
     public UserServiceImpl() {
         this.userRepository = new UserRepositoryImpl();
-        this.activeRepository = new ActiveRepositoryImpl();
     }
 
     @Override
@@ -100,13 +92,8 @@ public class UserServiceImpl implements UserService {
             );
             user.setSalt(salt);
             user.setPassword(encryptPassword);
-            int result2 = userRepository.save(user);
-            User user1 = userRepository.findByUsername(user.getUsername());
-
-            //给该用户一个验证码code
-            Active active = new Active(user1.getId(), code, ActiveStatus.INACTIVATED);
-            int result1 = activeRepository.save(active);
-            if (result1 > 0 && result2 > 0) {
+            int result = userRepository.save(user);
+            if (result > 0) {
                 return true;
             }
         }
@@ -137,31 +124,6 @@ public class UserServiceImpl implements UserService {
     public boolean modifyPassword(User user) {
         int res = userRepository.modifyPassword(user);
         if (res > 0) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean checkCode(String email, String code) {
-        User user = userRepository.findByEmail(email);
-        Active active = activeRepository.findByUserId(user.getId());
-        if (code.equals(active.getCode())) {
-            active.setStatus(ActiveStatus.ACTIVATED);
-            int result = activeRepository.update(active);
-            if (result > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean getCode(String email) {
-        User user = userRepository.findByEmail(email);
-        Active active = activeRepository.findByUserId(user.getId());
-        if (active != null) {
-            new Thread(new MailUtils(email, active.getCode())).start();
             return true;
         }
         return false;

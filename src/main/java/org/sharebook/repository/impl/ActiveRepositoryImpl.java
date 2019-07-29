@@ -87,23 +87,4 @@ public class ActiveRepositoryImpl implements ActiveRepository {
         }
         return count;
     }
-
-    @Override
-    public Active findByUserId(Long id) {
-        Active active = null;
-        String sql = "SELECT * FROM `active_status` WHERE `user_id` = ?";
-        try {
-            active = queryRunner.query(
-                    sql,
-                    new BeanHandler<>(
-                            Active.class,
-                            new BasicRowProcessor(new GenerousBeanProcessor())
-                    ),
-                    id
-            );
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return active;
-    }
 }

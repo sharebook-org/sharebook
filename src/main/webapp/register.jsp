@@ -62,7 +62,8 @@
         </div>
         <div>
           <label for="other">其他</label>
-          <input style="vertical-align: middle" id="other" name="sex" type="radio" value="2" checked="checked"/>
+          <input style="vertical-align: middle" id="other" name="sex" type="radio" value="2"
+                 checked="checked"/>
         </div>
       </div>
 
@@ -117,8 +118,8 @@
         },
         success: function (result) {
           if (result.code == 200) {
-            alert('注册成功');
-            window.location.href = '/login';
+            alert('注册成功,邮箱待验证');
+            window.location.href = '/next?email=' + $('#email').val();
           } else {
             alert('邮箱或手机号已被占用');
           }
