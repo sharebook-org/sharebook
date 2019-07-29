@@ -48,4 +48,6 @@ public interface FollowRepository extends CurdRepository<Follow,Long>{
     List<Follow> findAll();
 
     int delete(Long userId,Long followUserId);
+
+    List<Long> findAll(Long id);
 }

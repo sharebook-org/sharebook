@@ -5,6 +5,8 @@ import org.sharebook.repository.FollowRepository;
 import org.sharebook.repository.impl.FollowRepositoryImpl;
 import org.sharebook.service.FollowService;
 
+import java.util.List;
+
 public class FollowServiceImpl implements FollowService {
     private final FollowRepository followRepository;
     public FollowServiceImpl(){
@@ -29,12 +31,30 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
-    public boolean showFollow(Follow follow) {
-        if (follow!=null){
-            followRepository.findAll();
-            return true;
+    public Follow showFollow(Long userId) {
+        Follow follow=null;
+        if (userId!=null){
+            follow = followRepository.findById(userId);
+            return follow;
         }
-        return false;
+        return follow;
+    }
+
+    @Override
+    public List<Follow> showFollows(Long userId) {
+        List<Follow> follows=null;
+        if (userId!=null){
+            follows = followRepository.findFollowByUserId(userId);
+            return follows;
+        }
+        return follows;
+    }
+
+    @Override
+    public List<Long> showFollowUserId(Long id) {
+        List<Long> ids=null;
+        ids = followRepository.findAll(id);
+        return ids;
     }
 
     @Override

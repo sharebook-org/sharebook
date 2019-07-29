@@ -41,7 +41,7 @@
         <!-- 登录的头像 -->
         <li class="pi afb">
           <button class="cg bpo bpp boi" data-toggle="popover">
-            <img class="us" src="assets/img/avatar-dhg.png">
+            <img class="us" src="${user.avatar}">
           </button>
         </li>
       </ul>

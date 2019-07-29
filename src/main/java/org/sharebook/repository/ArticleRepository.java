@@ -22,4 +22,6 @@ public interface ArticleRepository extends CurdRepository<Article,Long>{
      * @return
      */
     long getArticlesCount();
+
+    List<Article> findArticlesByIds(List<Long> ids);
 }

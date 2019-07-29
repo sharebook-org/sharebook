@@ -2,6 +2,8 @@ package org.sharebook.service;
 
 import org.sharebook.model.User;
 
+import java.util.List;
+
 public interface UserService {
 
     /**
@@ -40,6 +42,8 @@ public interface UserService {
      * @return
      */
     User findUserById(Long id);
+
+    List<User> findUsers(List<Long> ids);
 
     /**
      * 根据名字查看个人信息

@@ -1,6 +1,7 @@
 package org.sharebook.servlet;
 
 import org.sharebook.model.Follow;
+import org.sharebook.model.User;
 import org.sharebook.service.FollowService;
 import org.sharebook.service.impl.FollowServiceImpl;
 import org.sharebook.utils.ResponseUtils;
@@ -40,9 +41,9 @@ public class FollowServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //User user=(User) request.getSession().getAttribute("user");
-        //Long userId=user.getId();
-        Long userId = Long.valueOf(request.getParameter("userId"));
+        User user=(User) request.getSession().getAttribute("user");
+        Long userId=user.getId();
+        //Long userId = Long.valueOf(request.getParameter("userId"));
 
         //得到关注的人数
         Long res1 = followService.showFollowNum(userId);

@@ -37,8 +37,7 @@ public class ArticleServlet extends HttpServlet {
         article.setImages(imgs);
         boolean result = articleService.publish(article);
         if (result) {
-            request.getSession().setAttribute("createTime", createTime);
-            request.getSession().setAttribute("content", content);
+
             //request.getRequestDispatcher("/attention").forward(request,response);
             ResponseUtils.write(response, ResponseUtils.success());
         } else {

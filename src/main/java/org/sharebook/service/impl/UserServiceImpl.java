@@ -7,6 +7,8 @@ import org.sharebook.repository.impl.UserRepositoryImpl;
 import org.sharebook.service.UserService;
 import org.sharebook.utils.MD5Utils;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -31,6 +33,12 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         return null;
+    }
+
+    @Override
+    public List<User> findUsers(List<Long> ids) {
+        List<User> users = userRepository.findUsers(ids);
+        return users;
     }
 
     @Override

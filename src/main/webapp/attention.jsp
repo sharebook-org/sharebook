@@ -22,7 +22,7 @@
         <div class="qf" style="background-image: url(assets/img/iceland.jpg);"></div>
         <div class="qa avz">
           <a href="/profile">
-            <img class="bpj" src="assets/img/avatar-dhg.png">
+            <img class="bpj" src="${user.avatar}">
           </a>
 
           <h6 class="qb">
@@ -35,14 +35,14 @@
             <li class="bpl">
               <a href="#userModal" class="boa" data-toggle="modal">
                 关注的人
-                <h6 class="aej">12M</h6>
+                <h6 class="aej">${followCount}</h6>
               </a>
             </li>
 
             <li class="bpl">
               <a href="#userModal" class="boa" data-toggle="modal">
                 粉丝
-                <h6 class="aej">1</h6>
+                <h6 class="aej">${fansCount}</h6>
               </a>
             </li>
           </ul>
@@ -81,13 +81,14 @@
         </li>
 
         <!-- 微博主体 -->
+        <c:forEach items="${articles}" var="article">
         <li class="rv b agz">
           <!-- 头像 -->
           <div style="display: flex; flex-direction: column">
             <img
                 data-action="zoom"
                 class="bos vb yb aff"
-                src="assets/img/avatar-dhg.png">
+                src="${article.avatar}">
             <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
               <span>关注</span>
             </button>
@@ -95,20 +96,24 @@
           <div class="rw">
             <div class="bpb">
               <!-- 发表时间 -->
-              <small class="acx axc"><%=request.getSession().getAttribute("createTime")%><%--4 min--%></small>
+              <small class="acx axc">${article.createTime}<%--4 min--%></small>
               <!-- 昵称 -->
               <div style="display: flex; ">
-                <h6>Dave Gamache</h6>
+                <h6>${article.username}</h6>
 
               </div>
             </div>
             <!-- 微博内容 -->
             <p>
-              <%=request.getSession().getAttribute("content")%>
+              ${article.content}
               <%--              Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.--%>
             </p>
             <!-- 图片 -->
             <div class="boy">
+              <c:forEach items="${article.images}" var="images">
+                <img style="width: 150px;height: 150px;" data-action="zoom" src="${images}">
+              </c:forEach>
+              <%--<img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
               <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
               <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
               <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
@@ -116,20 +121,19 @@
               <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
               <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
               <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
+              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">--%>
             </div>
 
             <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
               <span id="forward">转发</span>
-              <c:if test="${commentNum gt 0}" var="comment">
-                <span id="comment">评论&nbsp;${commentNum}</span>
+              <c:if test="${article.commentNum gt 0}" var="comment">
+                <span id="comment">评论&nbsp;${article.commentNum}</span>
               </c:if>
               <c:if test="${not comment}">
                 <span id="comment">评论</span>
               </c:if>
-              <c:if test="${likeNum gt 0}" var="like">
-                <span id="like">点赞&nbsp;${likeNum}</span>
+              <c:if test="${article.likeNum gt 0}" var="like">
+                <span id="like">点赞&nbsp;${article.likeNum}</span>
               </c:if>
               <c:if test="${not like}">
                 <span id="like">点赞</span>
@@ -137,8 +141,10 @@
             </div>
           </div>
         </li>
+        </c:forEach>
       </ul>
     </div>
+
 
     <!-- 右侧推荐框 -->
     <div class="fj">

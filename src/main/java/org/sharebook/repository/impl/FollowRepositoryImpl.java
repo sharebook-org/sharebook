@@ -5,6 +5,7 @@ import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.sharebook.model.Follow;
 import org.sharebook.repository.FollowRepository;
@@ -22,11 +23,11 @@ public class FollowRepositoryImpl implements FollowRepository {
     }
 
     @Override
-    public Follow findById(Long id) {
-        String sql = "select * from `follow` where `id`=?";
+    public Follow findById(Long userId) {
+        String sql = "select * from `follow` where `user_id`=?";
         Follow follow = null;
         try {
-            follow = queryRunner.query(sql, new BeanHandler<>(Follow.class), id);
+            follow = queryRunner.query(sql, new BeanHandler<>(Follow.class,new BasicRowProcessor(new GenerousBeanProcessor())), userId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -181,5 +182,21 @@ public class FollowRepositoryImpl implements FollowRepository {
             e.printStackTrace();
         }
         return count;
+    }
+
+    @Override
+    public List<Long> findAll(Long id) {
+        String sql="select `follow_user_id` from `follow` where `user_id`=?";
+        List<Long> ids=null;
+        try {
+            ids = queryRunner.query(
+                    sql,
+                    new ColumnListHandler<>("follow_user_id"),
+                    id
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ids;
     }
 }
