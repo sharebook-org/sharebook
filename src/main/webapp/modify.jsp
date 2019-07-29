@@ -77,7 +77,7 @@
       var newPassword = $('#newPassword').val();
       var res4 = notBlank(newPassword);
       showErrorMessage(res4, '请输入新密码！');
-    });
+    })
 
     $('#updatePwd-button').on('click', function () {
       var userName = $('#userName').val();

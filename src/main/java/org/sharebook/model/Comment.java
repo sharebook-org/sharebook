@@ -24,7 +24,5 @@ public class Comment {
         this.entityType = entityType;
         this.entityId = entityId;
         this.content = content;
-        this.createTime = new Date();
-        this.updateTime = new Date();
     }
 }

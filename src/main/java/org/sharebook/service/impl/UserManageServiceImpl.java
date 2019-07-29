@@ -20,7 +20,10 @@ public class UserManageServiceImpl implements UserManageService {
     @Override
     public List<User> getAllUsers(int page, int size) {
         List<User> users = userRepository.findAll(page, size);
-        return users;
+        if (users != null) {
+            return users;
+        }
+        return null;
     }
 
     @Override

@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.sharebook.constant.Role;
 import org.sharebook.constant.status.UserStatus;
-import org.sharebook.utils.AvatarUtils;
 
 import java.util.Date;
 
@@ -42,7 +41,6 @@ public class User {
         this.location = location;
         this.status = UserStatus.NORMAL;
         this.role = Role.USER;
-        this.avatar = AvatarUtils.getDefaultAvatar();
         this.createTime = new Date();
         this.updateTime = new Date();
     }

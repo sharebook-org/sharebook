@@ -3,10 +3,13 @@ package org.sharebook.service.impl;
 import org.sharebook.constant.EntityType;
 import org.sharebook.constant.status.LikeStatus;
 import org.sharebook.model.Article;
+import org.sharebook.model.Comment;
 import org.sharebook.model.Like;
 import org.sharebook.repository.ArticleRepository;
+import org.sharebook.repository.CommentRepository;
 import org.sharebook.repository.LikeResposity;
 import org.sharebook.repository.impl.ArticleRepositoryImpl;
+import org.sharebook.repository.impl.CommentRepositoryImpl;
 import org.sharebook.repository.impl.LikeResposityImpl;
 import org.sharebook.service.LikeService;
 
@@ -37,7 +40,9 @@ public class LikeServiceImpl implements LikeService {
             }
 
             int result = likeResposity.save(like1);
-            return result != 0;
+            if (result != 0) {
+                return true;
+            }
         } else {
             if (like.getLiked() == LikeStatus.UNLIKED) {
                 like.setLiked(LikeStatus.LIKED);
@@ -47,7 +52,9 @@ public class LikeServiceImpl implements LikeService {
                     articleRepository.update(article);
                 }
                 int result = likeResposity.update(like);
-                return result != 0;
+                if (result != 0) {
+                    return true;
+                }
             }
         }
         return false;
@@ -64,7 +71,9 @@ public class LikeServiceImpl implements LikeService {
                 articleRepository.save(article);
             }
             int result=likeResposity.save(like);
-            return result != 0;
+            if (result!=0){
+                return true;
+            }
         }
         return false;
     }

@@ -35,8 +35,3 @@ function logout() {
   });
 }
 
-function handleCommentClick(id) {
-  var href = '/detail?id=' + id;
-  window.open(href, '_blank');
-}
-

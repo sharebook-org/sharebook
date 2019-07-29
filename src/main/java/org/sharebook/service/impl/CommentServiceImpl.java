@@ -1,5 +1,6 @@
 package org.sharebook.service.impl;
 
+import jdk.nashorn.internal.runtime.regexp.joni.constants.EncloseType;
 import org.sharebook.constant.EntityType;
 import org.sharebook.model.Article;
 import org.sharebook.model.Comment;
@@ -31,7 +32,10 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment findById(long id) {
         Comment comment=commentRepository.findById(id);
-        return comment;
+        if (comment!=null){
+            return comment;
+        }
+        return null;
     }
 
     @Override
@@ -40,7 +44,9 @@ public class CommentServiceImpl implements CommentService {
             comment.setCreateTime(new Date());
             comment.setUpdateTime(new Date());
             int count = commentRepository.save(comment);
-            return count > 0;
+            if (count > 0) {
+                return true;
+            }
         }
         return false;
     }
@@ -53,7 +59,9 @@ public class CommentServiceImpl implements CommentService {
                 Long currentCommentNum = article.getCommentNum();
                 article.setCommentNum(currentCommentNum+1);
                 int result=articleRepository.save(article);
-                return result > 0;
+                if (result>0){
+                    return true;
+                }
             }
         }
         return false;

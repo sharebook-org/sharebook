@@ -160,7 +160,12 @@
         $('#hot-list').append(str);
       }
     });
-  });
+  })
+
+  function handleCommentClick(id) {
+    var href = '/detail?id=' + id;
+    window.open(href, '_blank');
+  };
 </script>
 </body>
 </html>
