@@ -39,7 +39,7 @@
 
 <div class="do axz">
   <div class="ayb">
-    <form class="ahr avz j">
+    <form class="ahr avz j" style="margin-top: 0px">
 
       <div class="mu afh">
         <span style="position: relative;left: -170px;top: 28px;">用户名</span>
@@ -49,7 +49,7 @@
             value="${user.username}"
             class="form-control"
             id="name"
-      />
+        />
       </div>
 
       <div class="mu afh">
@@ -99,11 +99,16 @@
         <span style="position: relative;left: -170px;top: 28px;">地区</span>
         <input
             type="text"
-            name="location"
             value="${user.location}"
             class="form-control"
             id="location"
         />
+      </div>
+
+      <div class="mu afh">
+        <span style="position: relative;left: -170px;top: 28px;">个人简介</span>
+        <textarea type="text" class="form-control" id="introduction">${user.introduction}
+        </textarea>
       </div>
       <div id="error-message" class="mu afh" style="display: none">
         <span style="color: #c9302c"></span>
@@ -133,6 +138,7 @@
       var sex = $('#sex').val();
       var birth = $('#birth').val();
       var location = $('#location').val();
+      var introduction = $('#introduction').val();
       if (sex == '女') {
         sex = 0;
       } else if (sex == '男') {
@@ -152,6 +158,7 @@
           sex: sex,
           birth: birth,
           location: location,
+          introduction: introduction
         },
         success: function (result) {
           if (result.code == 200) {
