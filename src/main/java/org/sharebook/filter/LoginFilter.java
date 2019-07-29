@@ -11,8 +11,9 @@ import java.io.IOException;
 /**
  * 未登录时访问以下页面会被拦截
  */
-@WebFilter(urlPatterns = {"/attention", "/publish", "/my"})
+@WebFilter(urlPatterns = {"/attention", "/publish", "/my", "/profile"})
 public class LoginFilter implements Filter {
+
     public void init(FilterConfig config) throws ServletException {
     }
 

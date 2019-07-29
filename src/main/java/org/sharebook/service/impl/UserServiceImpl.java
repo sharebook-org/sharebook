@@ -66,6 +66,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User login(String account, String password) {
+        User user = null;
+        user = userRepository.findByEmail(account);
+        if (user == null) {
+            user = userRepository.findByPhone(account);
+        }
+        return user;
+    }
+
+    @Override
     public boolean register(User user) {
         boolean isExist = isExistUser(user.getUsername());
         if (!isExist) {

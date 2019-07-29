@@ -13,7 +13,7 @@ import java.io.IOException;
 public class PageFilter implements Filter {
 
     private final static int DEFAULT_PAGE = 1;
-    private final static int DEFAULT_SIZE = 2;
+    private final static int DEFAULT_SIZE = 10;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

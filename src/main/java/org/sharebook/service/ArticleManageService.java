@@ -7,15 +7,17 @@ import java.util.List;
 public interface ArticleManageService {
 
     /**
-     *获取文章
+     * 获取文章
+     *
      * @param page
      * @param size
      * @return
      */
-    List<Article> getAllArticles(int page,int size);
+    List<Article> getAllArticles(int page, int size);
 
     /**
      * 修改文章
+     *
      * @param article
      * @return
      */
@@ -23,6 +25,7 @@ public interface ArticleManageService {
 
     /**
      * 根据id删除文章
+     *
      * @param id
      * @return
      */
@@ -30,12 +33,14 @@ public interface ArticleManageService {
 
     /**
      * 获取文章总数
+     *
      * @return
      */
     long getArticlesCount();
 
     /**
      * 获取单篇文章
+     *
      * @param id
      * @return
      */

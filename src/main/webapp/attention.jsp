@@ -62,7 +62,7 @@
             </li>
             <li><span class="axc h bgz aff"></span>生日 :${user.birth}</li>
             <li><span class="axc h bip aff"></span>地址 :${user.location}</li>
-            <li><span class="axc h bjl aff"></span>创建时间 :<span id="createTime"></span></li>
+            <li><span class="axc h bjl aff"></span>注册时间 :<span id="createTime"></span></li>
           </ul>
         </div>
       </div>

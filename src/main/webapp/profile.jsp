@@ -128,10 +128,11 @@
 
     $('#modify-button').on('click', function () {
       var name = $('#name').val();
+      var phone = $('#phone').val();
+      var email = $('#email').val();
       var sex = $('#sex').val();
       var birth = $('#birth').val();
       var location = $('#location').val();
-      var birth = $('#birth').val();
       if (sex == '女') {
         sex = 0;
       } else if (sex == '男') {
@@ -146,6 +147,8 @@
         dataType: 'json',
         data: {
           name: name,
+          phone: phone,
+          email: email,
           sex: sex,
           birth: birth,
           location: location,

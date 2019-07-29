@@ -71,14 +71,16 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public int update(User user) {
         int count = 0;
-        String sql = "UPDATE `user` SET `username` = ?, `introduction` = ?," +
-                " `sex` = ?, `birth` = ?, `location` = ?, `status` = ?," +
-                " `role` = ?, `avatar` = ?, `update_time` = ? WHERE `id` = ?";
+        String sql = "UPDATE `user` SET `username` = ?, `introduction` = ?, " +
+                "`email` = ?, `phone` = ?, `sex` = ?, `birth` = ?, `location` = ?," +
+                " `status` = ?, `role` = ?, `avatar` = ?, `update_time` = ? WHERE `id` = ?";
         try {
             count = queryRunner.update(
                     sql,
                     user.getUsername(),
                     user.getIntroduction(),
+                    user.getEmail(),
+                    user.getPhone(),
                     user.getSex(),
                     user.getBirth(),
                     user.getLocation(),
@@ -169,5 +171,40 @@ public class UserRepositoryImpl implements UserRepository {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        String sql = "SELECT * FROM `user` WHERE `email` = ?";
+        User user = null;
+        try {
+            user = queryRunner.query(sql, new BeanHandler<>(
+                            User.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())),
+                    email
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
+    public User findByPhone(String phone) {
+        String sql = "SELECT * FROM `user` WHERE `phone` = ?";
+        User user = null;
+        try {
+            user = queryRunner.query(
+                    sql,
+                    new BeanHandler<>(
+                            User.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
+                    phone
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }
