@@ -60,4 +60,8 @@ public interface UserService {
     long getCount();
 
     boolean modifyPassword(User user);
+
+    boolean checkCode(String email, String code);
+
+    boolean getCode(String email);
 }
