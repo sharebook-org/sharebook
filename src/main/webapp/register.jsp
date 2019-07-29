@@ -127,11 +127,11 @@
     })
   });
 
-  //检查用户名是否为空
-  function checkUsername() {
-    var username = $('#username').val();
-    return notBlank(username);
-  }
+    //检查用户名是否为空
+    function checkUsername() {
+        var username = $('#username').val();
+        return notBlank(username);
+    }
   function checkPassword() {
     console.log('check password');
     var password = $('#password').val();

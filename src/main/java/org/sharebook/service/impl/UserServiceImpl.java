@@ -1,32 +1,46 @@
 package org.sharebook.service.impl;
 
+import org.sharebook.constant.status.ActiveStatus;
 import org.sharebook.constant.status.UserStatus;
+import org.sharebook.model.Active;
 import org.sharebook.model.User;
+import org.sharebook.repository.ActiveRepository;
 import org.sharebook.repository.UserRepository;
+import org.sharebook.repository.impl.ActiveRepositoryImpl;
 import org.sharebook.repository.impl.UserRepositoryImpl;
 import org.sharebook.service.UserService;
+import org.sharebook.utils.CodeUtils;
 import org.sharebook.utils.MD5Utils;
+import org.sharebook.utils.MailUtils;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final ActiveRepository activeRepository;
 
     public UserServiceImpl() {
         this.userRepository = new UserRepositoryImpl();
+        this.activeRepository = new ActiveRepositoryImpl();
     }
 
     @Override
     public boolean modify(User user) {
         int result = userRepository.update(user);
-        return result != 0;
+        if (result != 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public User findUserById(Long id) {
         User user = userRepository.findById(id);
-        return user;
+        if (user != null) {
+            return user;
+        }
+        return null;
     }
 
     @Override
@@ -38,7 +52,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByName(String name) {
         User user = userRepository.findByUsername(name);
-        return user;
+        if (user != null) {
+            return user;
+        }
+        return null;
     }
 
     @Override
@@ -55,7 +72,9 @@ public class UserServiceImpl implements UserService {
             if (u.getStatus() == UserStatus.NORMAL) {
                 String salt = u.getSalt();
                 String encryptPassword = MD5Utils.md5(password, salt);
-                return encryptPassword.equals(u.getPassword());
+                if (encryptPassword.equals(u.getPassword())) {
+                    return true;
+                }
             }
 
         }
@@ -81,8 +100,15 @@ public class UserServiceImpl implements UserService {
             );
             user.setSalt(salt);
             user.setPassword(encryptPassword);
-            int result = userRepository.save(user);
-            return result > 0;
+            int result2 = userRepository.save(user);
+            User user1 = userRepository.findByUsername(user.getUsername());
+
+            //给该用户一个验证码code
+            Active active = new Active(user1.getId(), code, ActiveStatus.INACTIVATED);
+            int result1 = activeRepository.save(active);
+            if (result1 > 0 && result2 > 0) {
+                return true;
+            }
         }
         return false;
     }
@@ -90,7 +116,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean isExistUser(String username) {
         User user = userRepository.findByUsername(username);
-        return user != null;
+        if (user != null) {
+            return true;
+        }
+        return false;
     }
 
     public boolean isExistUser(User user) {
@@ -98,12 +127,43 @@ public class UserServiceImpl implements UserService {
         if (u == null) {
             u = userRepository.findByPhone(user.getPhone());
         }
-        return u != null;
+        if (u != null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean modifyPassword(User user) {
         int res = userRepository.modifyPassword(user);
-        return res > 0;
+        if (res > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkCode(String email, String code) {
+        User user = userRepository.findByEmail(email);
+        Active active = activeRepository.findByUserId(user.getId());
+        if (code.equals(active.getCode())) {
+            active.setStatus(ActiveStatus.ACTIVATED);
+            int result = activeRepository.update(active);
+            if (result > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean getCode(String email) {
+        User user = userRepository.findByEmail(email);
+        Active active = activeRepository.findByUserId(user.getId());
+        if (active != null) {
+            new Thread(new MailUtils(email, active.getCode())).start();
+            return true;
+        }
+        return false;
     }
 }
