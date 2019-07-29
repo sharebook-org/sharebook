@@ -46,16 +46,21 @@ public class UserRepositoryImpl implements UserRepository {
     public int save(User user) {
         int count = 0;
         //TODO 写SQL太复杂
-        String sql = "INSERT INTO `user`(`username`,`password`," +
-                "`salt`,`sex`,`status`,`role`,`avatar`," +
-                "`create_time`,`update_time`) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `user`(`username`, `email`, `phone`, `password`," +
+                " `salt`, `introduction`, `sex`, `birth`, `location`, `status`, `role`," +
+                " `avatar`, `create_time`, `update_time`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
         try {
             count = queryRunner.execute(
                     sql,
                     user.getUsername(),
+                    user.getEmail(),
+                    user.getPhone(),
                     user.getPassword(),
                     user.getSalt(),
+                    user.getIntroduction(),
                     user.getSex(),
+                    user.getBirth(),
+                    user.getLocation(),
                     user.getStatus(),
                     user.getRole(),
                     user.getAvatar(),
@@ -71,14 +76,16 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public int update(User user) {
         int count = 0;
-        String sql = "UPDATE `user` SET `username` = ?, `introduction` = ?," +
-                " `sex` = ?, `birth` = ?, `location` = ?, `status` = ?," +
-                " `role` = ?, `avatar` = ?, `update_time` = ? WHERE `id` = ?";
+        String sql = "UPDATE `user` SET `username` = ?, `introduction` = ?, " +
+                "`email` = ?, `phone` = ?, `sex` = ?, `birth` = ?, `location` = ?," +
+                " `status` = ?, `role` = ?, `avatar` = ?, `update_time` = ? WHERE `id` = ?";
         try {
             count = queryRunner.update(
                     sql,
                     user.getUsername(),
                     user.getIntroduction(),
+                    user.getEmail(),
+                    user.getPhone(),
                     user.getSex(),
                     user.getBirth(),
                     user.getLocation(),
@@ -169,5 +176,40 @@ public class UserRepositoryImpl implements UserRepository {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        String sql = "SELECT * FROM `user` WHERE `email` = ?";
+        User user = null;
+        try {
+            user = queryRunner.query(sql, new BeanHandler<>(
+                            User.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())),
+                    email
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
+    public User findByPhone(String phone) {
+        String sql = "SELECT * FROM `user` WHERE `phone` = ?";
+        User user = null;
+        try {
+            user = queryRunner.query(
+                    sql,
+                    new BeanHandler<>(
+                            User.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
+                    phone
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

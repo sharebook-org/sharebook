@@ -97,6 +97,10 @@
     $('#register-button').on('click', function () {
       var username = $('#username').val();
       var password = $('#password').val();
+      var email = $('#email').val();
+      var phone = $('#phone').val();
+      var location = $('#location').val();
+      var birth = $('#birth').val();
       var sex = $('input[name=\'sex\']:checked').val();
       $.ajax({
         url: '/register',
@@ -104,19 +108,20 @@
         dataType: 'json',
         data: {
           username: username,
+          email: email,
+          phone: phone,
+          location: location,
+          birth: birth,
           password: password,
-          sex: sex,
+          sex: sex
         },
         success: function (result) {
           if (result.code == 200) {
             alert('注册成功');
             window.location.href = '/login';
           } else {
-            alert('用户名已被占用');
+            alert('邮箱或手机号已被占用');
           }
-        },
-        error: function (e) {
-          console.log('error' + e);
         }
       })
     })

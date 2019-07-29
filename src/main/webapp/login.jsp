@@ -13,7 +13,7 @@
     <form class="ahr avz j">
       <h2>登录</h2>
       <div class="mu">
-        <input id="account" class="form-control" placeholder="账号"/>
+        <input id="account" class="form-control" placeholder="邮箱/手机号"/>
       </div>
 
       <div class="mu afh">
@@ -50,18 +50,17 @@
 
     $('#account').blur(function () {
       var result = checkAccount();
-      showErrorMessage(result, '用户名不能为空！');
+      showErrorMessage(result, '账户名不能为空！');
     });
 
     $('#password').blur(function () {
       var result = checkUserPassword();
-      console.log(result);
       showErrorMessage(result, '密码不能为空!');
     });
 
     //登录
     $('#login-button').on('click', function () {
-      var username = $('#account').val();
+      var account = $('#account').val();
       var password = $('#password').val();
       console.log('login');
       $.ajax({
@@ -69,22 +68,17 @@
         method: 'POST',
         dataType: 'json',
         data: {
-          username: username,
+          account: account,
           password: password,
         },
         success: function (result) {
-          console.log('login result' + result);
           if (result.code == 200) {
             window.location.href = '/index';
-          }else if (result.code==404){
+          } else if (result.code == 404) {
             alert(result.message);
-          }
-          else {
+          } else {
             alert('用户名或密码错误！');
           }
-        },
-        error: function (result) {
-          console.log(result);
         }
       })
     })
@@ -94,6 +88,7 @@
     var password = $('#password').val();
     return notBlank(password);
   }
+
   //根据结果是否展示错误信息
   function showErrorMessage(result, message) {
     if (!result) {

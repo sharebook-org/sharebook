@@ -3,6 +3,8 @@ package org.sharebook.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.sharebook.constant.Role;
+import org.sharebook.constant.status.UserStatus;
 
 import java.util.Date;
 
@@ -28,7 +30,20 @@ public class User {
     private Date updateTime;
 
     //constructor for register
-
+    public User(String username, String password, String email,
+                String phone, Integer sex, Date birth, String location) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.sex = sex;
+        this.birth = birth;
+        this.location = location;
+        this.status = UserStatus.NORMAL;
+        this.role = Role.USER;
+        this.createTime = new Date();
+        this.updateTime = new Date();
+    }
 
     public User(String username, String password, String salt,
                 String email, String phone, String introduction,

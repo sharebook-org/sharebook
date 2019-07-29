@@ -1,7 +1,5 @@
 package org.sharebook.servlet;
 
-import org.sharebook.constant.Role;
-import org.sharebook.constant.status.UserStatus;
 import org.sharebook.model.User;
 import org.sharebook.service.UserService;
 import org.sharebook.service.impl.UserServiceImpl;
@@ -13,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @WebServlet(urlPatterns = "/register")
@@ -37,15 +38,23 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String location = request.getParameter("location");
+        String birth = request.getParameter("birth");
         int sex = Integer.parseInt(request.getParameter("sex"));
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setSex(sex);
-        user.setSalt("test");
-        user.setStatus(UserStatus.NORMAL);
-        user.setRole(Role.USER);
-        user.setCreateTime(new Date());
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date birthday = null;
+        try {
+            birthday = dateFormat.parse(birth);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        User user = new User(
+                username, password, email, phone,
+                sex, birthday, location
+        );
 
         boolean result = userService.register(user);
         if (result) {
