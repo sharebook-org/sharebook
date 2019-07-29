@@ -17,6 +17,8 @@ public interface UserRepository extends CurdRepository<User, Long> {
 
     int modifyPassword(User user);
 
+    List<User> findUsers(List<Long> ids);
+
     /**
      * 根据邮箱查找用户
      *

@@ -12,6 +12,7 @@ import org.sharebook.repository.ArticleRepository;
 import org.sharebook.utils.JDBCUtils;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class ArticleRepositoryImpl implements ArticleRepository {
@@ -24,8 +25,8 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
 
     @Override
-    public Article findById(Long id) {
-        String sql = "SELECT * FROM `article` WHERE `id` = ?";
+    public Article findById(Long userId) {
+        String sql = "SELECT * FROM `article` WHERE `user_id` = ?";
         Article article = null;
         try {
             article = queryRunner.query(
@@ -34,7 +35,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
                             Article.class,
                             new BasicRowProcessor(new GenerousBeanProcessor())
                     ),
-                    id
+                    userId
             );
         } catch (SQLException e) {
             e.printStackTrace();
@@ -44,7 +45,20 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
     @Override
     public List<Article> findAll() {
-        return null;
+        String sql = "SELECT * FROM `article`";
+        List<Article> articles = null;
+        try {
+            articles = queryRunner.query(
+                    sql,
+                    new BeanListHandler<>(
+                            Article.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    )
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return articles;
     }
 
     @Override
@@ -142,5 +156,32 @@ public class ArticleRepositoryImpl implements ArticleRepository {
             e.printStackTrace();
         }
         return count;
+    }
+
+    @Override
+    public List<Article> findArticlesByIds(List<Long> ids) {
+        List<Article> articles=null;
+        StringBuffer sql=new StringBuffer("SELECT * FROM `article` WHERE `user_id` IN(");
+        for (int i = 0; i < ids.size(); i++) {
+            if (i == ids.size() - 1) {
+                sql.append(ids.get(i));
+            } else {
+                sql.append(ids.get(i));
+                sql.append(",");
+            }
+        }
+        sql.append(")");
+        try {
+            articles = queryRunner.query(
+                    sql.toString(),
+                    new BeanListHandler<>(
+                            Article.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    )
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return articles;
     }
 }

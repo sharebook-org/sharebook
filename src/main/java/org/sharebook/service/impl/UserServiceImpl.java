@@ -13,6 +13,8 @@ import org.sharebook.utils.CodeUtils;
 import org.sharebook.utils.MD5Utils;
 import org.sharebook.utils.MailUtils;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -39,6 +41,12 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         return null;
+    }
+
+    @Override
+    public List<User> findUsers(List<Long> ids) {
+        List<User> users = userRepository.findUsers(ids);
+        return users;
     }
 
     @Override

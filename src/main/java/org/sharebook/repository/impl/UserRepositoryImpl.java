@@ -212,4 +212,32 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return user;
     }
+
+    @Override
+    public List<User> findUsers(List<Long> ids) {
+        List<User> users=null;
+        StringBuffer sql=new StringBuffer("select * from `user` where `id` in(");
+        for (int i = 0; i < ids.size(); i++) {
+            if (i == ids.size() - 1) {
+                sql.append(ids.get(i));
+            } else {
+                sql.append(ids.get(i));
+                sql.append(",");
+            }
+        }
+        sql.append(")");
+        try {
+            users = queryRunner.query(
+                    sql.toString(),
+                    new BeanListHandler<>(
+                            User.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    )
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
 }
