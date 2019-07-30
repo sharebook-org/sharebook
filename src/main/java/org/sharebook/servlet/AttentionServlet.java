@@ -1,9 +1,16 @@
 package org.sharebook.servlet;
 
+import org.sharebook.constant.EntityType;
+import org.sharebook.constant.status.FollowStatus;
 import org.sharebook.model.Article;
 import org.sharebook.model.User;
+import org.sharebook.service.ArticleService;
+import org.sharebook.service.FollowService;
+import org.sharebook.service.LikeService;
+import org.sharebook.service.UserService;
 import org.sharebook.service.impl.ArticleServiceImpl;
 import org.sharebook.service.impl.FollowServiceImpl;
+import org.sharebook.service.impl.LikeServiceImpl;
 import org.sharebook.service.impl.UserServiceImpl;
 import org.sharebook.utils.ResponseUtils;
 import org.sharebook.vo.ArticleVO;
@@ -24,9 +31,10 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = "/attention")
 public class AttentionServlet extends HttpServlet {
-    public final UserServiceImpl userService = new UserServiceImpl();
-    public final FollowServiceImpl followService = new FollowServiceImpl();
-    public final ArticleServiceImpl articleService = new ArticleServiceImpl();
+    private final UserService userService = new UserServiceImpl();
+    private final FollowService followService = new FollowServiceImpl();
+    private final ArticleService articleService = new ArticleServiceImpl();
+    private final LikeService likeService = new LikeServiceImpl();
 
     //检测用户是否登录，从而控制关注页面的展示
     @Override
@@ -48,7 +56,13 @@ public class AttentionServlet extends HttpServlet {
                 //当前发表微博的用户
                 User user = userService.findUserById(article.getUserId());
                 ArticleVO articleVO = new ArticleVO(article, user);
-
+                Integer likedStatus = likeService.getLikedStatus(EntityType.ARTICLE,article.getId(),loginUser.getId());
+                articleVO.setLiked(likedStatus);
+                int followed = FollowStatus.UNFOLLOWED;
+                if (ids.contains(article.getUserId())){
+                    followed=FollowStatus.FOLLOWED;
+                }
+                articleVO.setFollowed(followed);
                 String images = article.getImages();
                 if (images != null) {
                     String[] image1 = images.split("#");

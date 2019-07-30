@@ -6,4 +6,6 @@ public interface LikeService {
     boolean isLiked(int entityType, long entityId, long userId);
 
     boolean likedCancle(int entityType, long entityId, long userId);
+
+    Integer getLikedStatus(int entityType, long entityId, long userId);
 }

@@ -1,10 +1,12 @@
 package org.sharebook.repository.impl;
 
 import org.apache.commons.dbutils.BasicRowProcessor;
+import org.apache.commons.dbutils.ColumnHandler;
 import org.apache.commons.dbutils.GenerousBeanProcessor;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.sharebook.constant.status.LikeStatus;
 import org.sharebook.model.Like;
 import org.sharebook.repository.LikeResposity;
 import org.sharebook.utils.JDBCUtils;
@@ -34,6 +36,24 @@ public class LikeResposityImpl implements LikeResposity {
             e.printStackTrace();
         }
         return like;
+    }
+
+    @Override
+    public Integer findStatus(int entityType, long entityId, long userId) {
+        Integer likedStatus= LikeStatus.UNLIKED;
+        String sql="select `liked` from `like` where `entity_type`=? and `entity_id`=? and `user_id`=?";
+        try {
+            likedStatus = queryRunner.query(
+                    sql,
+                    new ScalarHandler<>(),
+                    entityType,
+                    entityId,
+                    userId
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return likedStatus;
     }
 
     @Override

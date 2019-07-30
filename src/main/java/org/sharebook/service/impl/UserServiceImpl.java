@@ -96,9 +96,7 @@ public class UserServiceImpl implements UserService {
             //给该用户一个验证码code
             Active active = new Active(user1.getId(), code, ActiveStatus.INACTIVATED);
             int result1 = activeRepository.save(active);
-            if (result1 > 0 && result2 > 0) {
-                return true;
-            }
+            return result1 > 0 && result2 > 0;
         }
         return false;
     }

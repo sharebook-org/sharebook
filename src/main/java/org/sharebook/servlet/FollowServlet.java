@@ -26,12 +26,31 @@ public class FollowServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String method = request.getParameter("method");
         Long userId = Long.valueOf(request.getParameter("userId"));
-        Long followUserId = Long.valueOf(request.getParameter("followUserId"));
+        Long articleUserId = Long.valueOf(request.getParameter("articleUserId"));
         Follow follow = new Follow();
         follow.setUserId(userId);
-        follow.setFollowUserId(followUserId);
+        follow.setFollowUserId(articleUserId);
+        if (method.equals("follow")){
+            follow(follow,response);
+        }
+        else if (method.equals("followCancle")){
+            followCancle(userId,articleUserId,response);
+        }
+
+    }
+
+    private void follow(Follow follow,HttpServletResponse response){
         boolean res = followService.follow(follow);
+        if (res) {
+            ResponseUtils.write(response, ResponseUtils.success());
+        } else {
+            ResponseUtils.write(response, ResponseUtils.error());
+        }
+    }
+    private void followCancle(Long userId, Long articleUserId,HttpServletResponse response){
+        boolean res = followService.deleteFollow(userId, articleUserId);
         if (res) {
             ResponseUtils.write(response, ResponseUtils.success());
         } else {
@@ -56,15 +75,4 @@ public class FollowServlet extends HttpServlet {
         ResponseUtils.write(response, ResponseUtils.success(map));
     }
 
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long userId = Long.valueOf(req.getParameter("userId"));
-        Long followUserId = Long.valueOf(req.getParameter("followUserId"));
-        boolean res = followService.deleteFollow(userId, followUserId);
-        if (res) {
-            ResponseUtils.write(resp, ResponseUtils.success());
-        } else {
-            ResponseUtils.write(resp, ResponseUtils.error());
-        }
-    }
 }

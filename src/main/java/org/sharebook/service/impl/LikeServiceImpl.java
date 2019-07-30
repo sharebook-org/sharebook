@@ -61,11 +61,20 @@ public class LikeServiceImpl implements LikeService {
             if (entityType==EntityType.ARTICLE){
                 Article article=articleRepository.findById(entityId);
                 article.setLikeNum(article.getLikeNum()-1);
-                articleRepository.save(article);
+                articleRepository.update(article);
             }
-            int result=likeResposity.save(like);
+            int result=likeResposity.update(like);
             return result != 0;
         }
         return false;
+    }
+
+    @Override
+    public Integer getLikedStatus(int entityType, long entityId, long userId) {
+        Integer likedStatus = likeResposity.findStatus(entityType,entityId,userId);
+        if (likedStatus==null){
+            likedStatus=LikeStatus.UNLIKED;
+        }
+        return likedStatus;
     }
 }

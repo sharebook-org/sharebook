@@ -40,3 +40,103 @@ function handleCommentClick(id) {
   window.open(href, '_blank');
 }
 
+function like(id,userId) {
+  var res= notBlank(userId);
+  if (res) {
+    $.ajax({
+      url: '/like',
+      method: 'POST',
+      data: {
+        method:'like',
+        userId: userId,
+        entityType: 0,
+        entityId: id,
+      },
+      success:function (result) {
+        if (result.code==200){
+          alert("点赞成功！");
+          window.location.href = '/attention';
+        }
+      }
+    })
+  }
+  else {
+    alert("请登录！");
+    window.location.href='/login';
+  }
+
+}
+
+function likeCancle(id,userId) {
+  var res= notBlank(userId);
+  console.log(userId);
+  if (res) {
+    $.ajax({
+      url: '/like',
+      method: 'POST',
+      dataType:'json',
+      data: {
+        method:'likeCancle',
+        userId: userId,
+        entityType: 0,
+        entityId: id,
+      },
+      success:function (result) {
+        if (result.code==200){
+          alert("取消点赞成功！");
+          window.location.href = '/attention';
+        }
+      }
+    })
+  }
+
+}
+
+function follow(articleUserId,userId) {
+  var res= notBlank(userId);
+  if (res) {
+    $.ajax({
+      url: '/follow',
+      method: 'POST',
+      data: {
+        method:'follow',
+        userId: userId,
+        articleUserId: articleUserId,
+      },
+      success:function (result) {
+        if (result.code==200){
+          alert("关注成功！");
+          window.location.href = '/attention';
+        }
+      }
+    })
+  }
+  else {
+    alert("请登录！");
+    window.location.href='/login';
+  }
+
+
+}
+function followCancle(articleUserId,userId) {
+  var res= notBlank(userId);
+  if (res) {
+    $.ajax({
+      url: '/follow',
+      method: 'POST',
+      data: {
+        method:'followCancle',
+        userId: userId,
+        articleUserId: articleUserId,
+      },
+      success:function (result) {
+        if (result.code==200){
+          alert("取消关注成功！");
+          window.location.href = '/attention';
+        }
+      }
+    })
+  }
+
+}
+

@@ -14,7 +14,7 @@
 <div class="boq" style="background-image: url(./assets/img/iceland.jpg);">
   <div class="by">
     <div class="bor">
-      <img class="us bos" src="./assets/img/avatar-dhg.png">
+      <img class="us bos" src="${user.avatar}">
       <h3 class="bou">${user.username}</h3>
       <p class="bot">
         ${user.introduction}
@@ -107,11 +107,16 @@
 
       <div class="mu afh">
         <span style="position: relative;left: -170px;top: 28px;">个人简介</span>
-        <textarea type="text" class="form-control" id="introduction">${user.introduction}
-        </textarea>
+        <textarea type="text" class="form-control" id="introduction">${user.introduction}</textarea>
       </div>
-      <div id="error-message" class="mu afh" style="display: none">
-        <span style="color: #c9302c"></span>
+
+      <div class="mu afh">
+        <span style="position: relative;left: -170px;top: 28px;">上传头像</span>
+        <input
+                id="avatar"
+                type="file"
+                class="form-control"
+        />
       </div>
 
       <div class="afv">

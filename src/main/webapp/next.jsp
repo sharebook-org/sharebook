@@ -60,7 +60,7 @@
           }
         }
       })
-    })
+    });
 
     $('#submit-button').on('click', function () {
       var email = $('#email').val();

@@ -18,6 +18,8 @@ public class ArticleVO {
     private String[] images;
     private int status;
     private Long commentNum;
+    private int liked;
+    private int followed;
     private Long likeNum;
     private String createTime;
 

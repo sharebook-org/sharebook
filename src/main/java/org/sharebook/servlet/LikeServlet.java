@@ -20,10 +20,25 @@ public class LikeServlet extends HttpServlet {
     private LikeService likeService=new LikeServiceImpl();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user=(User)request.getSession().getAttribute("user");
-        long userId=user.getId();
+        //User user=(User)request.getSession().getAttribute("user");
+        String method = request.getParameter("method");
+        long userId= Long.parseLong(request.getParameter("userId"));
         int entityType=Integer.parseInt(request.getParameter("entityType"));
         long entityId= Long.parseLong(request.getParameter("entityId"));
+        if (method.equals("like")){
+            like(userId,entityType,entityId,response);
+        }
+        else if (method.equals("likeCancle")){
+            likeCancle(userId,entityType,entityId,response);
+        }
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/my.jsp").forward(request,response);
+    }
+
+    private void like(Long userId,int entityType,Long entityId,HttpServletResponse response){
         boolean result=likeService.isLiked(entityType,entityId,userId);
         if (result){
             ResponseUtils.write(response,ResponseUtils.success());
@@ -32,17 +47,7 @@ public class LikeServlet extends HttpServlet {
         }
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/my.jsp").forward(request,response);
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user=(User)request.getSession().getAttribute("user");
-        long userId=user.getId();
-//        long userId=Long.parseLong(request.getParameter("userId"));
-        int entityType=Integer.parseInt(request.getParameter("entityType"));
-        long entityId= Long.parseLong(request.getParameter("entityId"));
+    private void likeCancle(Long userId,int entityType,Long entityId,HttpServletResponse response){
         boolean result=likeService.likedCancle(entityType,entityId,userId);
         if (result){
             ResponseUtils.write(response,ResponseUtils.success());
@@ -50,4 +55,5 @@ public class LikeServlet extends HttpServlet {
             ResponseUtils.write(response,ResponseUtils.error());
         }
     }
+
 }
