@@ -17,7 +17,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getArticles() {
-
         return articleRepository.findAll();
     }
 
@@ -41,27 +40,16 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getArticle(Long userId) {
-        Article article = null;
-        if (userId != null) {
-            article = articleRepository.findById(userId);
-            return article;
-        }
-        return article;
+        return articleRepository.findById(userId);
     }
 
     @Override
     public List<Article> getArticles(List<Long> ids) {
-        List<Article> articles = null;
-        articles = articleRepository.findArticlesByIds(ids);
-        return articles;
+        return articleRepository.findArticlesByIds(ids);
     }
 
     @Override
-    public List<Article> getArticles(String keyWord) {
-        List<Article> articles=articleRepository.findByKeyWord(keyWord);
-        if (articles!=null){
-            return articles;
-        }
-        return null;
+    public List<Article> getArticles(String keyword) {
+        return articleRepository.findByKeyword(keyword);
     }
 }

@@ -61,7 +61,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
     }
 
     @Override
-    public List<Article> findAll(int page,int size) {
+    public List<Article> findAll(int page, int size) {
         int offset = (page - 1) * size;
         String sql = "SELECT * FROM `article` LIMIT ?,?";
         List<Article> articles = null;
@@ -159,8 +159,8 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
     @Override
     public List<Article> findArticlesByIds(List<Long> ids) {
-        List<Article> articles=null;
-        StringBuffer sql=new StringBuffer("SELECT * FROM `article` WHERE `user_id` IN(");
+        List<Article> articles = null;
+        StringBuffer sql = new StringBuffer("SELECT * FROM `article` WHERE `user_id` IN(");
         for (int i = 0; i < ids.size(); i++) {
             if (i == ids.size() - 1) {
                 sql.append(ids.get(i));
@@ -185,7 +185,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
     }
 
     @Override
-    public List<Article> findByKeyWord(String keyWord) {
+    public List<Article> findByKeyword(String keyword) {
         String sql = "SELECT * FROM `article` WHERE `content` LIKE ?";
         List<Article> articles = null;
         try {
@@ -195,7 +195,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
                             Article.class,
                             new BasicRowProcessor(new GenerousBeanProcessor())
                     ),
-                    "%"+keyWord+"%"
+                    "%" + keyword + "%"
             );
         } catch (SQLException e) {
             e.printStackTrace();

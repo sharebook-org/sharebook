@@ -56,7 +56,7 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
-    public Long showFollowNum(Long userId) {
+    public Long getFollowCount(Long userId) {
         Long result=0L;
         if (userId!=null){
             result=followRepository.findNumByUserId(userId);
@@ -66,7 +66,7 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
-    public Long showUserNum(Long followUserId) {
+    public Long getFansCount(Long followUserId) {
         Long result=0L;
         if (followUserId!=null){
             result=followRepository.findNumByFollowUserId(followUserId);
@@ -76,7 +76,7 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
-    public boolean deleteFollow(Long userId,Long followUserId) {
+    public boolean cancelFollow(Long userId, Long followUserId) {
             Follow follow1=followRepository.find(userId,followUserId);
             //如果查到则取消关注
             if (follow1!=null){

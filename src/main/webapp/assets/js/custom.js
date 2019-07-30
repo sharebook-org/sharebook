@@ -95,7 +95,7 @@ function likeCancle(id,userId) {
       method: 'POST',
       dataType:'json',
       data: {
-        method:'likeCancle',
+        method: 'cancelLike',
         userId: userId,
         entityType: 0,
         entityId: id,
@@ -144,7 +144,7 @@ function followCancle(articleUserId,userId) {
       url: '/follow',
       method: 'POST',
       data: {
-        method:'followCancle',
+        method: 'cancelFollow',
         userId: userId,
         articleUserId: articleUserId,
       },

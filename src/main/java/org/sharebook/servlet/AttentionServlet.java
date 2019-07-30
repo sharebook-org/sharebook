@@ -56,19 +56,15 @@ public class AttentionServlet extends HttpServlet {
                 //当前发表微博的用户
                 User user = userService.findUserById(article.getUserId());
                 ArticleVO articleVO = new ArticleVO(article, user);
-                Integer likedStatus = likeService.getLikedStatus(EntityType.ARTICLE,article.getId(),loginUser.getId());
+                Integer likedStatus = likeService.getLikedStatus(
+                        EntityType.ARTICLE, article.getId(), loginUser.getId()
+                );
                 articleVO.setLiked(likedStatus);
                 int followed = FollowStatus.UNFOLLOWED;
-                if (ids.contains(article.getUserId())){
-                    followed=FollowStatus.FOLLOWED;
+                if (ids.contains(article.getUserId())) {
+                    followed = FollowStatus.FOLLOWED;
                 }
                 articleVO.setFollowed(followed);
-                String images = article.getImages();
-                if (images != null) {
-                    String[] image1 = images.split("#");
-                    articleVO.setImages(image1);
-                }
-                articleVO.setCreateTime(dateFormat.format(article.getCreateTime()));
                 articleVOList.add(articleVO);
             }
 
@@ -96,9 +92,9 @@ public class AttentionServlet extends HttpServlet {
      */
     private Map<String, Long> getFollowAndFans(Long userId) {
         //得到关注的人数
-        Long res1 = followService.showFollowNum(userId);
+        Long res1 = followService.getFollowCount(userId);
         //得到粉丝数
-        Long res2 = followService.showUserNum(userId);
+        Long res2 = followService.getFansCount(userId);
         Map<String, Long> map = new HashMap<>();
         map.put("followCount", res1);
         map.put("fansCount", res2);

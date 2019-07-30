@@ -6,10 +6,14 @@ import java.util.List;
 
 public interface ArticleService {
     boolean publish(Article article);
+
     boolean browse(Article article);
+
     Article getArticle(Long userId);
+
     List<Article> getArticles(List<Long> ids);
+
     List<Article> getArticles();
 
-    List<Article> getArticles(String keyWord);
+    List<Article> getArticles(String keyword);
 }

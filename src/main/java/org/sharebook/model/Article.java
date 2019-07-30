@@ -26,8 +26,8 @@ public class Article {
         this.content = content;
         this.images = images;
         this.status = ArticleStatus.NORMAL;
-        this.commentNum = 0L;
-        this.likeNum = 0L;
+        this.commentNum = Long.valueOf(0);
+        this.likeNum = Long.valueOf(0);
         this.createTime = new Date();
         this.updateTime = new Date();
     }

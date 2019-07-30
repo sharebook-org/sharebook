@@ -50,8 +50,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public long getCount() {
-        return userRepository.getUsersCount();
+    public Long getCount() {
+        Long count = userRepository.getUsersCount();
+        return count == null ? 0 : count;
     }
 
     @Override
@@ -83,7 +84,7 @@ public class UserServiceImpl implements UserService {
     public boolean register(User user) {
         boolean isExist = isExistUser(user);
         if (!isExist) {
-            String code = CodeUtils.generateUniqueCode().substring(0,4);
+            String code = CodeUtils.generateUniqueCode().substring(0, 4);
             String salt = MD5Utils.getSalt();
             String encryptPassword = MD5Utils.md5(
                     user.getPassword(), salt
@@ -146,12 +147,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Active findByAccount(String account) {
-        User user=userRepository.findByEmail(account);
-        if (user == null){
-            user=userRepository.findByPhone(account);
+        User user = userRepository.findByEmail(account);
+        if (user == null) {
+            user = userRepository.findByPhone(account);
         }
-        if (user!=null){
-            Active active=activeRepository.findByUserId(user.getId());
+        if (user != null) {
+            Active active = activeRepository.findByUserId(user.getId());
             return active;
         }
         return null;

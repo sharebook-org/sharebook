@@ -9,7 +9,6 @@ import org.sharebook.repository.impl.ArticleRepositoryImpl;
 import org.sharebook.repository.impl.CommentRepositoryImpl;
 import org.sharebook.service.CommentService;
 
-import java.util.Date;
 import java.util.List;
 
 public class CommentServiceImpl implements CommentService {
@@ -19,48 +18,49 @@ public class CommentServiceImpl implements CommentService {
 
     public CommentServiceImpl() {
         this.commentRepository = new CommentRepositoryImpl();
-        this.articleRepository= new ArticleRepositoryImpl();
+        this.articleRepository = new ArticleRepositoryImpl();
     }
 
     @Override
-    public List<Comment> getCommentList(int entityType, long entityId) {
-        List<Comment> comments=commentRepository.findAll(entityType,entityId);
-        return comments;
+    public List<Comment> getCommentList(int entityType, Long entityId) {
+        return commentRepository.findAll(entityType, entityId);
     }
 
     @Override
-    public Comment findById(long id) {
-        Comment comment=commentRepository.findById(id);
-        return comment;
+    public Comment findById(Long id) {
+        return commentRepository.findById(id);
     }
 
     @Override
     public boolean comments(Comment comment) {
-        synchronized (this){
+        synchronized (this) {
             if (comment != null) {
-                comment.setCreateTime(new Date());
-                comment.setUpdateTime(new Date());
-                Long id=comment.getEntityId();
-                Article article=articleRepository.findById(id);
-                if (article!=null){
-                    article.setCommentNum(article.getCommentNum()+1);
-                    articleRepository.update(article);
+                boolean result = addCommentNum(comment);
+                if (result) {
+                    int count = commentRepository.save(comment);
+                    return count > 0;
                 }
-                int count = commentRepository.save(comment);
-                return count > 0;
             }
             return false;
         }
     }
 
-    @Override
-    public boolean addCommentNum(Comment comment) {
-        if (comment!=null){
-            if (comment.getEntityType()== EntityType.ARTICLE){
+    /**
+     * 添加评论数
+     *
+     * @param comment
+     * @return
+     */
+    private boolean addCommentNum(Comment comment) {
+        if (comment != null) {
+            if (comment.getEntityType() == EntityType.ARTICLE) {
                 Article article = articleRepository.findById(comment.getEntityId());
                 Long currentCommentNum = article.getCommentNum();
-                article.setCommentNum(currentCommentNum+1);
-                int result=articleRepository.save(article);
+                if (currentCommentNum == null) {
+                    currentCommentNum = Long.valueOf(0);
+                }
+                article.setCommentNum(currentCommentNum + 1);
+                int result = articleRepository.update(article);
                 return result > 0;
             }
         }

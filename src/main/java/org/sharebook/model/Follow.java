@@ -15,4 +15,11 @@ public class Follow {
     private Long followUserId;
     private Date createTime;
     private Date updateTime;
+
+    public Follow(Long userId, Long followUserId) {
+        this.userId = userId;
+        this.followUserId = followUserId;
+        this.createTime = new Date();
+        this.updateTime = new Date();
+    }
 }

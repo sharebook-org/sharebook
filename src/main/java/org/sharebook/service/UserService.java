@@ -26,6 +26,7 @@ public interface UserService {
 
     /**
      * 注册
+     *
      * @param user
      * @return
      */
@@ -33,6 +34,7 @@ public interface UserService {
 
     /**
      * 修改信息
+     *
      * @param user
      * @return
      */
@@ -48,6 +50,7 @@ public interface UserService {
 
     /**
      * 根据ID查看个人信息
+     *
      * @param id
      * @return
      */
@@ -57,12 +60,13 @@ public interface UserService {
 
     /**
      * 根据名字查看个人信息
+     *
      * @param name
      * @return
      */
     User findUserByName(String name);
 
-    long getCount();
+    Long getCount();
 
     boolean modifyPassword(User user);
 

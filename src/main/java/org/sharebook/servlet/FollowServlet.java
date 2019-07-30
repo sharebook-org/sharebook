@@ -29,19 +29,16 @@ public class FollowServlet extends HttpServlet {
         String method = request.getParameter("method");
         Long userId = Long.valueOf(request.getParameter("userId"));
         Long articleUserId = Long.valueOf(request.getParameter("articleUserId"));
-        Follow follow = new Follow();
-        follow.setUserId(userId);
-        follow.setFollowUserId(articleUserId);
-        if (method.equals("follow")){
-            follow(follow,response);
-        }
-        else if (method.equals("followCancle")){
-            followCancle(userId,articleUserId,response);
-        }
 
+        Follow follow = new Follow(userId, articleUserId);
+        if (method.equals("follow")) {
+            follow(follow, response);
+        } else if (method.equals("cancelFollow")) {
+            followCancle(userId, articleUserId, response);
+        }
     }
 
-    private void follow(Follow follow,HttpServletResponse response){
+    private void follow(Follow follow, HttpServletResponse response) {
         boolean res = followService.follow(follow);
         if (res) {
             ResponseUtils.write(response, ResponseUtils.success());
@@ -49,8 +46,9 @@ public class FollowServlet extends HttpServlet {
             ResponseUtils.write(response, ResponseUtils.error());
         }
     }
-    private void followCancle(Long userId, Long articleUserId,HttpServletResponse response){
-        boolean res = followService.deleteFollow(userId, articleUserId);
+
+    private void followCancle(Long userId, Long articleUserId, HttpServletResponse response) {
+        boolean res = followService.cancelFollow(userId, articleUserId);
         if (res) {
             ResponseUtils.write(response, ResponseUtils.success());
         } else {
@@ -60,17 +58,16 @@ public class FollowServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user=(User) request.getSession().getAttribute("user");
-        Long userId=user.getId();
-        //Long userId = Long.valueOf(request.getParameter("userId"));
+        User loginUser = (User) request.getSession().getAttribute("user");
+        Long userId = loginUser.getId();
 
         //得到关注的人数
-        Long res1 = followService.showFollowNum(userId);
+        Long followCount = followService.getFollowCount(userId);
         //得到粉丝数
-        Long res2 = followService.showUserNum(userId);
+        Long fansCount = followService.getFansCount(userId);
         Map<String, Long> map = new HashMap<>();
-        map.put("followCount", res1);
-        map.put("fansCount", res2);
+        map.put("followCount", followCount);
+        map.put("fansCount", fansCount);
 
         ResponseUtils.write(response, ResponseUtils.success(map));
     }

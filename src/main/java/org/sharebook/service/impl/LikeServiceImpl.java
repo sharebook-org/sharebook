@@ -21,7 +21,7 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public boolean isLiked(int entityType, long entityId, long userId) {
+    public boolean isLiked(int entityType, Long entityId, Long userId) {
         Like like = likeResposity.findByAllId(entityType, entityId, userId);
         if (like == null) {
             Like like1 = new Like();
@@ -31,7 +31,10 @@ public class LikeServiceImpl implements LikeService {
             like1.setLiked(LikeStatus.LIKED);
             if (entityType == EntityType.ARTICLE) {
                 Article article = articleRepository.findById(entityId);
-                long currentLikeNum = article.getLikeNum();
+                Long currentLikeNum = article.getLikeNum();
+                if (currentLikeNum == null) {
+                    currentLikeNum = 0L;
+                }
                 article.setLikeNum(currentLikeNum + 1);
                 int res = articleRepository.update(article);
             }
@@ -54,27 +57,50 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public boolean likedCancle(int entityType, long entityId, long userId) {
-        Like like=likeResposity.findByAllId(entityType,entityId,userId);
-        if (like!=null){
-            like.setLiked(LikeStatus.UNLIKED);
-            if (entityType==EntityType.ARTICLE){
-                Article article=articleRepository.findById(entityId);
-                article.setLikeNum(article.getLikeNum()-1);
-                articleRepository.update(article);
+    public boolean cancelLike(int entityType, Long entityId, Long userId) {
+        synchronized (this) {
+            Like like = likeResposity.findByAllId(entityType, entityId, userId);
+            if (like != null) {
+                like.setLiked(LikeStatus.UNLIKED);
+                if (entityType == EntityType.ARTICLE) {
+                    boolean result = addLikeNum(entityId);
+                    if (result) {
+                        int r = likeResposity.update(like);
+                        return r > 0;
+                    }
+                }
             }
-            int result=likeResposity.update(like);
-            return result != 0;
+            return false;
         }
-        return false;
     }
 
     @Override
-    public Integer getLikedStatus(int entityType, long entityId, long userId) {
-        Integer likedStatus = likeResposity.findStatus(entityType,entityId,userId);
-        if (likedStatus==null){
-            likedStatus=LikeStatus.UNLIKED;
+    public Integer getLikedStatus(int entityType, Long entityId, Long userId) {
+        Integer likedStatus = likeResposity.findStatus(entityType, entityId, userId);
+        if (likedStatus == null) {
+            likedStatus = LikeStatus.UNLIKED;
         }
         return likedStatus;
+    }
+
+    /**
+     * 添加点赞数
+     *
+     * @param articleId
+     * @return
+     */
+    private boolean addLikeNum(Long articleId) {
+        if (articleId != null) {
+            Article article = articleRepository.findById(articleId);
+            if (article != null) {
+                Long currentLikeNum = article.getLikeNum();
+                if (currentLikeNum != null && currentLikeNum != Long.valueOf(0)) {
+                    article.setLikeNum(currentLikeNum - 1);
+                    int result = articleRepository.update(article);
+                    return result > 0;
+                }
+            }
+        }
+        return false;
     }
 }

@@ -4,9 +4,10 @@ import org.sharebook.model.Follow;
 
 import java.util.List;
 
-public interface FollowRepository extends CurdRepository<Follow,Long>{
+public interface FollowRepository extends CurdRepository<Follow, Long> {
     /**
      * 通过user_id找到其关注的人
+     *
      * @param userId
      * @return
      */
@@ -14,6 +15,7 @@ public interface FollowRepository extends CurdRepository<Follow,Long>{
 
     /**
      * 通过follow_user_id查到该follow_user_id的粉丝
+     *
      * @param followUserId
      * @return
      */
@@ -21,14 +23,16 @@ public interface FollowRepository extends CurdRepository<Follow,Long>{
 
     /**
      * 通过user_id和follow_user_id查询是否存在该条语句
+     *
      * @param userId
      * @param followUserId
      * @return
      */
-    Follow find(Long userId,Long followUserId);
+    Follow find(Long userId, Long followUserId);
 
     /**
      * 通过user_id查询其关注的人数
+     *
      * @param userId
      * @return
      */
@@ -36,6 +40,7 @@ public interface FollowRepository extends CurdRepository<Follow,Long>{
 
     /**
      * 通过follow_user_id查询该follow_user_id的粉丝数
+     *
      * @param followUserId
      * @return
      */
@@ -43,11 +48,12 @@ public interface FollowRepository extends CurdRepository<Follow,Long>{
 
     /**
      * 找出follow表的所有信息
+     *
      * @return
      */
     List<Follow> findAll();
 
-    int delete(Long userId,Long followUserId);
+    int delete(Long userId, Long followUserId);
 
     List<Long> findAll(Long id);
 }

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CommentRepositoryImpl implements CommentRepository {
+
     private final QueryRunner queryRunner;
 
     public CommentRepositoryImpl() {
@@ -20,32 +21,33 @@ public class CommentRepositoryImpl implements CommentRepository {
     }
 
     @Override
-    public List<Comment> findAll(int entityType,long entityId) {
-        String sql="select * from `comment` where entity_type=? AND entity_id=?";
-        List<Comment> comments=null;
+    public List<Comment> findAll(int entityType, Long entityId) {
+        String sql = "SELECT * FROM `comment` WHERE `entity_type` = ? AND `entity_id` = ?";
+        List<Comment> comments = null;
         try {
-            comments= queryRunner.query(sql,new BeanListHandler<Comment>(
+            comments = queryRunner.query(sql, new BeanListHandler<>(
                             Comment.class,
                             new BasicRowProcessor(new GenerousBeanProcessor())),
-                    entityType,entityId
+                    entityType, entityId
             );
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return comments;
     }
+
     @Override
     public Comment findById(Long id) {
-        String sql="select * from `comment` where id=?";
-        Comment comment=null;
+        String sql = "SELECT * FROM `comment` WHERE `id` = ?";
+        Comment comment = null;
         try {
-           comment=queryRunner.query(sql,
-                   new BeanHandler<>(
-                           Comment.class,
-                           new BasicRowProcessor(new GenerousBeanProcessor())
-                   ),
-                   id
-           );
+            comment = queryRunner.query(sql,
+                    new BeanHandler<>(
+                            Comment.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
+                    id
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,9 +57,9 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     public int save(Comment comment) {
         int count = 0;
-        String sql = "insert into `comment`(`id`,`user_id`," +
+        String sql = "INSERT INTO `comment`(`id`,`user_id`," +
                 "`entity_type`,`entity_id`,`content`,`create_time`," +
-                "`update_time`) values(?,?,?,?,?,?,?)";
+                "`update_time`) VALUES (?,?,?,?,?,?,?)";
         try {
             count = queryRunner.execute(
                     sql,

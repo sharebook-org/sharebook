@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface CommentService {
     boolean comments(Comment comment);
-    boolean addCommentNum(Comment comment);
-    Comment findById(long id);
-    List<Comment> getCommentList(int entityType,long entityId);
+
+    Comment findById(Long id);
+
+    List<Comment> getCommentList(int entityType, Long entityId);
 }

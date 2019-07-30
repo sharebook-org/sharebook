@@ -24,10 +24,17 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public Follow findById(Long userId) {
-        String sql = "select * from `follow` where `user_id`=?";
+        String sql = "SELECT * FROM `follow` WHERE `user_id` = ?";
         Follow follow = null;
         try {
-            follow = queryRunner.query(sql, new BeanHandler<>(Follow.class,new BasicRowProcessor(new GenerousBeanProcessor())), userId);
+            follow = queryRunner.query(
+                    sql,
+                    new BeanHandler<>(
+                            Follow.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
+                    userId
+            );
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,8 +43,8 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public int save(Follow follow) {
-        String sql = "insert into `follow`(`id`,`user_id`,`follow_user_id`," +
-                "`create_time`,`update_time`) values(?,?,?,?,?)";
+        String sql = "INSERT INTO `follow`(`id`,`user_id`,`follow_user_id`," +
+                "`create_time`,`update_time`) VALUES (?,?,?,?,?)";
         int count = 0;
         try {
             count = queryRunner.execute(
@@ -66,7 +73,7 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public List<Follow> findFollowByUserId(Long userId) {
-        String sql = "select * from `follow` where `user_id`=?";
+        String sql = "SELECT * FROM `follow` WHERE `user_id` = ?";
         List<Follow> follows = null;
         try {
             follows = queryRunner.query(
@@ -85,7 +92,7 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public List<Follow> findUserByFollow(Long followUserId) {
-        String sql = "select * from `follow` where `follow_user_id`=?";
+        String sql = "SELECT * FROM `follow` WHERE `follow_user_id` = ?";
         List<Follow> follows = null;
         try {
             follows = queryRunner.query(
@@ -124,7 +131,7 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public Long findNumByUserId(Long userId) {
-        String sql = "select count(*) as count from `follow` where `user_id`=?";
+        String sql = "SELECT COUNT(*) AS count FROM `follow` WHERE `user_id` = ?";
         Long count = 0L;
         try {
             count = queryRunner.query(
@@ -140,7 +147,7 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public Long findNumByFollowUserId(Long followUserId) {
-        String sql = "select count(*) as count from `follow` where `follow_user_id`=?";
+        String sql = "SELECT COUNT(*) AS count FROM `follow` WHERE `follow_user_id` = ?";
         Long count = 0L;
         try {
             count = queryRunner.query(
@@ -157,7 +164,7 @@ public class FollowRepositoryImpl implements FollowRepository {
     @Override
     public List<Follow> findAll() {
         List<Follow> follows = null;
-        String sql = "select * from `follow`";
+        String sql = "SELECT * FROM `follow`";
         try {
             follows = queryRunner.query(
                     sql,
@@ -174,7 +181,7 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public int delete(Long userId, Long followUserId) {
-        String sql = "DELETE  FROM `follow` WHERE `user_id`=? AND `follow_user_id`=?";
+        String sql = "DELETE  FROM `follow` WHERE `user_id`=? AND `follow_user_id` = ?";
         int count = 0;
         try {
             count = queryRunner.execute(sql, userId, followUserId);
@@ -186,8 +193,8 @@ public class FollowRepositoryImpl implements FollowRepository {
 
     @Override
     public List<Long> findAll(Long id) {
-        String sql="select `follow_user_id` from `follow` where `user_id`=?";
-        List<Long> ids=null;
+        String sql = "SELECT `follow_user_id` FROM `follow` WHERE `user_id` = ?";
+        List<Long> ids = null;
         try {
             ids = queryRunner.query(
                     sql,
