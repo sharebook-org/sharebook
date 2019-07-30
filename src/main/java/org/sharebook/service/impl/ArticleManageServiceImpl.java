@@ -17,10 +17,7 @@ public class ArticleManageServiceImpl implements ArticleManageService {
     @Override
     public List<Article> getAllArticles(int page, int size) {
         List<Article> articles = articleRepository.findAll(page, size);
-        if (articles != null) {
-            return articles;
-        }
-        return null;
+        return articles;
     }
 
     @Override

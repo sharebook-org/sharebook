@@ -132,8 +132,7 @@
   function checkUsername() {
     var username = $('#username').val();
     return notBlank(username);
-  };
-
+  }
   function checkPassword() {
     console.log('check password');
     var password = $('#password').val();

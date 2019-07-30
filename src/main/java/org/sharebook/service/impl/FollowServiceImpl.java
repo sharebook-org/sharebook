@@ -19,9 +19,7 @@ public class FollowServiceImpl implements FollowService {
             Follow follow1=followRepository.find(follow.getUserId(),follow.getFollowUserId());
             if (follow1==null){
                 int result=followRepository.save(follow);
-                if (result>0){
-                    return true;
-                }
+                return result > 0;
             }
             else {
                 return false;

@@ -21,16 +21,17 @@
                     <!-- 头像 -->
                     <div style="display: flex; flex-direction: column">
                         <img
-                                class="bos vb yb aff"
-                                src="assets/img/avatar-dhg.png">
+                            class="bos vb yb aff"
+                            src="assets/img/avatar-dhg.png">
                         <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
-                            <span class="h ayi">关注</span>
+                            关注
                         </button>
                     </div>
                     <div class="rw">
                         <div class="bpb">
                             <!-- 发表时间 -->
-                            <small class="acx axc"><%=request.getSession().getAttribute("createTime")%><%--4 min--%></small>
+                            <small
+                                class="acx axc"><%=request.getSession().getAttribute("createTime")%><%--4 min--%></small>
                             <!-- 昵称 -->
                             <h6>${user.username}</h6>
                         </div>
@@ -51,7 +52,8 @@
                             <img style="width: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
                         </div>
 
-                        <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
+                        <div
+                            style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
                             <span id="forward">转发</span>
                             <c:if test="${commentNum gt 0}" var="commented">
                                 <span id="comment">评论&nbsp;${commentNum}</span>
@@ -67,7 +69,8 @@
                             </c:if>
                         </div>
                         <div style="display: flex; flex-direction: row;margin-bottom: 10px;">
-                            <textarea id="content" type="text" rows="2" class="form-control" placeholder="来发表您的评论吧！"></textarea>
+                            <textarea id="content" type="text" rows="2" class="form-control"
+                                      placeholder="来发表您的评论吧！"></textarea>
                             <button class="cg nz ok" id="publish-comment">评论</button>
                         </div>
                         <ul class="bow afa">
@@ -81,9 +84,9 @@
                                         <!-- 头像 -->
                                         <div style="display: flex; flex-direction: column">
                                             <img
-                                                    data-action="zoom"
-                                                    class="bos vb yb aff"
-                                                    src="${commentVO.avatar}">
+                                                data-action="zoom"
+                                                class="bos vb yb aff"
+                                                src="${commentVO.avatar}">
                                             <button class="cg nz ok" style="width: 40px;margin-top: 5px;">
                                                 <span>关注</span>
                                             </button>
@@ -109,28 +112,34 @@
 <script>
     $(function () {
         $('#publish-comment').on('click', function () {
-            var content=$('#content').val();
-            var id = <%=request.getParameter("id")%>
-            $.ajax({
-                url:'/comment',
-                method:'POST',
-                dataType:'json',
-                data:{
-                    userId:${user.id},
-                    content:content,
-                    entityType:0,
-                    entityId: id
-                },
-                success:function (result) {
-                    if (result.code==200) {
-                        alert('发表成功');
-                        $('#content').val('')
-                        window.location.href='/detail?id='+id;
-                    }else {
-                        alert('发表失败');
+            var content = $('#content').val();
+            var id = '<%=request.getParameter("id")%>';
+            var userId = '${user.id}';
+            if (notBlank(userId)) {
+                $.ajax({
+                    url: '/comment',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        userId: userId,
+                        content: content,
+                        entityType: 0,
+                        entityId: id
+                    },
+                    success: function (result) {
+                        if (result.code == 200) {
+                            alert('发表成功');
+                            $('#content').val('');
+                            window.location.href = '/detail?id=' + id;
+                        } else {
+                            alert('发表失败');
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                alert("您还未登录！");
+            }
+
         });
         $('#forward').on('click', function () {
             alert('转发');

@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.sharebook.model.User;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 @Data
 @NoArgsConstructor
@@ -17,22 +17,26 @@ public class UserVO {
     private String phone;
     private String introduction;
     private Integer sex;
-    private Date birth;
+    private String birth;
     private String location;
     private Integer status;
     private Integer role;
-    private Date createTime;
+    private String avatar;
+    private String createTime;
 
     public UserVO(User user) {
-        this.id=user.getId();
+        this.id = user.getId();
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.phone = user.getPhone();
         this.sex = user.getSex();
-        this.birth=user.getBirth();
-        this.location=user.getLocation();
+        this.birth = new SimpleDateFormat("yyyy-MM-dd")
+                .format(user.getBirth());
+        this.location = user.getLocation();
         this.status = user.getStatus();
         this.role = user.getRole();
-        this.createTime = user.getCreateTime();
+        this.avatar = user.getAvatar();
+        this.createTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                .format(user.getCreateTime());
     }
 }
