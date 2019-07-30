@@ -9,4 +9,5 @@ public interface ArticleService {
     boolean browse(Article article);
     Article getArticle(Long userId);
     List<Article> getArticles(List<Long> ids);
+    List<Article> getArticles();
 }

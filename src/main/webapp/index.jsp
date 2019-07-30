@@ -31,56 +31,59 @@
     <div class="fm">
       <ul class="ca bow box afo">
         <!-- 微博主体 -->
-        <li class="rv b agz">
-          <!-- 头像 -->
-          <div style="display: flex; flex-direction: column">
-            <img
-                data-action="zoom"
-                class="bos vb yb aff"
-                src="assets/img/avatar-dhg.png">
-            <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
-              <span>关注</span>
-            </button>
-          </div>
-          <div class="rw">
-            <div class="bpb">
-              <!-- 发表时间 -->
-              <small class="acx axc">${article.createTime}</small>
-              <!-- 昵称 -->
-              <h6>${article.username}</h6>
-            </div>
-            <!-- 微博内容 -->
-            <p>${article.content}</p>
-            <!-- 图片 -->
-            <div class="boy">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-            </div>
+        <c:if test="${empty articles}">
+          <li class="rv b agz">暂时没有微博呀！</li>
+        </c:if>
+        <c:if test="${!empty articles}">
+          <c:forEach items="${articles}" var="article">
+            <li class="rv b agz">
+              <!-- 头像 -->
+              <div style="display: flex; flex-direction: column">
+                <img
+                        data-action="zoom"
+                        class="bos vb yb aff"
+                        src="${article.avatar}">
+                <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
+                  <span>关注</span>
+                </button>
+              </div>
+              <div class="rw">
+                <div class="bpb">
+                  <!-- 发表时间 -->
+                  <small class="acx axc">${article.createTime}</small>
+                  <!-- 昵称 -->
+                  <div style="display: flex; ">
+                    <h6>${article.username}</h6>
+                  </div>
+                </div>
+                <!-- 微博内容 -->
+                <p>${article.content}</p>
+                <!-- 图片 -->
+                <div class="boy">
+                  <c:forEach items="${article.images}" var="images">
+                    <img style="width: 150px;height: 150px;" data-action="zoom" src="${images}">
+                  </c:forEach>
+                </div>
 
-            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
-              <span id="forward">转发</span>
-              <c:if test="${commentNum gt 0}" var="comment">
-                <span id="comment" onclick="handleCommentClick(id)">评论&nbsp;${commentNum}</span>
-              </c:if>
-              <c:if test="${not comment}">
-                <span id="comment" onclick="handleCommentClick(id)">评论</span>
-              </c:if>
-              <c:if test="${likeNum gt 0}" var="like">
-                <span id="like">点赞&nbsp;${likeNum}</span>
-              </c:if>
-              <c:if test="${not like}">
-                <span id="like">点赞</span>
-              </c:if>
-            </div>
-          </div>
-        </li>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
+                  <span id="forward">转发</span>
+                  <c:if test="${article.commentNum gt 0}" var="comment">
+                    <span id="comment" onclick="handleCommentClick(${article.id})">评论&nbsp;${article.commentNum}</span>
+                  </c:if>
+                  <c:if test="${not comment}">
+                    <span id="comment" onclick="handleCommentClick(${article.id})">评论</span>
+                  </c:if>
+                  <c:if test="${article.likeNum gt 0}" var="like">
+                    <span id="like">点赞&nbsp;${article.likeNum}</span>
+                  </c:if>
+                  <c:if test="${not like}">
+                    <span id="like">点赞</span>
+                  </c:if>
+                </div>
+              </div>
+            </li>
+          </c:forEach>
+        </c:if>
       </ul>
     </div>
 
