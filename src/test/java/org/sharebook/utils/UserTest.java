@@ -29,9 +29,9 @@ public class UserTest {
     public void getBirthday() throws ParseException {
         String d="0121";
         StringBuffer stringBuffer=new StringBuffer();
-        stringBuffer.append(d.substring(0,2));
+        stringBuffer.append(d, 0, 2);
         stringBuffer.append("-");
-        stringBuffer.append(d.substring(2,4));
+        stringBuffer.append(d, 2, 4);
         String s=stringBuffer.toString();
         SimpleDateFormat sdf=new SimpleDateFormat("MM-dd");
         Date birthday = sdf.parse(s);

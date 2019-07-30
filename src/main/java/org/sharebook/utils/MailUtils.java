@@ -7,16 +7,18 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class MailUtils implements  Runnable {
+public class MailUtils implements Runnable {
 
     /*=========收件人的信息==========*/
     private String email;// 收件人邮箱
     private String code;// 激活码
+
     /*=========初始化===============*/
     public MailUtils(String email, String code) {
         this.email = email;
         this.code = code;
     }
+
     /*========线程============*/
     public void run() {
         /*------------整体流程-----------*/
@@ -56,7 +58,7 @@ public class MailUtils implements  Runnable {
             // 2.3设置邮件主题
             message.setSubject("有一封账号激活邮件");
             // 2.4设置邮件内容
-            String content ="<html><h1>"+code+"</h1></html>"
+            String content = "<html><h1>" + code + "</h1></html>"
                     /*"<html><head></head><body><h1>" +
                             "这是一封激活邮件,激活请点击以下链接</h1><h3>" +
                             "<a href='http://localhost:8080/active?code="

@@ -45,19 +45,12 @@
           <div class="rw">
             <div class="bpb">
               <!-- 发表时间 -->
-              <small class="acx axc">4 min</small>
+              <small class="acx axc">${article.createTime}</small>
               <!-- 昵称 -->
-              <h6>Dave Gamache</h6>
+              <h6>${article.username}</h6>
             </div>
             <!-- 微博内容 -->
-            <p>
-              Aenean lacinia bibendum nulla sed consectetur. Vestibulum id
-              ligula porta felis euismod semper. Morbi leo risus, porta ac
-              consectetur ac, vestibulum at eros. Cras justo odio, dapibus
-              ac facilisis in, egestas eget quam. Vestibulum id ligula porta
-              felis euismod semper. Cum sociis natoque penatibus et magnis
-              dis parturient montes, nascetur ridiculus mus.
-            </p>
+            <p>${article.content}</p>
             <!-- 图片 -->
             <div class="boy">
               <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
@@ -160,12 +153,7 @@
         $('#hot-list').append(str);
       }
     });
-  })
-
-  function handleCommentClick(id) {
-    var href = '/detail?id=' + id;
-    window.open(href, '_blank');
-  };
+  });
 </script>
 </body>
 </html>

@@ -28,12 +28,11 @@ public class NextServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email=request.getParameter("email");
-        boolean result=userService.getCode(email);
-        if (result){
+        String email = request.getParameter("email");
+        boolean result = userService.getCode(email);
+        if (result) {
             ResponseUtils.write(response, ResponseUtils.success());
-        }
-        else {
+        } else {
             ResponseUtils.write(response, ResponseUtils.error());
         }
     }

@@ -19,4 +19,12 @@ public class CommentVO {
     private String content;
     private String createTime;
 
+    public CommentVO(long userId, String username, String avatar,
+                     long id, String content) {
+        this.userId = userId;
+        this.username = username;
+        this.avatar = avatar;
+        this.id = id;
+        this.content = content;
+    }
 }

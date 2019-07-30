@@ -11,22 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/active")
-public class ActiveServlet extends HotsServlet{
+public class ActiveServlet extends HotsServlet {
 
     private final UserService userService;
 
     public ActiveServlet() {
         this.userService = new UserServiceImpl();
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email=request.getParameter("email");
-        String code=request.getParameter("code");
-        Boolean result=userService.checkCode(email,code);
-        if (result){
+        String email = request.getParameter("email");
+        String code = request.getParameter("code");
+        Boolean result = userService.checkCode(email, code);
+        if (result) {
             ResponseUtils.write(response, ResponseUtils.success());
-        }
-        else {
+        } else {
             ResponseUtils.write(response, ResponseUtils.error());
         }
     }

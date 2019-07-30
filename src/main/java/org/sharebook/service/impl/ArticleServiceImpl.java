@@ -35,8 +35,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getArticle(Long userId) {
-        Article article=null;
-        if (userId!=null){
+        Article article = null;
+        if (userId != null) {
             article = articleRepository.findById(userId);
             return article;
         }
@@ -45,7 +45,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> getArticles(List<Long> ids) {
-        List<Article> articles=null;
+        List<Article> articles = null;
         articles = articleRepository.findArticlesByIds(ids);
         return articles;
     }

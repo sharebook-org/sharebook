@@ -43,11 +43,12 @@
   $(function () {
     //发送图片
     $('#upload').click(function () {
+      var formData = new FormData();
       var files = $('#images').prop('files');
       for (var i = 0; i < files.length; i++) {
         formData.append('images', files[i]);
       }
-      console.log(formData)
+      console.log(formData);
       $.ajax({
         url: '/upload',
         method: 'POST',

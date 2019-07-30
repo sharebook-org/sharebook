@@ -33,16 +33,16 @@
 
           <ul class="bpk">
             <li class="bpl">
-              <a href="#userModal" class="boa" data-toggle="modal">
+              <a href="" class="boa">
                 关注的人
-                <h6 class="aej">${followCount}</h6>
+                <h6 class="aej">${number.followCount}</h6>
               </a>
             </li>
 
             <li class="bpl">
-              <a href="#userModal" class="boa" data-toggle="modal">
+              <a href="" class="boa">
                 粉丝
-                <h6 class="aej">${fansCount}</h6>
+                <h6 class="aej">${number.fansCount}</h6>
               </a>
             </li>
           </ul>
@@ -56,19 +56,18 @@
           </h6>
           <ul class="dc axg">
             <li><span class="axc h bgz aff"></span>性别 :
-              <c:if test="${user.sex==0}">女</c:if>
-              <c:if test="${user.sex==1}">男</c:if>
-              <c:if test="${user.sex==2}">其他</c:if>
+              <c:if test="${profile.sex==0}">女</c:if>
+              <c:if test="${profile.sex==1}">男</c:if>
+              <c:if test="${profile.sex==2}">其他</c:if>
             </li>
-            <li><span class="axc h bgz aff"></span>生日 :${user.birth}</li>
-            <li><span class="axc h bip aff"></span>地址 :${user.location}</li>
-            <li><span class="axc h bjl aff"></span>注册时间 :<span id="createTime"></span></li>
+            <li><span class="axc h bgz aff"></span>生日 :${profile.birth}</li>
+            <li><span class="axc h bip aff"></span>地址 :${profile.location}</li>
+            <li><span class="axc h bjl aff"></span>注册时间 :${profile.createTime}</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- 微博 -->
     <div class="fm">
       <ul class="ca bow box afo">
         <!-- 发表框 -->
@@ -81,67 +80,59 @@
         </li>
 
         <!-- 微博主体 -->
-        <c:forEach items="${articles}" var="article">
-        <li class="rv b agz">
-          <!-- 头像 -->
-          <div style="display: flex; flex-direction: column">
-            <img
-                data-action="zoom"
-                class="bos vb yb aff"
-                src="${article.avatar}">
-            <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
-              <span>关注</span>
-            </button>
-          </div>
-          <div class="rw">
-            <div class="bpb">
-              <!-- 发表时间 -->
-              <small class="acx axc">${article.createTime}<%--4 min--%></small>
-              <!-- 昵称 -->
-              <div style="display: flex; ">
-                <h6>${article.username}</h6>
-
+        <c:if test="${empty articles}">
+          <li class="rv b agz">暂时没有微博呀！</li>
+        </c:if>
+        <c:if test="${!empty articles}">
+          <c:forEach items="${articles}" var="article">
+            <li class="rv b agz">
+              <!-- 头像 -->
+              <div style="display: flex; flex-direction: column">
+                <img
+                    data-action="zoom"
+                    class="bos vb yb aff"
+                    src="${article.avatar}">
+                <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
+                  <span>关注</span>
+                </button>
               </div>
-            </div>
-            <!-- 微博内容 -->
-            <p>
-              ${article.content}
-              <%--              Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.--%>
-            </p>
-            <!-- 图片 -->
-            <div class="boy">
-              <c:forEach items="${article.images}" var="images">
-                <img style="width: 150px;height: 150px;" data-action="zoom" src="${images}">
-              </c:forEach>
-              <%--<img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">
-              <img style="width: 150px;height: 150px;" data-action="zoom" src="assets/img/unsplash_1.jpg">--%>
-            </div>
+              <div class="rw">
+                <div class="bpb">
+                  <!-- 发表时间 -->
+                  <small class="acx axc">${article.createTime}</small>
+                  <!-- 昵称 -->
+                  <div style="display: flex; ">
+                    <h6>${article.username}</h6>
+                  </div>
+                </div>
+                <!-- 微博内容 -->
+                <p>${article.content}</p>
+                <!-- 图片 -->
+                <div class="boy">
+                  <c:forEach items="${article.images}" var="images">
+                    <img style="width: 150px;height: 150px;" data-action="zoom" src="${images}">
+                  </c:forEach>
+                </div>
 
-            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
-              <span id="forward">转发</span>
-              <c:if test="${article.commentNum gt 0}" var="comment">
-                <span id="comment">评论&nbsp;${article.commentNum}</span>
-              </c:if>
-              <c:if test="${not comment}">
-                <span id="comment">评论</span>
-              </c:if>
-              <c:if test="${article.likeNum gt 0}" var="like">
-                <span id="like">点赞&nbsp;${article.likeNum}</span>
-              </c:if>
-              <c:if test="${not like}">
-                <span id="like">点赞</span>
-              </c:if>
-            </div>
-          </div>
-        </li>
-        </c:forEach>
+                <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
+                  <span id="forward">转发</span>
+                  <c:if test="${article.commentNum gt 0}" var="comment">
+                    <span id="comment" onclick="handleCommentClick(${article.id})">评论&nbsp;${article.commentNum}</span>
+                  </c:if>
+                  <c:if test="${not comment}">
+                    <span id="comment" onclick="handleCommentClick(${article.id})">评论</span>
+                  </c:if>
+                  <c:if test="${article.likeNum gt 0}" var="like">
+                    <span id="like">点赞&nbsp;${article.likeNum}</span>
+                  </c:if>
+                  <c:if test="${not like}">
+                    <span id="like">点赞</span>
+                  </c:if>
+                </div>
+              </div>
+            </li>
+          </c:forEach>
+        </c:if>
       </ul>
     </div>
 
@@ -226,8 +217,6 @@
 <jsp:include page="./common/script.jsp"></jsp:include>
 <script>
   $(function () {
-    var date = '${user.createTime}';
-    $('#createTime').text(date.substring(0, date.length - 2));
     $('#publish-button').on('click', function () {
       var article = $('#article').val();
       var res = notBlank(article);
@@ -245,6 +234,7 @@
             if (result.code == 200) {
               alert('发表文章成功！');
               $('#article').val('');
+              window.location.href='/attention';
             } else {
               alert('发表文章失败！');
             }
