@@ -1,5 +1,6 @@
 package org.sharebook.service;
 
+import org.sharebook.model.Active;
 import org.sharebook.model.User;
 
 import java.util.List;
@@ -68,4 +69,6 @@ public interface UserService {
     boolean checkCode(String email, String code);
 
     boolean getCode(String email);
+
+    Active findByAccount(String account);
 }

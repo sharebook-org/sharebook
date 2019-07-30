@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
     public boolean register(User user) {
         boolean isExist = isExistUser(user);
         if (!isExist) {
-            String code = CodeUtils.generateUniqueCode();
+            String code = CodeUtils.generateUniqueCode().substring(0,4);
             String salt = MD5Utils.getSalt();
             String encryptPassword = MD5Utils.md5(
                     user.getPassword(), salt
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
             user.setSalt(salt);
             user.setPassword(encryptPassword);
             int result2 = userRepository.save(user);
-            User user1 = userRepository.findByUsername(user.getUsername());
+            User user1 = userRepository.findByEmail(user.getEmail());
 
             //给该用户一个验证码code
             Active active = new Active(user1.getId(), code, ActiveStatus.INACTIVATED);
@@ -166,5 +166,18 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Active findByAccount(String account) {
+        User user=userRepository.findByEmail(account);
+        if (user == null){
+            user=userRepository.findByPhone(account);
+        }
+        if (user!=null){
+            Active active=activeRepository.findByUserId(user.getId());
+            return active;
+        }
+        return null;
     }
 }

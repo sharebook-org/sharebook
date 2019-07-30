@@ -2,7 +2,6 @@ package org.sharebook.servlet;
 
 import org.sharebook.service.UserService;
 import org.sharebook.service.impl.UserServiceImpl;
-import org.sharebook.utils.MailUtils;
 import org.sharebook.utils.ResponseUtils;
 
 import javax.servlet.ServletException;
