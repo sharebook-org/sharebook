@@ -255,6 +255,7 @@
             if (result.code == 200) {
               alert('发表文章成功！');
               $('#article').val('');
+              window.location.href='/attention';
             } else {
               alert('发表文章失败！');
             }

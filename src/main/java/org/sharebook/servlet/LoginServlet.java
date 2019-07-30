@@ -1,6 +1,8 @@
 package org.sharebook.servlet;
 
+import org.sharebook.constant.status.ActiveStatus;
 import org.sharebook.constant.status.UserStatus;
+import org.sharebook.model.Active;
 import org.sharebook.model.User;
 import org.sharebook.service.UserService;
 import org.sharebook.service.impl.UserServiceImpl;
@@ -41,9 +43,17 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         User loginUser = userService.login(account, password);
+        Active active = userService.findByAccount(account);
         if (loginUser == null) {
             ResponseUtils.write(response, ResponseUtils.error("您尚未注册!"));
             return;
+        } else if (active!=null){
+            boolean canUse = accountStatus(active.getStatus(), response);
+            //用户状态正常，成功登录
+            if (canUse) {
+                request.getSession().setAttribute("user", new User(loginUser));
+                ResponseUtils.write(response, ResponseUtils.success());
+            }
         } else {
             boolean flag = processStatus(loginUser.getStatus(), response);
             //用户状态正常，成功登录
@@ -83,5 +93,25 @@ public class LoginServlet extends HttpServlet {
                 break;
         }
         return flag;
+    }
+
+
+    /**
+     * 校验账号状态
+     * @param status
+     * @param response
+     * @return
+     */
+    private boolean accountStatus(int status,HttpServletResponse response){
+        boolean canUse=false;
+        switch (status){
+            case ActiveStatus.ACTIVATED:
+                canUse=true;
+                break;
+            case ActiveStatus.INACTIVATED:
+                ResponseUtils.write(response, ResponseUtils.error("你的账号尚未激活！"));
+                break;
+        }
+        return canUse;
     }
 }

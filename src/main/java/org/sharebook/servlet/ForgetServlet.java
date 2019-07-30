@@ -17,6 +17,7 @@ import java.io.IOException;
 public class ForgetServlet extends HttpServlet {
     private UserService userService = new UserServiceImpl();
 
+    //忘记密码
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

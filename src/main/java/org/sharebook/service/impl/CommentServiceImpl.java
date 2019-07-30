@@ -36,13 +36,21 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public boolean comments(Comment comment) {
-        if (comment != null) {
-            comment.setCreateTime(new Date());
-            comment.setUpdateTime(new Date());
-            int count = commentRepository.save(comment);
-            return count > 0;
+        synchronized (this){
+            if (comment != null) {
+                comment.setCreateTime(new Date());
+                comment.setUpdateTime(new Date());
+                Long id=comment.getEntityId();
+                Article article=articleRepository.findById(id);
+                if (article!=null){
+                    article.setCommentNum(article.getCommentNum()+1);
+                    articleRepository.update(article);
+                }
+                int count = commentRepository.save(comment);
+                return count > 0;
+            }
+            return false;
         }
-        return false;
     }
 
     @Override
