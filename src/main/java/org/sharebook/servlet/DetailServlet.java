@@ -10,6 +10,7 @@ import org.sharebook.service.UserService;
 import org.sharebook.service.impl.ArticleServiceImpl;
 import org.sharebook.service.impl.CommentServiceImpl;
 import org.sharebook.service.impl.UserServiceImpl;
+import org.sharebook.utils.DateFormatUtils;
 import org.sharebook.vo.ArticleVO;
 import org.sharebook.vo.CommentVO;
 
@@ -36,18 +37,12 @@ public class DetailServlet extends HttpServlet {
             throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Article article = articleService.getArticle(id);
         ArticleVO articleVO = null;
         if (article != null) {
+            //向VO对象赋值
             User user = userService.findUserById(article.getUserId());
             articleVO = new ArticleVO(article, user);
-            String images = article.getImages();
-            if (images != null) {
-                String[] image1 = images.split("#");
-                articleVO.setImages(image1);
-            }
-            articleVO.setCreateTime(dateFormat.format(article.getCreateTime()));
         }
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,9 +52,10 @@ public class DetailServlet extends HttpServlet {
             CommentVO commentVO = null;
             User user = userService.findUserById(comment.getUserId());
             if (user != null) {
+                //TODO 待优化
                 commentVO = new CommentVO(user.getId(), user.getUsername(),
                         user.getAvatar(), comment.getId(), comment.getContent());
-                String date = df.format(comment.getCreateTime());
+                String date = DateFormatUtils.complexDateFormat(comment.getCreateTime());
                 commentVO.setCreateTime(date);
             }
             commentVOList.add(commentVO);
