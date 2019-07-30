@@ -40,8 +40,3 @@ function handleCommentClick(id) {
   window.open(href, '_blank');
 }
 
-function handleCommentClick(id) {
-  var href = '/detail?id=' + id;
-  window.open(href, '_blank');
-}
-

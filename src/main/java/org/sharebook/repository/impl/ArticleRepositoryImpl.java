@@ -12,7 +12,6 @@ import org.sharebook.repository.ArticleRepository;
 import org.sharebook.utils.JDBCUtils;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 public class ArticleRepositoryImpl implements ArticleRepository {
@@ -25,8 +24,8 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
 
     @Override
-    public Article findById(Long userId) {
-        String sql = "SELECT * FROM `article` WHERE `user_id` = ?";
+    public Article findById(Long id) {
+        String sql = "SELECT * FROM `article` WHERE `id` = ?";
         Article article = null;
         try {
             article = queryRunner.query(
@@ -35,7 +34,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
                             Article.class,
                             new BasicRowProcessor(new GenerousBeanProcessor())
                     ),
-                    userId
+                    id
             );
         } catch (SQLException e) {
             e.printStackTrace();
