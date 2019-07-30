@@ -183,4 +183,23 @@ public class ArticleRepositoryImpl implements ArticleRepository {
         }
         return articles;
     }
+
+    @Override
+    public List<Article> findByKeyWord(String keyWord) {
+        String sql = "SELECT * FROM `article` WHERE `content` LIKE ?";
+        List<Article> articles = null;
+        try {
+            articles = queryRunner.query(
+                    sql,
+                    new BeanListHandler<>(
+                            Article.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
+                    "%"+keyWord+"%"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return articles;
+    }
 }

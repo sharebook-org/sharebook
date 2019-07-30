@@ -56,5 +56,12 @@ public class ArticleServiceImpl implements ArticleService {
         return articles;
     }
 
-
+    @Override
+    public List<Article> getArticles(String keyWord) {
+        List<Article> articles=articleRepository.findByKeyWord(keyWord);
+        if (articles!=null){
+            return articles;
+        }
+        return null;
+    }
 }

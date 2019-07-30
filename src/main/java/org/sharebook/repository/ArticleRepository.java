@@ -24,4 +24,6 @@ public interface ArticleRepository extends CurdRepository<Article,Long>{
     long getArticlesCount();
 
     List<Article> findArticlesByIds(List<Long> ids);
+
+    List<Article> findByKeyWord(String keyWord);
 }

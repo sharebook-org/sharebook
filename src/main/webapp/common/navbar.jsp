@@ -28,6 +28,7 @@
     <!-- 搜索框 -->
     <form class="nn acx d-none vt">
       <input
+          id="search-input"
           class="form-control"
           type="text"
           data-action="grow"

@@ -6,6 +6,25 @@ $(function () {
   });
 });
 
+    //回车搜索
+function search(keyWord) {
+      $.ajax({
+        url: '/search',
+        method: 'POST',
+        data:{
+          keyWord: keyWord,
+        },
+        success: function (result) {
+          if (result.code == 200) {
+            alert(result.message)
+            //window.location.href = '/index';
+          } else {
+            alert(result.message);
+          }
+        }
+      });
+    }
+
 //检查用户名是否为空
 function checkAccount() {
   var account = $('#account').val();

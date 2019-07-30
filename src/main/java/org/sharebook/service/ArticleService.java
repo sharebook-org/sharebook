@@ -10,4 +10,6 @@ public interface ArticleService {
     Article getArticle(Long userId);
     List<Article> getArticles(List<Long> ids);
     List<Article> getArticles();
+
+    List<Article> getArticles(String keyWord);
 }
