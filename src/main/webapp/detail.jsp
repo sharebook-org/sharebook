@@ -54,10 +54,10 @@
                   style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
                 <span id="forward">转发</span>
                 <c:if test="${article.commentNum gt 0}" var="commented">
-                  <span id="comment">评论&nbsp;${article.commentNum}</span>
+                  <span id="comment" onclick="handleCommentClick(${article.id})">评论&nbsp;${article.commentNum}</span>
                 </c:if>
                 <c:if test="${not commented}">
-                  <span id="comment">评论</span>
+                  <span id="comment" onclick="handleCommentClick(${article.id})">评论${article.commentNum}</span>
                 </c:if>
                 <c:if test="${article.likeNum gt 0}" var="like">
                   <span id="like">点赞&nbsp;${article.likeNum}</span>
@@ -68,7 +68,7 @@
               </div>
               <div style="display: flex; flex-direction: row;margin-bottom: 10px;">
                 <textarea id="content" type="text" rows="2" class="form-control" placeholder="来发表您的评论吧！"></textarea>
-                <button class="cg nz ok" id="publish-comment">评论</button>
+                <button class="cg nz ok" id="publish-comment">评论 </button>
               </div>
 
               <ul class="bow afa">
