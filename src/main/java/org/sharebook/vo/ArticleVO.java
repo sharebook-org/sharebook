@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.sharebook.model.Article;
 import org.sharebook.model.User;
+import org.sharebook.utils.DateFormatUtils;
 
 @Data
 @NoArgsConstructor
@@ -32,5 +33,12 @@ public class ArticleVO {
         this.status = article.getStatus();
         this.commentNum = article.getCommentNum();
         this.likeNum = article.getLikeNum();
+        if (article.getImages() != null) {
+            String[] images = article.getImages().split("#");
+            this.images = images;
+        }
+        if (article.getCreateTime() != null) {
+            this.createTime = DateFormatUtils.complexDateFormat(article.getCreateTime());
+        }
     }
 }

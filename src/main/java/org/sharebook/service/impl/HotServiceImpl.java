@@ -26,7 +26,7 @@ public class HotServiceImpl implements HotService {
         try {
             list = getData("weibo");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("微博接口失效");
         }
         return list;
     }
@@ -37,7 +37,7 @@ public class HotServiceImpl implements HotService {
         try {
             list = getData("zhihu");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("知乎接口失效");
         }
         return list;
     }
@@ -48,7 +48,7 @@ public class HotServiceImpl implements HotService {
         try {
             list = getData("hupu");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("虎扑接口失效");
         }
         return list;
     }
@@ -59,7 +59,7 @@ public class HotServiceImpl implements HotService {
         try {
             list = getData("tianya");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("天涯接口失效");
         }
         return list;
     }

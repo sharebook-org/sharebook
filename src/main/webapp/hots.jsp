@@ -20,12 +20,12 @@
         <div class="qa">
           <h6 class="afh">微博热搜</h6>
           <ul class="dc axg">
-            <c:if test="${weiboHots != null || weiboHots.size() > 0}" var="hasWeiboHots">
+            <c:if test="${!empty weiboHots}">
               <c:forEach items="${weiboHots}" var="weibo">
                 <li><a href="${weibo.url}" target="_blank">${weibo.title}</a></li>
               </c:forEach>
             </c:if>
-            <c:if test="${not hasWeiboHots}">
+            <c:if test="${empty weiboHots}">
               <li>暂时没有数据啦！</li>
             </c:if>
           </ul>
@@ -40,12 +40,12 @@
         <div class="qa">
           <h6 class="afh">知乎热搜</h6>
           <ul class="dc axg">
-            <c:if test="${zhihuHots != null || zhihuHots.size() > 0}" var="hasZhihuHots">
+            <c:if test="${!empty zhihuHots}">
               <c:forEach items="${zhihuHots}" var="zhihu">
                 <li><a href="${zhihu.url}" target="_blank">${zhihu.title}</a></li>
               </c:forEach>
             </c:if>
-            <c:if test="${not hasZhihuHots}">
+            <c:if test="${empty hasZhihuHots}">
               <li>暂时没有数据啦！</li>
             </c:if>
           </ul>
@@ -60,12 +60,12 @@
         <div class="qa">
           <h6 class="afh">虎扑热搜</h6>
           <ul class="dc axg">
-            <c:if test="${hupuHots != null || hupuHots.size() > 0}" var="hasHupuHots">
+            <c:if test="${!empty hupuHots}">
               <c:forEach items="${hupuHots}" var="hupu">
                 <li><a href="${hupu.url}" target="_blank">${hupu.title}</a></li>
               </c:forEach>
             </c:if>
-            <c:if test="${not hasHupuHots}">
+            <c:if test="${empty hasHupuHots}">
               <li>暂时没有数据啦！</li>
             </c:if>
           </ul>
@@ -80,12 +80,12 @@
         <div class="qa">
           <h6 class="afh">天涯热搜</h6>
           <ul class="dc axg">
-            <c:if test="${tianyaHots != null || tianyaHots.size() > 0}" var="hasTianyaHots">
+            <c:if test="${!empty tianyaHots}">
               <c:forEach items="${tianyaHots}" var="tianya">
                 <li><a href="${tianya.url}" target="_blank">${tianya.title}</a></li>
               </c:forEach>
             </c:if>
-            <c:if test="${not hasTianyaHots}">
+            <c:if test="${empty tianyaHots}">
               <li>暂时没有数据啦！</li>
             </c:if>
           </ul>
