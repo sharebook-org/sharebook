@@ -37,6 +37,7 @@
       <footer class="bqx">
         <a href="/forget" class="axc">找回密码</a>
         <a href="/modify" class="axc">修改密码</a>
+        <span style="cursor:pointer" id="check" class="axc">激活账户</span>
       </footer>
     </form>
   </div>
@@ -81,6 +82,12 @@
           }
         }
       })
+    })
+
+    //激活账户
+    $('#check').on('click',function () {
+      var account=$('#account').val();
+      window.location.href='/next?email='+account;
     })
   });
 

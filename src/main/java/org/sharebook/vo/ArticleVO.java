@@ -23,9 +23,11 @@ public class ArticleVO {
     private String createTime;
 
     public ArticleVO(Article article, User user) {
+        //用户
         this.userId = user.getId();
         this.username = user.getUsername();
         this.avatar = user.getAvatar();
+        //文章
         this.id = article.getId();
         this.content = article.getContent();
         this.status = article.getStatus();
