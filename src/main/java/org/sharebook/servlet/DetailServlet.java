@@ -1,14 +1,17 @@
 package org.sharebook.servlet;
 
 import org.sharebook.constant.EntityType;
+import org.sharebook.constant.status.FollowStatus;
 import org.sharebook.model.Article;
 import org.sharebook.model.Comment;
 import org.sharebook.model.User;
 import org.sharebook.service.ArticleService;
 import org.sharebook.service.CommentService;
+import org.sharebook.service.FollowService;
 import org.sharebook.service.UserService;
 import org.sharebook.service.impl.ArticleServiceImpl;
 import org.sharebook.service.impl.CommentServiceImpl;
+import org.sharebook.service.impl.FollowServiceImpl;
 import org.sharebook.service.impl.UserServiceImpl;
 import org.sharebook.utils.DateFormatUtils;
 import org.sharebook.vo.ArticleVO;
@@ -31,6 +34,7 @@ public class DetailServlet extends HttpServlet {
     private final CommentService commentService = new CommentServiceImpl();
     private final UserService userService = new UserServiceImpl();
     private final ArticleService articleService = new ArticleServiceImpl();
+    private final FollowService followService = new FollowServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -38,11 +42,19 @@ public class DetailServlet extends HttpServlet {
         long id = Long.parseLong(request.getParameter("id"));
 
         Article article = articleService.getArticle(id);
+        List<Long> ids = followService.showFollowUserId(article.getUserId());
+        ids.add(article.getUserId());
         ArticleVO articleVO = null;
         if (article != null) {
             //向VO对象赋值
             User user = userService.findUserById(article.getUserId());
             articleVO = new ArticleVO(article, user);
+
+            int followed = FollowStatus.UNFOLLOWED;
+            if (ids.contains(article.getUserId())) {
+                followed = FollowStatus.FOLLOWED;
+            }
+            articleVO.setFollowed(followed);
         }
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
