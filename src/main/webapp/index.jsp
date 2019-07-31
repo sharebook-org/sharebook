@@ -43,9 +43,23 @@
                         data-action="zoom"
                         class="bos vb yb aff"
                         src="${article.avatar}">
-                <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
-                  <span>关注</span>
-                </button>
+                <c:if test="${article.userId eq user.id}" var="currentUser">
+                  <button class="cg nz ok" style="width: 60px;margin-top: 5px;" hidden>
+                    <span>关注</span>
+                  </button>
+                </c:if>
+                <c:if test="${not currentUser}">
+                  <c:if test="${article.followed eq 0}">
+                    <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
+                      <span onclick="follow('${article.userId}','${user.id}')">关注</span>
+                    </button>
+                  </c:if>
+                  <c:if test="${article.followed eq 1}">
+                    <button class="cg nz ok" style="width: 60px;margin-top: 5px;">
+                      <span onclick="followCancle('${article.userId}','${user.id}')">已关注</span>
+                    </button>
+                  </c:if>
+                </c:if>
               </div>
               <div class="rw">
                 <div class="bpb">
@@ -67,17 +81,22 @@
 
                 <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
                   <span id="forward">转发</span>
-                  <c:if test="${article.commentNum gt 0}" var="comment">
-                    <span id="comment" onclick="handleCommentClick(${article.id})">评论&nbsp;${article.commentNum}</span>
-                  </c:if>
-                  <c:if test="${not comment}">
+                  <c:if test="${article.commentNum eq 0}" var="comment">
                     <span id="comment" onclick="handleCommentClick(${article.id})">评论</span>
                   </c:if>
-                  <c:if test="${article.likeNum gt 0}" var="like">
-                    <span id="like">点赞&nbsp;${article.likeNum}</span>
+                  <c:if test="${not comment}">
+                    <span id="comment" onclick="handleCommentClick(${article.id})">评论&nbsp;${article.commentNum}</span>
+                  </c:if>
+                  <c:if test="${article.likeNum eq 0}" var="like">
+                    <span id="like" onclick="like('${article.id}','${user.id}')">点赞</span>
                   </c:if>
                   <c:if test="${not like}">
-                    <span id="like">点赞</span>
+                    <c:if test="${article.liked eq 0}" var="liked">
+                      <span id="like" onclick="like('${article.id}','${user.id}')">点赞&nbsp;${article.likeNum}</span>
+                    </c:if>
+                    <c:if test="${not liked}">
+                      <span id="like" onclick="likeCancle('${article.id}','${user.id}')">已点赞&nbsp;${article.likeNum}</span>
+                    </c:if>
                   </c:if>
                 </div>
               </div>

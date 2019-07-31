@@ -86,8 +86,6 @@
         <c:if test="${!empty articles}">
           <c:forEach items="${articles}" var="article">
             <li class="rv b agz">
-              <span hidden id="userId">${article.userId}</span>
-              <span hidden id="articleId">${article.id}</span>
               <!-- 头像 -->
               <div style="display: flex; flex-direction: column">
                 <img
