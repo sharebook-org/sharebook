@@ -95,6 +95,7 @@ function likeCancle(id,userId) {
 }
 
 function follow(articleUserId,userId) {
+  var path = window.location.href;
   var res= notBlank(userId);
   if (res) {
     $.ajax({
@@ -108,7 +109,7 @@ function follow(articleUserId,userId) {
       success:function (result) {
         if (result.code==200){
           alert("关注成功！");
-          window.location.href = '/attention';
+          window.location.href = path;
         }
       }
     })
@@ -121,6 +122,7 @@ function follow(articleUserId,userId) {
 
 }
 function followCancle(articleUserId,userId) {
+  var path = window.location.href;
   var res= notBlank(userId);
   if (res) {
     $.ajax({
@@ -134,7 +136,7 @@ function followCancle(articleUserId,userId) {
       success:function (result) {
         if (result.code==200){
           alert("取消关注成功！");
-          window.location.href = '/attention';
+          window.location.href = path;
         }
       }
     })
