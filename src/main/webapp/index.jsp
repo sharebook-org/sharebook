@@ -67,7 +67,12 @@
                                     <small class="acx axc">${article.createTime}</small>
                                     <!-- 昵称 -->
                                     <div style="display: flex; ">
-                                        <h6>${article.username}</h6>
+                                        <c:if test="${article.role eq 1}">
+                                            <h6 style="color: red;font-size: 15px">${article.username}</h6>
+                                        </c:if>
+                                        <c:if test="${article.role eq 0}">
+                                            <h6>${article.username}</h6>
+                                        </c:if>
                                     </div>
                                 </div>
                                 <!-- 微博内容 -->

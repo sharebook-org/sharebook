@@ -18,6 +18,7 @@ public class ArticleVO {
     private String avatar;
     private String[] images;
     private int status;
+    private int role;
     private Long commentNum;
     private int liked;
     private int followed;
@@ -29,6 +30,7 @@ public class ArticleVO {
         this.userId = user.getId();
         this.username = user.getUsername();
         this.avatar = user.getAvatar();
+        this.role = user.getRole();
         //文章
         this.id = article.getId();
         this.content = article.getContent();

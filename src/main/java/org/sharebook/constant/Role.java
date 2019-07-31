@@ -12,7 +12,7 @@ public class Role {
     /**
      * 大V用户
      */
-    public final static int VUSER = 0;
+    public final static int VUSER = 1;
 
     /**
      * 管理员

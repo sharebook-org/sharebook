@@ -1,3 +1,4 @@
+<%@ page import="org.sharebook.constant.Role" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -88,10 +89,10 @@
             <li class="rv b agz">
               <!-- 头像 -->
               <div style="display: flex; flex-direction: column">
-                <img
-                    data-action="zoom"
-                    class="bos vb yb aff"
-                    src="${article.avatar}">
+                  <img
+                          data-action="zoom"
+                          class="bos vb yb aff"
+                          src="${article.avatar}">
                 <c:if test="${article.userId eq user.id}" var="currentUser">
                 <button class="cg nz ok" style="width: 60px;margin-top: 5px;" hidden>
                   <span>关注</span>
@@ -116,7 +117,12 @@
                   <small class="acx axc">${article.createTime}</small>
                   <!-- 昵称 -->
                   <div style="display: flex; ">
-                    <h6>${article.username}</h6>
+                    <c:if test="${article.role eq 1}" >
+                      <h6 style="color: red;font-size: 15px">${article.username}</h6>
+                    </c:if>
+                    <c:if test="${article.role eq 0}">
+                      <h6>${article.username}</h6>
+                    </c:if>
                   </div>
                 </div>
                 <!-- 微博内容 -->
@@ -234,7 +240,7 @@
   </div>
 </div>
 <jsp:include page="./common/script.jsp"></jsp:include>
-<script>
+<script type="text/javascript" charset="utf-8">
   $(function () {
     $('#publish-button').on('click', function () {
       var article = $('#article').val();

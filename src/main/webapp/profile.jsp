@@ -28,7 +28,7 @@
         <a class="pg active" href="/profile">主页</a>
       </li>
       <li class="pi">
-        <a class="pg" href="/my">微博</a>
+        <a class="pg" href="/my" >微博</a>
       </li>
       <li class="pi">
         <a class="pg" href="#">相册</a>

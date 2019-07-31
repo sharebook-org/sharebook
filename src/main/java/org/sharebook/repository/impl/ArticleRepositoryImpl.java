@@ -203,4 +203,23 @@ public class ArticleRepositoryImpl implements ArticleRepository {
         }
         return articles;
     }
+
+    @Override
+    public List<Article> findByUerId(long userId) {
+        String sql="SELECT * FROM `article` WHERE `user_id` = ?";
+        List<Article> articles = null;
+        try {
+            articles = queryRunner.query(
+                    sql,
+                    new BeanListHandler<>(
+                            Article.class,
+                            new BasicRowProcessor(new GenerousBeanProcessor())
+                    ),
+                    userId
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return articles;
+    }
 }

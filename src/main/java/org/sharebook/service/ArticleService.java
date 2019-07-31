@@ -16,4 +16,6 @@ public interface ArticleService {
     List<Article> getArticles();
 
     List<Article> getArticles(String keyword);
+
+    List<Article> getArticles(long userId);
 }
