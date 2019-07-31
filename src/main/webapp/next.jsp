@@ -54,9 +54,9 @@
         },
         success: function (result) {
           if (result.code == 200) {
-            alert("验证码已经发到邮箱！")
+            alert("验证码已经发到邮箱！");
           } else {
-            alert("获取验证码失败")
+            alert("获取验证码失败");
           }
         }
       })
@@ -71,13 +71,14 @@
         dataType: 'json',
         data: {
           email: email,
-          code: code,
+          code: code
         },
         success: function (result) {
           if (result.code == 200) {
-            window.location.href = '/login.jsp'
+            alert("您已激活成功！");
+            window.location.href = '/login';
           } else {
-            alert("验证码错误！")
+            alert("验证码错误！");
           }
         }
       })

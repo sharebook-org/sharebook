@@ -27,10 +27,17 @@ import java.util.List;
 @WebServlet(urlPatterns = "/index")
 public class IndexServlet extends HttpServlet {
 
-    private final UserService userService = new UserServiceImpl();
-    private final ArticleService articleService = new ArticleServiceImpl();
-    private final FollowService followService = new FollowServiceImpl();
-    private final LikeService likeService = new LikeServiceImpl();
+    private final UserService userService;
+    private final ArticleService articleService;
+    private final FollowService followService;
+    private final LikeService likeService;
+
+    public IndexServlet() {
+        this.userService = new UserServiceImpl();
+        this.articleService = new ArticleServiceImpl();
+        this.followService = new FollowServiceImpl();
+        this.likeService = new LikeServiceImpl();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,7 +51,7 @@ public class IndexServlet extends HttpServlet {
             Long userId = loginUser.getId();
             ids = followService.showFollowUserId(userId);
         }
-            articleList = articleService.getArticles();
+        articleList = articleService.getArticles();
         List<ArticleVO> articleVOList = new ArrayList<>();
 
         //TODO 代码重复
@@ -81,6 +88,6 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request,response);
+        doGet(request, response);
     }
 }

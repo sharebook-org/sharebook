@@ -20,7 +20,8 @@ public class ActiveServlet extends HotsServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String email = request.getParameter("email");
         String code = request.getParameter("code");
         Boolean result = userService.checkCode(email, code);

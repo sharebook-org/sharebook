@@ -58,12 +58,7 @@ public class MailUtils implements Runnable {
             // 2.3设置邮件主题
             message.setSubject("有一封账号激活邮件");
             // 2.4设置邮件内容
-            String content = "<html><h1>" + code + "</h1></html>"
-                    /*"<html><head></head><body><h1>" +
-                            "这是一封激活邮件,激活请点击以下链接</h1><h3>" +
-                            "<a href='http://localhost:8080/active?code="
-                            + code + "'>http://localhost:8080/active?code=" + code
-                            + "</href></h3></body></html>"*/;
+            String content = "<html><h1>" + code + "</h1></html>";
             message.setContent(content, "text/html;charset=UTF-8");
 
             // 3.发送邮件

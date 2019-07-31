@@ -5,11 +5,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Random;
 
 public class MD5Utils {
-
-    private final static Random random = new Random();
 
     //写一个md5加密的方法
     public static String md5(String password, String salt) {
