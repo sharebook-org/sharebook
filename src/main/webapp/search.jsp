@@ -85,17 +85,20 @@
                                         <span id="comment" onclick="handleCommentClick(${article.id})">评论</span>
                                     </c:if>
                                     <c:if test="${not comment}">
-                                        <span id="comment" onclick="handleCommentClick(${article.id})">评论&nbsp;${article.commentNum}</span>
+                                        <span id="comment"
+                                              onclick="handleCommentClick(${article.id})">评论&nbsp;${article.commentNum}</span>
                                     </c:if>
                                     <c:if test="${article.likeNum eq 0}" var="like">
                                         <span id="like" onclick="like('${article.id}','${user.id}')">点赞</span>
                                     </c:if>
                                     <c:if test="${not like}">
                                         <c:if test="${article.liked eq 0}" var="liked">
-                                            <span id="like" onclick="like('${article.id}','${user.id}')">点赞&nbsp;${article.likeNum}</span>
+                                            <span id="like"
+                                                  onclick="like('${article.id}','${user.id}')">点赞&nbsp;${article.likeNum}</span>
                                         </c:if>
                                         <c:if test="${not liked}">
-                                            <span id="like" onclick="likeCancle('${article.id}','${user.id}')">已点赞&nbsp;${article.likeNum}</span>
+                                            <span id="like"
+                                                  onclick="likeCancle('${article.id}','${user.id}')">已点赞&nbsp;${article.likeNum}</span>
                                         </c:if>
                                     </c:if>
                                 </div>
@@ -111,11 +114,12 @@
             <div class="pz afo d-none vy">
                 <div class="qa">
                     <h6 class="afh">
-                        Likes <small>· <a href="#">View All</a></small>
+                        Likes
+                        <small>· <a href="#">View All</a></small>
                     </h6>
                     <ul class="bow box">
                         <li class="rv afa">
-                            <img class="bos vb yb aff" src="assets/img/avatar-fat.jpg" />
+                            <img class="bos vb yb aff" src="assets/img/avatar-fat.jpg"/>
                             <div class="rw">
                                 <strong>Jacob Thornton</strong> @fat
                                 <div class="bpa">
@@ -174,13 +178,6 @@
                 var str = '<li>暂时没有数据！</li>';
                 $('#hot-list').append(str);
             }
-        });
-
-        $('#search-input').keydown(function(){
-            var keyword = $('#search-input').val();
-            if (event.keyCode == 13) {
-                search(keyword);
-            };
         });
     });
 </script>
