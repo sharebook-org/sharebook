@@ -38,6 +38,7 @@ public class ProfileServlet extends HttpServlet {
         String birth = request.getParameter("birth");
         String location = request.getParameter("location");
         String introduction = request.getParameter("introduction");
+        String avatar = request.getParameter("avatar");
 
         //获取已登录的用户
         User user = (User) request.getSession().getAttribute("user");
@@ -53,6 +54,7 @@ public class ProfileServlet extends HttpServlet {
         }
         user.setLocation(location);
         user.setIntroduction(introduction);
+        user.setAvatar(avatar);
         boolean result = userService.modify(user);
         if (result) {
             ResponseUtils.write(response, ResponseUtils.success());

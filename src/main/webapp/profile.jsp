@@ -110,6 +110,7 @@
         <textarea type="text" class="form-control" id="introduction">${user.introduction}</textarea>
       </div>
 
+      <form enctype="multipart/form-data">
       <div class="mu afh">
         <span style="position: relative;left: -170px;top: 28px;">上传头像</span>
         <input
@@ -117,9 +118,11 @@
                 type="file"
                 class="form-control"
         />
+        <button type="button" id="upload">上传</button>
       </div>
+      </form>
 
-      <div class="afv">
+      <div class="afv" style="position: absolute;left: 730px">
         <button type="button" id="modify-button" class="cg nq">修改</button>
       </div>
 
@@ -136,6 +139,28 @@
       showErrorMessage(result, '用户名不能为空');
     });
 
+    //发送图片
+    var avatar;
+    $('#upload').click(function () {
+      var formData = new FormData();
+      var files = $('#avatar').prop('files');
+      for (var i = 0; i < files.length; i++) {
+        formData.append('images', files[i]);
+      }
+      $.ajax({
+        url: '/upload',
+        method: 'POST',
+        data: formData,
+        dataType: 'json',
+        cache: false,
+        processData: false,
+        contentType: false,
+        success: function (result) {
+          avatar = result.data;
+          alert("上传成功！");
+        }
+      });
+    });
     $('#modify-button').on('click', function () {
       var name = $('#name').val();
       var phone = $('#phone').val();
@@ -163,7 +188,8 @@
           sex: sex,
           birth: birth,
           location: location,
-          introduction: introduction
+          introduction: introduction,
+          avatar:avatar
         },
         success: function (result) {
           if (result.code == 200) {
