@@ -1,6 +1,7 @@
 package org.sharebook.servlet;
 
 import org.sharebook.constant.EntityType;
+import org.sharebook.constant.status.ArticleStatus;
 import org.sharebook.constant.status.FollowStatus;
 import org.sharebook.model.Article;
 import org.sharebook.model.User;
@@ -55,6 +56,9 @@ public class AttentionServlet extends HttpServlet {
             for (Article article : articles) {
                 //当前发表微博的用户
                 User user = userService.findUserById(article.getUserId());
+                if (!user.getStatus().equals(ArticleStatus.NORMAL)) {
+                    continue;
+                }
                 ArticleVO articleVO = new ArticleVO(article, user);
                 Integer likedStatus = likeService.getLikedStatus(
                         EntityType.ARTICLE, article.getId(), loginUser.getId()

@@ -47,23 +47,6 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userId = request.getParameter("id");
-        if (!StringUtils.isBlank(userId)) {
-            Long id = Long.valueOf(userId);
-            User user = userService.findUserById(id);
-            if (user != null) {
-                UserVO userVO = new UserVO(user);
-                ResponseUtils.write(response, ResponseUtils.success(userVO));
-            } else {
-                ResponseUtils.write(response, ResponseUtils.error("该用户不存在"));
-            }
-        } else {
-            ResponseUtils.write(response, ResponseUtils.error());
-        }
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
         String hasRole = request.getParameter("role");
         String hasStatus = request.getParameter("status");
@@ -103,8 +86,8 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doOptions(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Headers", "content-type");
-        response.addHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Origin, Accept, Authorization");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     }
 }

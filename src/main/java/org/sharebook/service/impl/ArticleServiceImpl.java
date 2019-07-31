@@ -1,8 +1,12 @@
 package org.sharebook.service.impl;
 
+import org.sharebook.constant.status.ArticleStatus;
 import org.sharebook.model.Article;
+import org.sharebook.model.User;
 import org.sharebook.repository.ArticleRepository;
+import org.sharebook.repository.UserRepository;
 import org.sharebook.repository.impl.ArticleRepositoryImpl;
+import org.sharebook.repository.impl.UserRepositoryImpl;
 import org.sharebook.service.ArticleService;
 
 import java.util.List;
@@ -10,9 +14,11 @@ import java.util.List;
 public class ArticleServiceImpl implements ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final UserRepository userRepository;
 
     public ArticleServiceImpl() {
         this.articleRepository = new ArticleRepositoryImpl();
+        this.userRepository = new UserRepositoryImpl();
     }
 
     @Override
@@ -40,7 +46,13 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article getArticle(Long userId) {
-        return articleRepository.findById(userId);
+        Article article = null;
+        User user = userRepository.findById(userId);
+        if (user != null && user.getStatus().equals(ArticleStatus.NORMAL)) {
+            article = articleRepository.findById(userId);
+        }
+
+        return article;
     }
 
     @Override

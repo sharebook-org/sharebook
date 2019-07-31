@@ -44,7 +44,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
 
     @Override
     public List<Article> findAll() {
-        String sql = "SELECT * FROM `article`";
+        String sql = "SELECT * FROM `article` WHERE `status` = ?";
         List<Article> articles = null;
         try {
             articles = queryRunner.query(
@@ -52,7 +52,8 @@ public class ArticleRepositoryImpl implements ArticleRepository {
                     new BeanListHandler<>(
                             Article.class,
                             new BasicRowProcessor(new GenerousBeanProcessor())
-                    )
+                    ),
+                    ArticleStatus.NORMAL
             );
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,7 +64,7 @@ public class ArticleRepositoryImpl implements ArticleRepository {
     @Override
     public List<Article> findAll(int page, int size) {
         int offset = (page - 1) * size;
-        String sql = "SELECT * FROM `article` LIMIT ?,?";
+        String sql = "SELECT * FROM `article` LIMIT ?, ?";
         List<Article> articles = null;
         try {
             articles = queryRunner.query(

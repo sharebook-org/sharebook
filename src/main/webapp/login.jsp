@@ -82,7 +82,7 @@
           }
         }
       })
-    })
+    });
 
     //激活账户
     $('#check').on('click',function () {

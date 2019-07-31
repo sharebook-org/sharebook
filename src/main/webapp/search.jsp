@@ -119,7 +119,7 @@
                     </h6>
                     <ul class="bow box">
                         <li class="rv afa">
-                            <img class="bos vb yb aff" src="assets/img/avatar-fat.jpg"/>
+                          <img class="bos vb yb aff" src="assets/img/avatar-fat.jpg"/>
                             <div class="rw">
                                 <strong>Jacob Thornton</strong> @fat
                                 <div class="bpa">

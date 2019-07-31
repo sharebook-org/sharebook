@@ -16,21 +16,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(urlPatterns = "/articleManage")
+@WebServlet(urlPatterns = "/articles")
 public class ArticleManageServlet extends HttpServlet {
 
     private ArticleManageService articleManageService = new ArticleManageServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String hasPage = request.getParameter("page");
-        String hsaSize = request.getParameter("size");
-        int page = 1;
-        int size = 2;
-        if (!StringUtils.isBlank(hasPage) && !StringUtils.isBlank(hsaSize)) {
-            page = Integer.parseInt(hasPage);
-            size = Integer.parseInt(hasPage);
-        }
+        int page = Integer.parseInt(request.getParameter("page"));
+        int size = Integer.parseInt(request.getParameter("size"));
+
         List<Article> articles = articleManageService.getAllArticles(page, size);
         long count = articleManageService.getArticlesCount();
         Map map = new HashMap();
@@ -39,15 +34,16 @@ public class ArticleManageServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String hasId = request.getParameter("id");
+        int status = Integer.parseInt(request.getParameter("status"));
         if (StringUtils.isBlank(hasId)) {
             ResponseUtils.write(response, ResponseUtils.error("该文章不存在"));
             return;
         }
         long id = Long.parseLong(hasId);
         Article article = articleManageService.getArticle(id);
-        int status = Integer.parseInt(request.getParameter("status"));
         article.setStatus(status);
         int result = articleManageService.updateArticle(article);
         if (result != 0) {
@@ -71,5 +67,13 @@ public class ArticleManageServlet extends HttpServlet {
         } else {
             ResponseUtils.write(response, ResponseUtils.error("该文章不存在"));
         }
+    }
+
+    @Override
+    protected void doOptions(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Headers", "Content-Type");
+        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     }
 }

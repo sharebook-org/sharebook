@@ -1,5 +1,6 @@
 package org.sharebook.servlet;
 
+import org.sharebook.constant.status.ArticleStatus;
 import org.sharebook.constant.status.FollowStatus;
 import org.sharebook.model.Article;
 import org.sharebook.model.User;
@@ -42,10 +43,14 @@ public class IndexServlet extends HttpServlet {
             articleList = articleService.getArticles();
         List<ArticleVO> articleVOList = new ArrayList<>();
 
+        //TODO 代码重复
         for (Article article : articleList) {
             //当前发表微博的用户
             User user = userService.findUserById(article.getUserId());
             if (user != null) {
+                if (!user.getStatus().equals(ArticleStatus.NORMAL)) {
+                    continue;
+                }
                 ArticleVO articleVO = new ArticleVO(article, user);
                 if (loginUser != null) {
                     int followed = FollowStatus.UNFOLLOWED;

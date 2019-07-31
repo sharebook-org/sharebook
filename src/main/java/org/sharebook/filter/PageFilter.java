@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = "/users")
+@WebFilter(urlPatterns = {"/users", "/articles"})
 public class PageFilter implements Filter {
 
     private final static int DEFAULT_PAGE = 1;
@@ -40,7 +40,7 @@ public class PageFilter implements Filter {
                 size = Integer.parseInt(currentSize);
             }
             request.getRequestDispatcher(
-                    String.format("/users?page=%d&&size=%d", page, size)
+                    String.format("/%s?page=%d&&size=%d", request.getServletPath(), page, size)
             ).forward(request, response);
         }else {
             chain.doFilter(request, response);
