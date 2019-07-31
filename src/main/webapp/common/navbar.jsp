@@ -26,9 +26,10 @@
     </ul>
 
     <!-- 搜索框 -->
-    <form class="nn acx d-none vt">
+    <form class="nn acx d-none vt" action="/search" method="post">
       <input
           id="search-input"
+          name="keyword"
           class="form-control"
           type="text"
           data-action="grow"

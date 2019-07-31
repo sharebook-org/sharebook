@@ -176,12 +176,12 @@
       }
     });
 
-    $('#search-input').keydown(function(){
-      var keyWord = $('#search-input').val();
-      if (event.keyCode == 13) {
-        search(keyWord);
-      };
-    });
+    // $('#search-input').keydown(function(){
+    //   var keyword = $('#search-input').val();
+    //   if (event.keyCode == 13) {
+    //     search(keyword);
+    //   };
+    // });
     });
 </script>
 </body>

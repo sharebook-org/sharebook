@@ -31,37 +31,36 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        //待渲染的文章
+        List<Article> articleList = null;
         User loginUser = (User) request.getSession().getAttribute("user");
-        List<Long> ids=null;
-        if(loginUser!=null) {
+        List<Long> ids = null;
+        if (loginUser != null) {
             Long userId = loginUser.getId();
-             ids= followService.showFollowUserId(userId);
+            ids = followService.showFollowUserId(userId);
         }
+            articleList = articleService.getArticles();
+        List<ArticleVO> articleVOList = new ArrayList<>();
 
-            List<Article> articleList=articleService.getArticles();
-            List<ArticleVO> articleVOList = new ArrayList<>();
-
-            for (Article article : articleList) {
-                //当前发表微博的用户
-                User user = userService.findUserById(article.getUserId());
-                if (user != null) {
-                    ArticleVO articleVO = new ArticleVO(article, user);
-                    if (loginUser!=null){
-                        int followed = FollowStatus.UNFOLLOWED;
-                        if (ids.contains(article.getUserId())) {
-                            followed = FollowStatus.FOLLOWED;
-                        }
-                        articleVO.setFollowed(followed);
-                        articleVOList.add(articleVO);
+        for (Article article : articleList) {
+            //当前发表微博的用户
+            User user = userService.findUserById(article.getUserId());
+            if (user != null) {
+                ArticleVO articleVO = new ArticleVO(article, user);
+                if (loginUser != null) {
+                    int followed = FollowStatus.UNFOLLOWED;
+                    if (ids.contains(article.getUserId())) {
+                        followed = FollowStatus.FOLLOWED;
                     }
-                    else {
-                        articleVOList.add(articleVO);
-                    }
+                    articleVO.setFollowed(followed);
+                    articleVOList.add(articleVO);
+                } else {
+                    articleVOList.add(articleVO);
                 }
             }
-            request.setAttribute("articles",articleVOList);
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
-
+        }
+        request.setAttribute("articles", articleVOList);
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
 
 
     }
@@ -69,6 +68,6 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+        doGet(request,response);
     }
 }
