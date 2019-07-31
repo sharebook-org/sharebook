@@ -101,13 +101,13 @@ public class UserRepositoryImpl implements UserRepository {
         return count;
     }
 
-    //非真实删除
+    //非真实删除，封禁用户
     @Override
     public int delete(Long id) {
         String sql = "UPDATE `user` SET `status` = ? WHERE `id` = ?";
         int count = 0;
         try {
-            count = queryRunner.update(sql, UserStatus.DELETED, id);
+            count = queryRunner.update(sql, UserStatus.BANNED, id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
