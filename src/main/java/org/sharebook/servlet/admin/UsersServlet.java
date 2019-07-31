@@ -83,6 +83,7 @@ public class UsersServlet extends HttpServlet {
         ResponseUtils.write(response, ResponseUtils.error("修改失败"));
     }
 
+    //后台封禁用户
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String hasId = request.getParameter("id");
@@ -104,5 +105,6 @@ public class UsersServlet extends HttpServlet {
             throws ServletException, IOException {
         response.addHeader("Access-Control-Allow-Origin", "*");
         response.addHeader("Access-Control-Allow-Headers", "content-type");
+        response.addHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
     }
 }
