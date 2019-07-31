@@ -1,14 +1,17 @@
 package org.sharebook.servlet;
 
+import org.sharebook.constant.EntityType;
 import org.sharebook.constant.status.ArticleStatus;
 import org.sharebook.constant.status.FollowStatus;
 import org.sharebook.model.Article;
 import org.sharebook.model.User;
 import org.sharebook.service.ArticleService;
 import org.sharebook.service.FollowService;
+import org.sharebook.service.LikeService;
 import org.sharebook.service.UserService;
 import org.sharebook.service.impl.ArticleServiceImpl;
 import org.sharebook.service.impl.FollowServiceImpl;
+import org.sharebook.service.impl.LikeServiceImpl;
 import org.sharebook.service.impl.UserServiceImpl;
 import org.sharebook.vo.ArticleVO;
 
@@ -27,6 +30,7 @@ public class IndexServlet extends HttpServlet {
     private final UserService userService = new UserServiceImpl();
     private final ArticleService articleService = new ArticleServiceImpl();
     private final FollowService followService = new FollowServiceImpl();
+    private final LikeService likeService = new LikeServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,6 +57,10 @@ public class IndexServlet extends HttpServlet {
                 }
                 ArticleVO articleVO = new ArticleVO(article, user);
                 if (loginUser != null) {
+                    Integer likedStatus = likeService.getLikedStatus(
+                            EntityType.ARTICLE, article.getId(), loginUser.getId()
+                    );
+                    articleVO.setLiked(likedStatus);
                     int followed = FollowStatus.UNFOLLOWED;
                     if (ids.contains(article.getUserId())) {
                         followed = FollowStatus.FOLLOWED;

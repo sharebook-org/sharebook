@@ -41,6 +41,7 @@ function handleCommentClick(id) {
 }
 
 function like(id,userId) {
+  var path = window.location.href;
   var res= notBlank(userId);
   if (res) {
     $.ajax({
@@ -55,7 +56,7 @@ function like(id,userId) {
       success:function (result) {
         if (result.code==200){
           alert("点赞成功！");
-          window.location.href = '/attention';
+          window.location.href = path;
         }
       }
     })
@@ -68,6 +69,7 @@ function like(id,userId) {
 }
 
 function likeCancle(id,userId) {
+  var path = window.location.href;
   var res= notBlank(userId);
   console.log(userId);
   if (res) {
@@ -84,7 +86,7 @@ function likeCancle(id,userId) {
       success:function (result) {
         if (result.code==200){
           alert("取消点赞成功！");
-          window.location.href = '/attention';
+          window.location.href = path;
         }
       }
     })
