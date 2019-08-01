@@ -2,9 +2,13 @@ package org.sharebook.servlet.admin;
 
 import org.apache.commons.lang3.StringUtils;
 import org.sharebook.model.Article;
+import org.sharebook.model.User;
 import org.sharebook.service.ArticleManageService;
+import org.sharebook.service.UserService;
 import org.sharebook.service.impl.ArticleManageServiceImpl;
+import org.sharebook.service.impl.UserServiceImpl;
 import org.sharebook.utils.ResponseUtils;
+import org.sharebook.vo.ArticleVO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +25,7 @@ import java.util.Map;
 public class ArticleManageServlet extends HttpServlet {
 
     private ArticleManageService articleManageService = new ArticleManageServiceImpl();
+    private UserService userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,10 +33,16 @@ public class ArticleManageServlet extends HttpServlet {
         int size = Integer.parseInt(request.getParameter("size"));
 
         List<Article> articles = articleManageService.getAllArticles(page, size);
+        List<ArticleVO> articleVOList = new ArrayList<>();
+        for (Article article : articles){
+            User user = userService.findUserById(article.getUserId());
+            ArticleVO articleVO = new ArticleVO(article, user);
+            articleVOList.add(articleVO);
+        }
         long count = articleManageService.getArticlesCount();
         Map map = new HashMap();
         map.put("count", count);
-        ResponseUtils.write(response, ResponseUtils.success(articles, map));
+        ResponseUtils.write(response, ResponseUtils.success(articleVOList, map));
     }
 
     @Override

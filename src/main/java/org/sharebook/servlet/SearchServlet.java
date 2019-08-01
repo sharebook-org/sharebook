@@ -69,7 +69,7 @@ public class SearchServlet extends HttpServlet {
             request.getRequestDispatcher("/search.jsp").forward(request, response);
         }
         else {
-            ResponseUtils.write(response, ResponseUtils.error("不存在该内容的文章"));
+            request.getRequestDispatcher("/search.jsp").forward(request, response);
         }
     }
 }

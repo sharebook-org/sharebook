@@ -67,7 +67,12 @@
                                     <small class="acx axc">${article.createTime}</small>
                                     <!-- 昵称 -->
                                     <div style="display: flex; ">
-                                        <h6>${article.username}</h6>
+                                        <c:if test="${article.role eq 1}">
+                                            <h6 style="color: red;font-size: 15px">${article.username}</h6>
+                                        </c:if>
+                                        <c:if test="${article.role eq 0}">
+                                            <h6>${article.username}</h6>
+                                        </c:if>
                                     </div>
                                 </div>
                                 <!-- 微博内容 -->
@@ -119,7 +124,7 @@
                     </h6>
                     <ul class="bow box">
                         <li class="rv afa">
-                          <img class="bos vb yb aff" src="assets/img/avatar-fat.jpg"/>
+                            <img class="bos vb yb aff" src="assets/img/avatar-fat.jpg"/>
                             <div class="rw">
                                 <strong>Jacob Thornton</strong> @fat
                                 <div class="bpa">
