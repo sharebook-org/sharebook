@@ -42,25 +42,29 @@ public class LoginServlet extends HttpServlet {
         String account = request.getParameter("account");
         String password = request.getParameter("password");
 
-        User loginUser = userService.login(account, password);
+        //校验激活状态
         Active active = userService.findByAccount(account);
-        if (loginUser == null) {
-            ResponseUtils.write(response, ResponseUtils.error("您尚未注册!"));
-            return;
-        } else if (active!=null){
+        if (active != null) {
             boolean canUse = accountStatus(active.getStatus(), response);
-            //用户状态正常，成功登录
-            if (canUse) {
-                request.getSession().setAttribute("user", new User(loginUser));
-                ResponseUtils.write(response, ResponseUtils.success());
+            if (!canUse) {
+                ResponseUtils.write(response, ResponseUtils.error("用户未激活！"));
+                return;
             }
-        } else {
-            boolean flag = processStatus(loginUser.getStatus(), response);
-            //用户状态正常，成功登录
-            if (flag) {
-                request.getSession().setAttribute("user", new User(loginUser));
-                ResponseUtils.write(response, ResponseUtils.success());
-            }
+        }
+
+        //验证账户，密码
+        boolean loginSuccess = userService.login(account, password);
+        if (!loginSuccess) {
+            ResponseUtils.write(response, ResponseUtils.error("登录失败!"));
+            return;
+        }
+
+        //校验用户状态
+        User loginUser = userService.getUser(account);
+        boolean flag = processStatus(loginUser.getStatus(), response);
+        if (flag) {
+            request.getSession().setAttribute("user", new User(loginUser));
+            ResponseUtils.write(response, ResponseUtils.success());
         }
     }
 
@@ -98,15 +102,16 @@ public class LoginServlet extends HttpServlet {
 
     /**
      * 校验账号状态
+     *
      * @param status
      * @param response
      * @return
      */
-    private boolean accountStatus(int status,HttpServletResponse response){
-        boolean canUse=false;
-        switch (status){
+    private boolean accountStatus(int status, HttpServletResponse response) {
+        boolean canUse = false;
+        switch (status) {
             case ActiveStatus.ACTIVATED:
-                canUse=true;
+                canUse = true;
                 break;
             case ActiveStatus.INACTIVATED:
                 ResponseUtils.write(response, ResponseUtils.error("你的账号尚未激活！"));

@@ -85,7 +85,7 @@
       var rePassword = $('#rePassword').val();
       var newPassword = $('#newPassword').val();
       $.ajax({
-        url: '/forget',
+        url: '/modify',
         method: 'POST',
         dataType: 'json',
         data: {

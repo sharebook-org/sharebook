@@ -22,7 +22,7 @@ public interface UserService {
      * @param password 密码
      * @return
      */
-    User login(String account, String password);
+    boolean login(String account, String password);
 
     /**
      * 注册
@@ -75,4 +75,6 @@ public interface UserService {
     boolean getCode(String email);
 
     Active findByAccount(String account);
+
+    User getUser(String account);
 }

@@ -72,12 +72,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String account, String password) {
+    public boolean login(String account, String password) {
         User user = userRepository.findByEmail(account);
         if (user == null) {
             user = userRepository.findByPhone(account);
         }
-        return user;
+        if (user != null) {
+            String encryptPassword = MD5Utils.md5(
+                    password, user.getSalt()
+            );
+            if (encryptPassword.equals(user.getPassword())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -156,5 +164,14 @@ public class UserServiceImpl implements UserService {
             return active;
         }
         return null;
+    }
+
+    @Override
+    public User getUser(String account) {
+        User user = userRepository.findByEmail(account);
+        if (user == null) {
+            user = userRepository.findByPhone(account);
+        }
+        return user;
     }
 }
