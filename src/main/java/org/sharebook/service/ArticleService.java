@@ -9,7 +9,7 @@ public interface ArticleService {
 
     boolean browse(Article article);
 
-    Article getArticle(Long userId);
+    Article getArticle(Long id);
 
     List<Article> getArticles(List<Long> ids);
 

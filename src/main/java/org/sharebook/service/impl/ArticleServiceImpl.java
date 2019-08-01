@@ -45,14 +45,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article getArticle(Long userId) {
-        Article article = null;
-        User user = userRepository.findById(userId);
-        if (user != null && user.getStatus().equals(ArticleStatus.NORMAL)) {
-            article = articleRepository.findById(userId);
-        }
-
-        return article;
+    public Article getArticle(Long id) {
+        return  articleRepository.findById(id);
     }
 
     @Override
