@@ -34,7 +34,7 @@ public class FollowServlet extends HttpServlet {
         if (method.equals("follow")) {
             follow(follow, response);
         } else if (method.equals("cancelFollow")) {
-            followCancle(userId, articleUserId, response);
+            followCancel(userId, articleUserId, response);
         }
     }
 
@@ -47,7 +47,7 @@ public class FollowServlet extends HttpServlet {
         }
     }
 
-    private void followCancle(Long userId, Long articleUserId, HttpServletResponse response) {
+    private void followCancel(Long userId, Long articleUserId, HttpServletResponse response) {
         boolean res = followService.cancelFollow(userId, articleUserId);
         if (res) {
             ResponseUtils.write(response, ResponseUtils.success());

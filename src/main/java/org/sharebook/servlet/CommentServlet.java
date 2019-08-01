@@ -15,7 +15,11 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/comment")
 public class CommentServlet extends HttpServlet {
 
-    private final CommentService commentService = new CommentServiceImpl();
+    private final CommentService commentService;
+
+    public CommentServlet() {
+        this.commentService = new CommentServiceImpl();
+    }
 
     //发表评论
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -36,10 +40,5 @@ public class CommentServlet extends HttpServlet {
         } else {
             ResponseUtils.write(response, ResponseUtils.error());
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
     }
 }

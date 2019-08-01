@@ -14,7 +14,6 @@ import org.sharebook.service.impl.LikeServiceImpl;
 import org.sharebook.service.impl.UserServiceImpl;
 import org.sharebook.utils.ResponseUtils;
 import org.sharebook.vo.ArticleVO;
-import org.sharebook.vo.UserVO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,28 +21,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(urlPatterns = "/my")
 public class MyServlet extends HttpServlet {
 
     private final ArticleService articleService;
-    private final UserService userService = new UserServiceImpl();
-    private final LikeService likeService = new LikeServiceImpl();
-    private final FollowService followService = new FollowServiceImpl();
+    private final UserService userService;
+    private final LikeService likeService;
+    private final FollowService followService;
 
     public MyServlet() {
         this.articleService = new ArticleServiceImpl();
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+        this.userService = new UserServiceImpl();
+        this.likeService = new LikeServiceImpl();
+        this.followService = new FollowServiceImpl();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -73,10 +66,6 @@ public class MyServlet extends HttpServlet {
                    articleVOList.add(articleVO);
                }
             }
-            //基本资料
-            request.setAttribute("profile", new UserVO(loginUser));
-            //关注数粉丝数
-//            request.setAttribute("number", map);
             //微博列表
             request.setAttribute("articles", articleVOList);
             request.getRequestDispatcher("/my.jsp").forward(request, response);

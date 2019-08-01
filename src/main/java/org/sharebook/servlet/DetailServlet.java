@@ -8,7 +8,6 @@ import org.sharebook.model.Comment;
 import org.sharebook.model.User;
 import org.sharebook.service.*;
 import org.sharebook.service.impl.*;
-import org.sharebook.utils.DateFormatUtils;
 import org.sharebook.vo.ArticleVO;
 import org.sharebook.vo.CommentVO;
 
@@ -18,8 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,9 +36,12 @@ public class DetailServlet extends HttpServlet {
 
         long id = Long.parseLong(request.getParameter("id"));
 
+        List<Long> ids = null;
+        if (loginUser != null) {
+            Long userId = loginUser.getId();
+            ids = followService.showFollowUserId(userId);
+        }
         Article article = articleService.getArticle(id);
-        List<Long> ids = followService.showFollowUserId(article.getUserId());
-        ids.add(article.getUserId());
         ArticleVO articleVO = null;
         if (article != null) {
             //向VO对象赋值
@@ -60,21 +60,16 @@ public class DetailServlet extends HttpServlet {
             }
             articleVO.setLiked(likedStatus);
             articleVO.setFollowed(followed);
-
         }
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        //获取评论
         List<Comment> commentList = commentService.getCommentList(EntityType.ARTICLE, id);
         List<CommentVO> commentVOList = new ArrayList<>();
         for (Comment comment : commentList) {
             CommentVO commentVO = null;
             User user = userService.findUserById(comment.getUserId());
             if (user != null) {
-                //TODO 待优化
-                commentVO = new CommentVO(user.getId(), user.getUsername(),
-                        user.getAvatar(), comment.getId(), comment.getContent());
-                String date = DateFormatUtils.complexDateFormat(comment.getCreateTime());
-                commentVO.setCreateTime(date);
+                commentVO = new CommentVO(user, comment);
             }
             commentVOList.add(commentVO);
         }

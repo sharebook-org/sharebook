@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
         //验证账户，密码
         boolean loginSuccess = userService.login(account, password);
         if (!loginSuccess) {
-            ResponseUtils.write(response, ResponseUtils.error("登录失败!"));
+            ResponseUtils.write(response, ResponseUtils.error("账号或密码错误!"));
             return;
         }
 
@@ -68,7 +68,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    //注销
+    //退出登录
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
      *
      * @param status   用户状态
      * @param response
-     * @return 用户状态正常返回true，否则返回false。
+     * @return 用户状态正常返回true，否则返回false
      */
     private boolean processStatus(int status, HttpServletResponse response) {
         boolean flag = false;
