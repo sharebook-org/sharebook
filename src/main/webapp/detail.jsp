@@ -69,10 +69,10 @@
                   style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 10px">
                 <span id="forward">转发</span>
                 <c:if test="${article.commentNum eq 0}" var="commented">
-                  <span id="comment" onclick="handleCommentClick(${article.id})">评论&nbsp;${article.commentNum}</span>
+                  <span id="comment">评论</span>
                 </c:if>
                 <c:if test="${not commented}">
-                  <span id="comment" onclick="handleCommentClick(${article.id})">评论${article.commentNum}</span>
+                  <span id="comment">评论${article.commentNum}</span>
                 </c:if>
                 <c:if test="${article.likeNum eq 0}" var="like">
                   <span id="like" onclick="like('${article.id}','${user.id}')">点赞</span>
